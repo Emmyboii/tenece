@@ -52,14 +52,14 @@ const BlogDetails = () => {
             <div className="bg-[#eeeeee]">
                 <Header />
 
-                <div className="px- py-28 pt-36 max-w-[1512px] mx-auto">
-                    <h1 className="text-[64px] leading-tight font-playfair text-center max-w-[1170px] mx-auto font-medium mb-10">
+                <div className="py-28 pt-36 3xl:max-w-[1512px] sh:mx-9 mx-4 3xl:mx-auto">
+                    <h1 className="mk:text-[64px] sm:text-[45px] text-[32px] leading-tight font-playfair text-center max-w-[1170px] 3xl:mx-auto font-medium mb-10">
                         {post.title}
                     </h1>
                     <img
                         src={post.coverImage}
                         alt={post.title}
-                        className="w-[1292px] h-[611px] object-cover rounded-2xl mx-auto"
+                        className="w-[1292px] sm:h-[611px] object-cover rounded-2xl 3xl:mx-auto"
                     />
 
                     <div className="space-y-6 text-lg leading-relaxed mt-10">
@@ -115,7 +115,7 @@ const BlogDetails = () => {
                     <div className="mt-16">
                         <p className="text-[40px] font-medium">More Articles</p>
 
-                        <div className="grid grid-cols-4 gap-[41px] mt-8">
+                        <div className="grid xl:grid-cols-4 md:grid-cols-3 sd:grid-cols-2 md:gap-[41px] gap-4 mt-8">
                             {blogPosts.map((lot, index) => (
                                 <Link to={`/blog/${lot.slug}`} key={index}>
                                     <LOT

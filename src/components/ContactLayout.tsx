@@ -147,16 +147,16 @@ const ContactLayout = () => {
     };
 
     return (
-        <div className="flex items-center justify-between gap-4">
+        <div className="flex lg:flex-row flex-col items-center justify-between gap-4">
             {hexa ? (
-                <img src={contact2} alt="" className={`${ignoreFields && 'w-[705px]'}`} />
+                <img src={contact2} alt="" className={`${ignoreFields && 'w-[705px]'} lg:w-auto w-full`} />
             ) : (
-                <img src={contact} alt="" className={`${ignoreFields && 'w-[705px]'}`} />
+                <img src={contact} alt="" className={`${ignoreFields && 'w-[705px]'} lg:w-auto w-full`} />
             )}
 
             <form
                 onSubmit={handleSubmit}
-                className="bg-white rounded-[5px] p-12 py-12 w-full max-w-[545px] space-y-8"
+                className="bg-white rounded-[8px] sm:p-12 p-5 w-full lg:max-w-[545px] sm:space-y-8 space-y-3"
             >
                 {hexa && (
                     <p className="text-center text-2xl font-manrope font-medium text-[#000000] mt-[-10px]">Join the Priority list</p>
@@ -194,7 +194,7 @@ const ContactLayout = () => {
                             <div className="flex w-full gap-2">
                                 {/* Country code */}
                                 <div
-                                    className="flex items-center gap-2 h-[64px] rounded-xl px-3 cursor-pointer bg-gray-100"
+                                    className="flex items-center gap-2 sm:h-[64px] h-[55px] rounded-xl px-3 cursor-pointer bg-gray-100"
                                     onClick={() => setIsOpen(!isOpen)}
                                     onKeyDown={handleKeyDown}
                                     tabIndex={0}
@@ -215,7 +215,7 @@ const ContactLayout = () => {
                                     placeholder="Enter phone number"
                                     value={form.phone}
                                     onChange={handlePhoneChange}
-                                    className="flex-1 h-[64px] bg-gray-100 rounded-xl rounded-r-md p-2 outline-none"
+                                    className="flex-1 sm:h-[64px] h-[55px] bg-gray-100 rounded-xl rounded-r-md p-2 outline-none"
                                     maxLength={15}
                                     inputMode="numeric"
                                 />
@@ -290,7 +290,7 @@ const ContactLayout = () => {
                 {/* Button */}
                 <button
                     type="submit"
-                    className="w-full bg-[#1F262B] text-white py-4 rounded-full text-lg hover:bg-black transition"
+                    className="w-full bg-[#1F262B] text-white sm:py-4 py-3 rounded-full text-lg hover:bg-black transition"
                 >
                     {ignoreFields ? 'Submit' : ' Request Consultation'}
                 </button>

@@ -16,16 +16,16 @@ const ProjectLayout = ({ text, subText, cta, ctaLink, smallImg, largeImg, revers
 
     return (
         <div>
-            <div className={"flex gap-4 justify-between items-start" + (reverse ? " flex-row-reverse" : "")}>
-                <div className="">
-                    <h2 className="text-[64px] font-playfair font-medium text-[#1F262B]">{text}</h2>
-                    <p className="text-base font-medium text-[#1F262B] mt-4">{subText}</p>
-                    <button onClick={() => ctaLink && navigate(ctaLink)} type="submit" className="bg-black text-white py-4 px-5 text-xl rounded-full mt-4 hover:bg-black/95">
+            <div className={"flex lg:flex-row flex-col gap-4 justify-between lg:items-start items-center" + (reverse ? " flex-row-reverse" : "")}>
+                <div className="lg:text-start text-center mb-2 lg:mb-0">
+                    <h2 className="mk:mk:text-[64px] sm:text-[45px] text-[32px] font-playfair font-medium text-[#1F262B]">{text}</h2>
+                    <p className="sm:text-base text-sm font-medium text-[#1F262B] mt-4">{subText}</p>
+                    <button onClick={() => ctaLink && navigate(ctaLink)} type="submit" className="bg-black sm:text-base text-sm text-white py-4 px-5 rounded-full mt-4 hover:bg-black/95">
                         {cta || "EXPLORE OUR PROJECTS"}
                     </button>
                 </div>
                 <div className="">
-                    <img src={smallImg} alt={text} />
+                    <img src={smallImg} className="w-screen lg:w-auto" alt={text} />
                 </div>
             </div>
             <div className="mt-8">

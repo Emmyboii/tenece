@@ -7,7 +7,7 @@ const Contact = () => {
         <div className="overflow-x-hidden">
             <div className="bg-[#eeeeee]">
                 <Header />
-                <div className="px- py-28 pt-36 max-w-[1512px] mx-auto">
+                <div className="py-28 pt-36 3xl:max-w-[1512px]  sh:mx-9 mx-4 3xl:mx-auto">
                     <ContactLayout />
                 </div>
             </div>

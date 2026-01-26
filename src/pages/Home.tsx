@@ -68,10 +68,10 @@ const Home = () => {
                 />
             </div>
 
-            <div className="px- py-20 max-w-[1512px] mx-auto">
-                <h1 className="text-[40px] font-playfair font-medium text-[#1F262B] mb-16 text-center">A Legacy of Trust. The Future of Innovation.</h1>
+            <div className="sm:py-20 py-10 3xl:max-w-[1512px]  sh:mx-9 mx-4 3xl:mx-auto">
+                <h1 className="sm:text-[40px] text-[30px] font-playfair font-medium text-[#1F262B] mb-16 text-center">A Legacy of Trust. The Future of Innovation.</h1>
 
-                <div className="grid grid-cols-4 gap-[76px]">
+                <div className="grid mf:grid-cols-4 sd:grid-cols-2 gap-[76px]">
                     {LOTData.map((lot, index) => (
                         <LOT
                             key={index}
@@ -87,21 +87,21 @@ const Home = () => {
             </div>
 
             <div className="bg-[#C0C0C0]">
-                <div className="px- py-20 max-w-[1512px] mx-auto">
-                    <h1 className="text-[40px] font-playfair font-medium text-[#1F262B] mb-16 text-center">Our Signature Developments</h1>
+                <div className="sm:py-20 py-10 3xl:max-w-[1512px]  sh:mx-9 mx-4 3xl:mx-auto">
+                    <h1 className="sm:text-[40px] text-[26px] font-playfair font-medium text-[#1F262B] sm:mb-16 mb-6 text-center">Our Signature Developments</h1>
 
                     <MirasolLayout />
                 </div>
             </div>
 
-            <div className="px- py-20 max-w-[1512px] mx-auto">
+            <div className="sm:py-20 py-10 3xl:max-w-[1512px]  sh:mx-9 mx-4 3xl:mx-auto">
                 <HexaHomesLayout />
             </div>
 
-            <div className="px- py-20 max-w-[1512px] mx-auto">
-                <h1 className="text-[40px] font-playfair font-medium text-[#1F262B] mb-16 text-center">Capabilities That Set Us Apart</h1>
+            <div className="sm:py-20 py-10 3xl:max-w-[1512px]  sh:mx-9 mx-4 3xl:mx-auto">
+                <h1 className="sm:text-[40px] text-[30px] font-playfair font-medium text-[#1F262B] mb-16 text-center">Capabilities That Set Us Apart</h1>
 
-                <div className="grid grid-cols-3 gap-[76px]">
+                <div className="grid lg:grid-cols-3 sh:grid-cols-2 gap-[40px]">
                     {Capabilities.map((capability, index) => (
                         <LOT
                             key={index}
@@ -128,12 +128,12 @@ const Home = () => {
                 <div className="absolute inset-0 bg-gradient-to-t from-[#4d4e4e] via-white/20 to-[#1F262B]" />
 
                 {/* Content */}
-                <div className="relative z-10 py-20 px- max-w-[1512px] mx-auto">
-                    <h1 className="text-[40px] font-playfair font-medium text-white mb-16 text-center">
+                <div className="relative z-10 sm:py-20 py-10 3xl:max-w-[1512px] sh:mx-9 mx-4 3xl:mx-auto">
+                    <h1 className="sm:text-[40px] text-[30px] font-playfair font-medium text-white mb-16 text-center">
                         You and your Home in Sync
                     </h1>
 
-                    <div className="grid grid-cols-16 gap-x-5 gap-y-10 relative z-10">
+                    <div className="grid lg:grid-cols-16 md:grid-cols-2 gap-x-5 lg:gap-y-10 gap-y-5 relative z-10">
                         {HISData.map((hisItem, index) => (
                             <HIS
                                 key={index}
@@ -148,13 +148,13 @@ const Home = () => {
             </div>
 
             <div className="bg-[#36454F]">
-                <div className="px- py-20 max-w-[1512px] mx-auto flex items-center justify-between gap-8">
+                <div className="sm:py-20 py-10 3xl:max-w-[1512px] sh:mx-9 mx-4 3xl:mx-auto flex xl:flex-row flex-col-reverse items-center justify-between gap-8">
                     <div className="relative">
                         <img src={luxury1} alt="" />
-                        <img src={luxury2} alt="" className="absolute top-1/2 -translate-y-1/2 left-[400px]" />
+                        <img src={luxury2} alt="" className="absolute top-1/2 mk:block hidden -translate-y-1/2 left-[400px]" />
                     </div>
-                    <div className="space-y-4 max-w-[450px]">
-                        <h1 className="text-[40px] font-playfair font-medium text-white ">
+                    <div className="space-y-4 xl:text-start text-center xl:max-w-[450px]">
+                        <h1 className="sm:text-[40px] text-[30px] font-playfair font-medium text-white ">
                             Luxury That Performs Like an Asset
                         </h1>
                         <p className="text-white font-normal">
@@ -166,13 +166,13 @@ const Home = () => {
             </div>
 
             <div className="bg-[#ffffff]">
-                <div className="px- py-20 max-w-[1512px] mx-auto">
+                <div className="sm:py-20 py-10 3xl:max-w-[1512px]  sh:mx-9 mx-4 3xl:mx-auto">
                     <div className="max-w-[630px] text-center mx-auto">
-                        <h1 className="text-[40px] font-playfair font-medium text-[#1F262B] mb-4 text-center">Latest in Smart Luxury Living</h1>
+                        <h1 className="sm:text-[40px] text-[30px] font-playfair font-medium text-[#1F262B] mb-4 text-center">Latest in Smart Luxury Living</h1>
                         <p>Discover industry insights, architecture inspiration, and smart living breakthroughs — curated for future-focused homeowners and investors.</p>
                     </div>
 
-                    <div className="grid grid-cols-2 gap-x-4">
+                    <div className="grid mc:grid-cols-2 grid-cols-1 gap-x-4">
                         {LatestSmartData.map((item, index) => (
                             <LatestSmart
                                 key={index}
@@ -183,16 +183,16 @@ const Home = () => {
                         ))}
                     </div>
 
-                    <button className="bg-[#1F262B] w-[240px] text-white py-4 px-6 text-xl rounded-full mt-10 hover:bg-black/95 flex items-center justify-center mx-auto">
+                    <button className="bg-[#1F262B] sm:w-[240px] text-white py-4 px-6 sm:text-xl text-[17px] rounded-full mt-10 hover:bg-black/95 flex items-center justify-center mx-auto">
                         Discover More
                     </button>
                 </div>
             </div>
 
             <div className="bg-[#eeeeee]">
-                <div className="px- py-20 max-w-[1512px] mx-auto">
+                <div className="sm:py-20 py-10 3xl:max-w-[1512px]  sh:mx-9 mx-4 3xl:mx-auto">
                     <div className="max-w-[860px] text-center mx-auto mb-16">
-                        <h1 className="text-[40px] font-playfair font-medium text-[#1F262B] mb-4 text-center">Start the Conversation That Builds Your Legacy</h1>
+                        <h1 className="sm:text-[40px] text-[30px] font-playfair font-medium text-[#1F262B] mb-4 text-center">Start the Conversation That Builds Your Legacy</h1>
                         <p>Our homes are not just designed for living — they’re built to outperform. Backed by top-tier real estate data, TRE offers long-term appreciation, passive income, and security of value.</p>
                     </div>
 

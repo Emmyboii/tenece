@@ -14,7 +14,7 @@ body {
 }
 
 .input {
-    @apply w-full h-16 bg-gray-100 rounded-xl mt-3 z-0 px-4 outline-none text-base;
+    @apply w-full sm:h-16 h-14 bg-gray-100 rounded-xl mt-3 z-0 px-4 outline-none text-base;
 }
 
 .error {

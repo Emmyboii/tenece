@@ -49,10 +49,12 @@ const Blog = () => {
     );
 
     useEffect(() => {
-        blogRef.current?.scrollIntoView({
-            behavior: "smooth",
-            block: "start",
-        });
+        if (currentPage > 1) {
+            blogRef.current?.scrollIntoView({
+                behavior: "smooth",
+                block: "start",
+            });
+        }
     }, [currentPage]);
 
 
@@ -81,7 +83,7 @@ const Blog = () => {
 
             <div className="bg-[#eeeeee] text-[#1F262B]">
                 {!hasArticles ? (
-                    <div className="py-20 flex justify-center">
+                    <div className="sm:py-20 py-10 flex justify-center">
                         <div className="bg-white rounded-xl shadow-sm p-12 max-w-lg text-center">
                             <div className="flex justify-center mb-6">
                                 <div className="w-16 h-16 flex items-center justify-center rounded-full bg-[#1F262B]/10">
@@ -101,7 +103,7 @@ const Blog = () => {
                     </div>
                 ) : (
                     <>
-                        <div className="px- py-20 max-w-[1512px] mx-auto">
+                        <div className="sm:py-20 py-10 3xl:max-w-[1512px] sh:mx-9 mx-4 3xl:mx-auto">
                             <p className="text-[40px] font-medium">Latest Article</p>
 
                             <Link onClick={() => window.scrollTo(0, 0)} to={`/blog/${latestPost.slug}`} >
@@ -114,12 +116,12 @@ const Blog = () => {
 
 
                             <div ref={blogRef} className="mt-16">
-                                <p className="text-[40px] font-medium">Featured Article Spotlight</p>
+                                <p className="mk:text-[40px] text-[29px] font-medium">Featured Article Spotlight</p>
 
 
-                                <div className="grid grid-cols-4 gap-[41px] mt-8">
+                                <div className="grid xl:grid-cols-4 md:grid-cols-3 sd:grid-cols-2 md:gap-[41px] gap-4 mt-8">
                                     {currentItems.map((post, index) => (
-                                        <Link onClick={() => window.scrollTo(0, 0)} to={`/blog/${post.slug}`} key={index}>
+                                        <Link onClick={() => window.scrollTo(0, 0)} to={`/blog/${post.slug}`} key={index} className="border-b sd:border-0 border-black pb-10">
                                             <LOT
                                                 imageUrl={post.imageUrl}
                                                 subText={post.subText}

@@ -14,21 +14,21 @@ const Projects = () => {
             />
 
             <div className="bg-[#C0C0C0]">
-                <div className="px- py-20 max-w-[1512px] mx-auto">
-                    <h1 className="text-[40px] font-playfair font-medium text-[#1F262B] mb-16 text-center">Our Signature Developments</h1>
+                <div className="sm:py-20 py-10 3xl:max-w-[1512px]  sh:mx-9 mx-4 3xl:mx-auto">
+                    <h1 className="sm:text-[40px] text-[26px] font-playfair font-medium text-[#1F262B] sm:mb-16 mb-6 text-center">Our Signature Developments</h1>
 
                     <MirasolLayout />
                 </div>
             </div>
 
-            <div className="px- py-20 max-w-[1512px] mx-auto">
+            <div className="sm:py-20 py-10 3xl:max-w-[1512px]  sh:mx-9 mx-4 3xl:mx-auto">
                 <HexaHomesLayout />
             </div>
 
             <div className="bg-[#eeeeee]">
-                <div className="px- py-20 max-w-[1512px] mx-auto">
-                    <div className="max-w-[980px] text-center mx-auto mb-16">
-                        <h1 className="text-[40px] font-playfair font-medium text-[#1F262B] mb-4 text-center">Let’s Build a Landmark Together</h1>
+                <div className="sm:py-20 py-10 3xl:max-w-[1512px]  sh:mx-9 mx-4 3xl:mx-auto">
+                    <div className="max-w-[980px] text-center 3xl:mx-auto mb-16">
+                        <h1 className="sm:text-[40px] text-[30px] font-playfair font-medium text-[#1F262B] mb-4 text-center">Let’s Build a Landmark Together</h1>
                         <p>From luxury smart homes to signature estates, we bring deep expertise, innovation, and precision craftsmanship to every project. Whether you’re building your dream residence or a legacy investment, we’re here to exceed expectations.</p>
                     </div>
 

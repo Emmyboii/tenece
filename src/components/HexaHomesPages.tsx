@@ -47,20 +47,20 @@ const HexaHomesPages = () => {
       />
 
       <div className="bg-[#EEEEEE]">
-        <div className="px- py-20 max-w-[1512px] mx-auto flex items-center justify-between gap-8">
+        <div className="sm:py-20 py-10 3xl:max-w-[1512px]  sh:mx-9 mx-4 3xl:mx-auto flex rx:flex-row flex-col items-center justify-between gap-8">
           <div className="relative">
-            <img src={luxury1} alt="" />
-            <img src={luxury2} alt="" className="absolute top-1/2 -translate-y-1/2 left-[400px]" />
+            <img src={luxury1} alt="" className="w-[440px] 2xl:w-auto" />
+            <img src={luxury2} alt="" className="absolute top-1/2 mk:block hidden -translate-y-1/2 2xl:left-[400px] left-[300px] 2xl:w-auto w-[250px]" />
           </div>
 
           <div className="max-w-[700px]">
-            <h1 className="text-[40px] font-playfair font-medium text-[#1F262B]">Our Unique Features</h1>
-            <p className="font-normal font-poppins mt-6">
+            <h1 className="sm:text-[40px] text-[30px] text-center rx:text-start font-playfair font-medium text-[#1F262B]">Our Unique Features</h1>
+            <p className="font-normal font-poppins text-center rx:text-start mt-6">
               Our projects made with the finest quality materials, world-class infrastructure, and some of the most sophisticated,
               state-of-the-art security protocols and advanced home automation
             </p>
 
-            <div className="flex items-center gap-4 mt-10 mb-4">
+            <div className="flex mh:flex-row flex-col items-center gap-4 mt-10 mb-4">
               <UniqueFeatures
                 text="Spacious and Elegant"
                 subText="Designed for utmost comfort. Enjoy the best family experiences without restriction."
@@ -99,12 +99,12 @@ const HexaHomesPages = () => {
         <div className="absolute inset-0 bg-gradient-to-t from-[#273030] via-black/50 to-[#1f282e]" />
 
 
-        <div className="relative z-10 py-20 px- max-w-[1512px] mx-auto">
-          <h1 className="text-[40px] font-playfair font-medium text-white mb-16 text-center">
+        <div className="relative z-10 sm:py-20 py-10 3xl:max-w-[1512px]  sh:mx-9 mx-4 3xl:mx-auto">
+          <h1 className="sm:text-[40px] text-[30px] font-playfair font-medium text-white mb-16 text-center">
             Triplex Home Excellence
           </h1>
 
-          <div className="grid grid-cols-4 gap-x-5 gap-y-10 relative z-10">
+          <div className="grid 2xl:grid-cols-4 mf:grid-cols-3 md:grid-cols-2 gap-x-5 gap-y-10 relative z-10">
             {HISData.map((hisItem, index) => (
               <HIS
                 key={index}
@@ -117,43 +117,43 @@ const HexaHomesPages = () => {
             ))}
           </div>
 
-          <button type="submit" className={`bg-white w-[244px] py-3 text-black p-2.5 text-xl rounded-full mt-12 mx-auto flex justify-center hover:bg-white/95`}>
+          <button type="submit" className={`bg-white w-[244px] py-3 text-black p-2.5 sm:text-xl text-[17px] rounded-full mt-12 mx-auto flex justify-center hover:bg-white/95`}>
             Download Brochure
           </button>
         </div>
       </div>
 
       <div className="bg-[#ffffff]">
-        <div className="px- py-20 max-w-[1512px] mx-auto">
-          <div className="flex items-center justify-between gap-8">
-            <div className="max-w-[753px]">
-              <h1 className="text-[40px] font-playfair font-medium text-[#1F262B] max-w-[703px]">Designed for the Few Who Live Ahead of the Curve</h1>
-              <p className="text-[24px] font-normal text-[#1F262B] mt-5 leading-loose">
+        <div className="sm:py-20 py-10 3xl:max-w-[1512px]  sh:mx-9 mx-4 3xl:mx-auto">
+          <div className="flex lg:flex-row flex-col items-center justify-between gap-8">
+            <div className="lg:max-w-[753px]">
+              <h1 className="sm:text-[40px] text-[30px] font-playfair lg:text-start text-center font-medium text-[#1F262B] lg:max-w-[703px]">Designed for the Few Who Live Ahead of the Curve</h1>
+              <p className="sm:text-[24px] text-[17px] font-normal text-[#1F262B] mt-5 leading-loose">
                 HexaHomes isn’t a mass-produced home. We craft lasting assets — with limited availability — for individuals who understand
-                the value of timing, location, and legacy. <br /> Every HexaHome is a statement of refined intelligence:
+                the value of timing, location, and legacy. <br className="md:block hidden" /> Every HexaHome is a statement of refined intelligence:
               </p>
 
               <div className="mt-5 flex items-center gap-4">
                 <img src="/src/assets/hexaIcon17.svg" alt="" />
-                <p className="text-xl font-normal">Built with the highest-grade materials</p>
+                <p className="md:text-xl sm:text-lg font-medium">Built with the highest-grade materials</p>
               </div>
               <div className="mt-5 flex items-center gap-4">
                 <img src="/src/assets/hexaIcon18.svg" alt="" />
-                <p className="text-xl font-normal">Powered by smart automation</p>
+                <p className="md:text-xl sm:text-lg font-medium">Powered by smart automation</p>
               </div>
               <div className="mt-5 flex items-center gap-4">
                 <img src="/src/assets/hexaIcon19.svg" alt="" />
-                <p className="text-xl font-normal">Framed to hold generational value</p>
+                <p className="md:text-xl sm:text-lg font-medium">Framed to hold generational value</p>
               </div>
             </div>
 
-            <img src="/src/assets/hexa1.svg" alt="" />
+            <img src="/src/assets/hexa1.svg" alt="" className="lg:w-auto w-max" />
           </div>
 
           <div className="relative">
-            <img src="/src/assets/hexa2.svg" alt="" className="w-full mt-10" />
-            <div className="absolute text-white bg-[#031E424D] backdrop-blur-sm bottom-0 right-0 w-[702px] p-4 px-12">
-              <p className="font-normal">
+            <img src="/src/assets/hexa2.svg" alt="" className="w-screen mt-10" />
+            <div className="absolute text-white bg-[#031E424D] backdrop-blur-sm bottom-0 right-0 max-w-[702px] p-4 md:px-12 px-4">
+              <p className="font-normal mh:text-base text-sm">
                 “This isn’t a home you upgrade — it’s one you pass down. Reserved for a select few, HexaHomes offers
                 the kind of exclusivity money alone can’t buy — a timeless statement of status, built to remain rare.”
               </p>
@@ -164,13 +164,13 @@ const HexaHomesPages = () => {
       </div>
 
       <div className="bg-[#EEEEEE]">
-        <div className="px- py-20 max-w-[1512px] mx-auto">
-          <h1 className="text-[40px] font-playfair font-medium text-[#1F262B] text-center">Just 6 Private Units. No More, No Later.</h1>
+        <div className="sm:py-20 py-10 3xl:max-w-[1512px]  sh:mx-9 mx-4 3xl:mx-auto">
+          <h1 className="sm:text-[40px] text-[30px] font-playfair font-medium text-[#1F262B] text-center">Just 6 Private Units. No More, No Later.</h1>
           <p className="font-normal font-poppins mt-6 text-center">
-            In a world of noise and excess, true luxury is defined by what’s rare. <br /> HexaHomes is a limited collection of 6 bespoke triplexes — and every one is uniquely crafted.
+            In a world of noise and excess, true luxury is defined by what’s rare. <br className="md:block hidden" /> HexaHomes is a limited collection of 6 bespoke triplexes — and every one is uniquely crafted.
           </p>
 
-          <div className="grid grid-cols-3 gap-4 mt-16">
+          <div className="grid mk:grid-cols-3 sh:grid-cols-2 gap-4 mt-16">
             <img src="/src/assets/hexa3.svg" alt="" className="w-full" />
             <img src="/src/assets/hexa4.svg" alt="" className="w-full" />
             <img src="/src/assets/hexa5.svg" alt="" className="w-full" />
@@ -179,20 +179,20 @@ const HexaHomesPages = () => {
             <img src="/src/assets/hexa8.svg" alt="" className="w-full" />
           </div>
 
-          <button type="submit" className={`bg-black w-[264px] text-white p-2.5 py-3 text-xl rounded-full mt-12 mx-auto flex justify-center hover:bg-black/95`}>
+          <button type="submit" className={`bg-black w-[264px] text-white p-2.5 py-3 sm:text-xl text-[17px] rounded-full mt-12 mx-auto flex justify-center hover:bg-black/95`}>
             Join the Property List
           </button>
         </div>
       </div>
 
       <div className="bg-[#1F262B] text-white">
-        <div className="px- py-20 max-w-[1512px] mx-auto">
-          <h1 className="text-[40px] font-playfair font-medium text-[#ffffff] text-center">Live in Sync With Your Home</h1>
+        <div className="sm:py-20 py-10 3xl:max-w-[1512px]  sh:mx-9 mx-4 3xl:mx-auto">
+          <h1 className="sm:text-[40px] text-[30px] font-playfair font-medium text-[#ffffff] text-center">Live in Sync With Your Home</h1>
           <p className="font-normal font-poppins mt-6 text-center">
-            Designed with intelligent automation at its core, every system responds to your preferences in real time. <br /> With a single app, you control your entire home environment — effortlessly.
+            Designed with intelligent automation at its core, every system responds to your preferences in real time. <br className="mp:block hidden" /> With a single app, you control your entire home environment — effortlessly.
           </p>
 
-          <div className="grid grid-cols-4 gap-[76px] mt-20">
+          <div className="grid lg:grid-cols-4 mk:grid-cols-3 sh:grid-cols-2 gap-[36px] mt-20">
             {LOTData.map((lot, index) => (
               <LOT
                 key={index}
@@ -207,20 +207,20 @@ const HexaHomesPages = () => {
       </div>
 
       <div className="bg-[#ffffff]">
-        <div className="px- pt-20 max-w-[1512px mx-auto">
-          <h1 className="text-[40px] font-playfair font-medium text-[#1F262B] text-center">The Right Place; The Right Time</h1>
-          <p className="font-normal font-poppins mt-6 text-center">
-            Centrally located in Lekki Phase 1 — minutes from fine dining, world-class schools, and Lagos’ tech and business district — <br /> HexaHomes is positioned for those who thrive at the center of culture and capital.
+        <div className="pt-20 max-w-[1512px 3xl:mx-auto">
+          <h1 className="sm:text-[40px] text-[30px] font-playfair font-medium text-[#1F262B] text-center">The Right Place; The Right Time</h1>
+          <p className="font-normal font-poppins mt-6 text-center px-2">
+            Centrally located in Lekki Phase 1 — minutes from fine dining, world-class schools, and Lagos’ tech and business district — <br className="md:block hidden" /> HexaHomes is positioned for those who thrive at the center of culture and capital.
           </p>
           <img src="/src/assets/hexaMap.svg" alt="" className="w-full" />
         </div>
       </div>
 
       <div className="bg-[#eeeeee]">
-        <div className="px- py-20 max-w-[1512px] mx-auto">
+        <div className="sm:py-20 py-10 3xl:max-w-[1512px]  sh:mx-9 mx-4 3xl:mx-auto">
           <div className="text-center mx-auto mb-16">
-            <h1 className="text-[40px] font-playfair font-medium text-[#1F262B] mb-4 text-center">A Limited Opportunity for Those Who Think Long-Term.</h1>
-            <p>There are homes. There are investments. And then there’s HexaHomes. <br /> 12 residences. Lifetime value. Tailored for those who appreciate modern luxury and smart living</p>
+            <h1 className="md:text-[40px] sm:text-[30px] text-[24px] font-playfair font-medium text-[#1F262B] mb-4 text-center">A Limited Opportunity for Those Who Think Long-Term.</h1>
+            <p className="sm:text-base text-sm">There are homes. There are investments. And then there’s HexaHomes. <br className="md:block hidden" /> 12 residences. Lifetime value. Tailored for those who appreciate modern luxury and smart living</p>
           </div>
 
           <ContactLayout />
