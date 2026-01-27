@@ -13,8 +13,8 @@ const BlogDetails = () => {
 
     const blogPosts = [
         { imageUrl: "/src/assets/blogImg2.svg", subText: "Design Without Compromise: The Architectural Philosophy Behind Tenece Residences", slug: "luxury-real-estate-vs-traditional-investments" },
-        { imageUrl: "/src/assets/blogImg3.svg", subText: "Design Without Compromise: The Architectural Philosophy Behind Tenece Residences", slug: "luxury-real-estate-vs-traditional-investments" },
-        { imageUrl: "/src/assets/blogImg4.svg", subText: "Design Without Compromise: The Architectural Philosophy Behind Tenece Residences", slug: "luxury-real-estate-vs-traditional-investments" },
+        { imageUrl: "/src/assets/blogImg3.png", subText: "Design Without Compromise: The Architectural Philosophy Behind Tenece Residences", slug: "luxury-real-estate-vs-traditional-investments" },
+        { imageUrl: "/src/assets/blogImg4.png", subText: "Design Without Compromise: The Architectural Philosophy Behind Tenece Residences", slug: "luxury-real-estate-vs-traditional-investments" },
         { imageUrl: "/src/assets/blogImg5.svg", subText: "Design Without Compromise: The Architectural Philosophy Behind Tenece Residences", slug: "luxury-real-estate-vs-traditional-investments" },
     ]
 
@@ -53,7 +53,7 @@ const BlogDetails = () => {
                 <Header />
 
                 <div className="py-28 pt-36 3xl:max-w-[1512px] sh:mx-9 mx-4 3xl:mx-auto">
-                    <h1 className="mk:text-[64px] sm:text-[45px] text-[32px] leading-tight font-playfair text-center max-w-[1170px] 3xl:mx-auto font-medium mb-10">
+                    <h1 className="mk:text-[64px] sm:text-[45px] text-[24px] leading-tight font-playfair text-center max-w-[1170px] 3xl:mx-auto font-medium mb-10">
                         {post.title}
                     </h1>
                     <img
@@ -62,14 +62,14 @@ const BlogDetails = () => {
                         className="w-[1292px] sm:h-[611px] object-cover rounded-2xl 3xl:mx-auto"
                     />
 
-                    <div className="space-y-6 text-lg leading-relaxed mt-10">
+                    <div className="space-y-6 sm:text-lg leading-relaxed mt-10">
                         {post.content.map((block, index) => {
                             switch (block.type) {
                                 case "heading":
                                     return (
                                         <h2
                                             key={index}
-                                            className="text-2xl font-semibold mt-10"
+                                            className="sm:text-2xl text-xl font-semibold mt-10"
                                         >
                                             {block.text}
                                         </h2>
@@ -79,7 +79,7 @@ const BlogDetails = () => {
                                     return (
                                         <p
                                             key={index}
-                                            className="text-lg leading-relaxed text-gray-700"
+                                            className="sm:text-lg leading-relaxed text-gray-700"
                                         >
                                             {block.text}
                                         </p>
@@ -89,7 +89,7 @@ const BlogDetails = () => {
                                     return block.ordered ? (
                                         <ol
                                             key={index}
-                                            className="list-decimal pl-6 space-y-2 text-lg text-gray-700"
+                                            className="list-decimal pl-6 space-y-2 sm:text-lg text-gray-700"
                                         >
                                             {block.items.map((item, i) => (
                                                 <li key={i}>{item}</li>
@@ -98,7 +98,7 @@ const BlogDetails = () => {
                                     ) : (
                                         <ul
                                             key={index}
-                                            className="list-disc pl-6 space-y-2 text-lg text-gray-700"
+                                            className="list-disc pl-6 space-y-2 sm:text-lg text-gray-700"
                                         >
                                             {block.items.map((item, i) => (
                                                 <li key={i}>{item}</li>
@@ -113,11 +113,11 @@ const BlogDetails = () => {
                     </div>
 
                     <div className="mt-16">
-                        <p className="text-[40px] font-medium">More Articles</p>
+                        <p className="sm:text-[40px] text-2xl font-medium">More Articles</p>
 
                         <div className="grid xl:grid-cols-4 md:grid-cols-3 sd:grid-cols-2 md:gap-[41px] gap-4 mt-8">
                             {blogPosts.map((lot, index) => (
-                                <Link to={`/blog/${lot.slug}`} key={index}>
+                                <Link to={`/blog/${lot.slug}`} onClick={() => window.scrollTo(0, 0)} key={index}>
                                     <LOT
                                         imageUrl={lot.imageUrl}
                                         subText={lot.subText}

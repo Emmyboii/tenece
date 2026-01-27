@@ -1,5 +1,5 @@
-import contact from "../assets/homeContact.svg";
-import contact2 from "../assets/hexa13.svg";
+import contact from "../assets/homeContact.png";
+import contact2 from "../assets/hexa13.png";
 import { useState, useEffect, useRef } from "react";
 import CountryCode from './CountryCode';
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
@@ -149,7 +149,7 @@ const ContactLayout = () => {
     return (
         <div className="flex lg:flex-row flex-col items-center justify-between gap-4">
             {hexa ? (
-                <img src={contact2} alt="" className={`${ignoreFields && 'w-[705px]'} lg:w-auto w-full`} />
+                <img src={contact2} alt="" className={`${ignoreFields && 'w-[705px]'} w-[705px]`} />
             ) : (
                 <img src={contact} alt="" className={`${ignoreFields && 'w-[705px]'} lg:w-auto w-full`} />
             )}

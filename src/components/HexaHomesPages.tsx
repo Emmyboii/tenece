@@ -7,6 +7,7 @@ import kitchen from "../assets/kitchen.svg";
 import LOT from "./LOT";
 import ContactLayout from "./ContactLayout";
 import Footer from "./Footer";
+import { Link } from "react-router-dom";
 
 const HexaHomesPages = () => {
 
@@ -39,7 +40,7 @@ const HexaHomesPages = () => {
   return (
     <div className="overflow-x-hidden">
       <Hero
-        heroImage="/src/assets/hexaHero.svg"
+        heroImage="/src/assets/hexaHero.png"
         heroText="HexaHomes"
         heroText2="Where innovation meets Elegance"
         subText="A deluxe home with upscale infrastructure in an exclusive location."
@@ -179,9 +180,9 @@ const HexaHomesPages = () => {
             <img src="/src/assets/hexa8.svg" alt="" className="w-full" />
           </div>
 
-          <button type="submit" className={`bg-black w-[264px] text-white p-2.5 py-3 sm:text-xl text-[17px] rounded-full mt-12 mx-auto flex justify-center hover:bg-black/95`}>
+          <Link to={'/contact'} onClick={() => window.scrollTo(0, 0)} className={`bg-black w-[264px] text-white p-2.5 py-3 sm:text-xl text-[17px] rounded-full mt-12 mx-auto flex justify-center hover:bg-black/95`}>
             Join the Property List
-          </button>
+          </Link>
         </div>
       </div>
 

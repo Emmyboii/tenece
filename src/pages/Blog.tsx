@@ -13,15 +13,15 @@ const Blog = () => {
     const blogPosts = [
         { image: "/src/assets/blogImg.svg", title: "Luxury Real Estate vs. Traditional Investments: Where Should You Put Your Money?", date: "25 Jan 2025", slug: "luxury-real-estate-vs-traditional-investments", },
         { imageUrl: "/src/assets/blogImg2.svg", subText: "Design Without Compromise: The Architectural Philosophy Behind Tenece Residences", slug: "luxury-real-estate-vs-traditional-investments", variant: "standard" },
-        { imageUrl: "/src/assets/blogImg3.svg", subText: "Design Without Compromise: The Architectural Philosophy Behind Tenece Residences", slug: "luxury-real-estate-vs-traditional-investments", variant: "standard" },
-        { imageUrl: "/src/assets/blogImg4.svg", subText: "Design Without Compromise: The Architectural Philosophy Behind Tenece Residences", slug: "luxury-real-estate-vs-traditional-investments", variant: "standard" },
+        { imageUrl: "/src/assets/blogImg3.png", subText: "Design Without Compromise: The Architectural Philosophy Behind Tenece Residences", slug: "luxury-real-estate-vs-traditional-investments", variant: "standard" },
+        { imageUrl: "/src/assets/blogImg4.png", subText: "Design Without Compromise: The Architectural Philosophy Behind Tenece Residences", slug: "luxury-real-estate-vs-traditional-investments", variant: "standard" },
         { imageUrl: "/src/assets/blogImg5.svg", subText: "Design Without Compromise: The Architectural Philosophy Behind Tenece Residences", slug: "luxury-real-estate-vs-traditional-investments", variant: "standard" },
         { imageUrl: "/src/assets/blogImg6.svg", subText: "Design Without Compromise: The Architectural Philosophy Behind Tenece Residences", slug: "luxury-real-estate-vs-traditional-investments", variant: "standard" },
         { imageUrl: "/src/assets/blogImg7.svg", subText: "Design Without Compromise: The Architectural Philosophy Behind Tenece Residences", slug: "luxury-real-estate-vs-traditional-investments", variant: "standard" },
         { imageUrl: "/src/assets/blogImg5.svg", subText: "Design Without Compromise: The Architectural Philosophy Behind Tenece Residences", slug: "luxury-real-estate-vs-traditional-investments", variant: "standard" },
-        { imageUrl: "/src/assets/blogImg3.svg", subText: "Design Without Compromise: The Architectural Philosophy Behind Tenece Residences", slug: "luxury-real-estate-vs-traditional-investments", variant: "standard" },
+        { imageUrl: "/src/assets/blogImg3.png", subText: "Design Without Compromise: The Architectural Philosophy Behind Tenece Residences", slug: "luxury-real-estate-vs-traditional-investments", variant: "standard" },
         { imageUrl: "/src/assets/blogImg2.svg", subText: "Design Without Compromise: The Architectural Philosophy Behind Tenece Residences", slug: "luxury-real-estate-vs-traditional-investments", variant: "standard" },
-        { imageUrl: "/src/assets/blogImg4.svg", subText: "Design Without Compromise: The Architectural Philosophy Behind Tenece Residences", slug: "luxury-real-estate-vs-traditional-investments", variant: "standard" },
+        { imageUrl: "/src/assets/blogImg4.png", subText: "Design Without Compromise: The Architectural Philosophy Behind Tenece Residences", slug: "luxury-real-estate-vs-traditional-investments", variant: "standard" },
         { imageUrl: "/src/assets/blogImg6.svg", subText: "Design Without Compromise: The Architectural Philosophy Behind Tenece Residences", slug: "luxury-real-estate-vs-traditional-investments", variant: "standard" },
         { imageUrl: "/src/assets/blogImg2.svg", subText: "Design Without Compromise: The Architectural Philosophy Behind Tenece Residences", slug: "luxury-real-estate-vs-traditional-investments", variant: "standard" },
         { imageUrl: "/src/assets/blogImg2.svg", subText: "Design Without Compromise: The Architectural Philosophy Behind Tenece Residences", slug: "luxury-real-estate-vs-traditional-investments", variant: "standard" },
@@ -76,7 +76,7 @@ const Blog = () => {
     return (
         <div className="overflow-x-hidden">
             <Hero
-                heroImage="/src/assets/blogHero.svg"
+                heroImage="/src/assets/blogHero.png"
                 heroText="Inside the World of Prestige, Design, and Smart Living"
                 subText="Discover trends, insights, and inspiration across architecture, smart homes, and luxury investments — curated for the modern elite."
             />

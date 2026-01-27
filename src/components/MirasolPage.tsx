@@ -1,6 +1,6 @@
 import BelowHeroHomeAndMirasol from "./BelowHeroHomeAndMirasol"
 import Hero from "./Hero"
-import Future from "../assets/Future.svg";
+import Future from "../assets/Future.png";
 import OurTeamImg from "./OurTeamImg";
 import Footer from "./Footer";
 
@@ -8,7 +8,7 @@ const MirasolPage = () => {
     return (
         <div className="overflow-x-hidden">
             <Hero
-                heroImage="/src/assets/mirasolHero.svg"
+                heroImage="/src/assets/mirasolHero.png"
                 heroText="The Mirasol"
                 subText="Power. Privacy. Prestige — designed by the developers behind Lagos’ most iconic smart residences"
                 cta="Download Brochure"
@@ -26,29 +26,29 @@ const MirasolPage = () => {
 
 
             <div className="sm:py-20 py-10 3xl:max-w-[1512px]  sh:mx-9 mx-4 3xl:mx-auto">
-                <h1 className="sm:text-[40px] text-[26px] font-playfair font-medium text-[#1F262B] mb-16 text-center">Crafted for the Privileged Few</h1>
+                <h1 className="sm:text-[40px] text-[26px] font-playfair font-medium text-[#1F262B] sm:mb-16 mb-9 text-center">Crafted for the Privileged Few</h1>
 
                 <div className="grid rk:grid-cols-3 md:grid-cols-2 gap-4">
                     <div className="space-y-4">
                         <OurTeamImg
-                            image="/src/assets/mira1.svg"
+                            image="/src/assets/mira1.png"
                             name="Smart Living Systems"
                             rounded
                         />
                         <OurTeamImg
-                            image="/src/assets/mira2.svg"
+                            image="/src/assets/mira2.png"
                             name="Kohler Smart Kitchens & Fixtures"
                             rounded
                         />
                     </div>
                     <OurTeamImg
-                        image="/src/assets/mira3.svg"
+                        image="/src/assets/mira3.png"
                         name="Fully Automated Curtains & Glass"
                         height='3rd'
                         rounded
                     />
                     <OurTeamImg
-                        image="/src/assets/mira4.svg"
+                        image="/src/assets/mira4.png"
                         name="High-Security Smart Surveillance"
                         rounded
                         height='3rd'
@@ -64,9 +64,9 @@ const MirasolPage = () => {
                     </div>
 
                     <div className="flex items-center gap-4">
-                        <img src="/src/assets/mira5.svg" alt="" className="w-[990px h-[600px" />
+                        <img src="/src/assets/mira5.svg" alt="" className="w-[990px h-[600px lg:block hidden" />
                         <img src="/src/assets/mira6.svg" alt="" className="w-[990px h-[600px" />
-                        <img src="/src/assets/mira7.svg" alt="" className="w-[990px h-[600px" />
+                        <img src="/src/assets/mira7.svg" alt="" className="w-[990px h-[600px lg:block hidden" />
                     </div>
 
                 </div>
@@ -98,7 +98,7 @@ const MirasolPage = () => {
                         It isn’t just a location — it’s a symbol of status, influence, and generational wealth. From its tree-lined avenues to its world-class <br className="sm:block hidden" /> institutions, it remains the address of choice for Nigeria’s most powerful, affluent, and forward-looking individuals.
                     </p>
                     <div className="relative mt-20">
-                        <img src="/src/assets/mirasolMap.svg" alt="" className="w-full" />
+                        <img src="/src/assets/mirasolMap.png" alt="" className="w-full" />
                         {/* <button type="submit" className={`bg-white w-[284px] absolute bottom-[116px] left-36 py-6 text-black p-2.5 sm:text-xl text-[17px] rounded-full mt-12 3xl:mx-auto flex justify-center hover:bg-white/95`}>
                             Download Brochure
                         </button> */}

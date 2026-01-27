@@ -1,12 +1,12 @@
 import Hero from "../components/Hero"
-import Future from "../assets/Future.svg";
+import Future from "../assets/Future.png";
 import Legacy1 from "../assets/Legacy1.svg";
 import Legacy2 from "../assets/Legacy2.svg";
 import Legacy3 from "../assets/Legacy3.svg";
 import Legacy4 from "../assets/Legacy4.svg";
 import capa1 from "../assets/capa1.svg";
 import capa2 from "../assets/capa2.svg";
-import capa3 from "../assets/capa3.svg";
+import capa3 from "../assets/capa3.png";
 import kitchen from "../assets/kitchen.svg";
 import luxury1 from "../assets/luxury1.svg";
 import luxury2 from "../assets/luxury2.svg";
@@ -18,6 +18,7 @@ import LatestSmart from "../components/LatestSmart";
 import ContactLayout from "../components/ContactLayout";
 import Footer from "../components/Footer";
 import BelowHeroHomeAndMirasol from "../components/BelowHeroHomeAndMirasol";
+import { Link } from "react-router-dom";
 
 const Home = () => {
 
@@ -47,13 +48,13 @@ const Home = () => {
     const LatestSmartData = [
         { image: "/src/assets/latest1.svg", text: "Smart Homes, Smarter Living: How Technology is Redefining Luxury in Lagos" },
         { image: "/src/assets/latest2.svg", text: "Smart Homes, Smarter Living: How Technology is Redefining Luxury in Lagos" },
-        { image: "/src/assets/latest3.svg", text: "Smart Homes, Smarter Living: How Technology is Redefining Luxury in Lagos" },
+        { image: "/src/assets/latest3.png", text: "Smart Homes, Smarter Living: How Technology is Redefining Luxury in Lagos" },
     ]
 
     return (
         <div className="overflow-x-hidden">
             <Hero
-                heroImage="/src/assets/HomeHero.svg"
+                heroImage="/src/assets/HomeHero.png"
                 heroText="Shaping Africa’s Most Exclusive Luxury Residences"
                 subText="From client-led residences to iconic addresses like HexaHomes and The Mirasol, Tenece crafts real estate legacies powered by innovation, precision, and prestige"
             />
@@ -183,9 +184,9 @@ const Home = () => {
                         ))}
                     </div>
 
-                    <button className="bg-[#1F262B] sm:w-[240px] text-white py-4 px-6 sm:text-xl text-[17px] rounded-full mt-10 hover:bg-black/95 flex items-center justify-center mx-auto">
+                    <Link to={'/projects'} onClick={() => window.scrollTo(0, 0)} className="bg-[#1F262B] sm:w-[240px] text-white py-4 px-6 sm:text-xl text-[17px] rounded-full mt-10 hover:bg-black/95 flex items-center justify-center mx-auto">
                         Discover More
-                    </button>
+                    </Link>
                 </div>
             </div>
 

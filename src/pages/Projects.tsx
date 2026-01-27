@@ -8,7 +8,7 @@ const Projects = () => {
     return (
         <div className="overflow-x-hidden">
             <Hero
-                heroImage="/src/assets/projectHero.svg"
+                heroImage="/src/assets/projectHero.png"
                 heroText="Transforming Ideas into Exceptional Spaces"
                 subText="We blend creativity, functionality, and innovation to design spaces that inspire, engage, and elevate everyday living."
             />

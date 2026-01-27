@@ -37,6 +37,7 @@ const Header = () => {
                         <a
                             key={item.name}
                             href={item.link}
+                            onClick={() => window.scrollTo(0, 0)}
                             className={`${contactURL ? "text-black" : "text-white"
                                 } hover:text-blue-500`}
                         >
@@ -48,6 +49,7 @@ const Header = () => {
                 {/* DESKTOP CTA */}
                 <a
                     href="/contact"
+                    onClick={() => window.scrollTo(0, 0)}
                     className={`hidden lg:block px-5 py-4 rounded-full hover:bg-white/95 ${contactURL
                         ? "bg-black text-white"
                         : "bg-white text-black"
@@ -76,7 +78,10 @@ const Header = () => {
                             <a
                                 key={item.name}
                                 href={item.link}
-                                onClick={() => setOpen(false)}
+                                onClick={() => {
+                                    window.scrollTo(0, 0)
+                                    setOpen(false)
+                                }}
                                 className={`text-lg ${contactURL ? "text-black" : "text-white"
                                     } hover:text-blue-500`}
                             >

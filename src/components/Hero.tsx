@@ -1,5 +1,5 @@
 import { FiArrowDownCircle } from "react-icons/fi";
-import homeHero from "../assets/HomeHero.svg";
+import homeHero from "../assets/HomeHero.png";
 import Header from "./Header";
 
 interface HeroProps {
@@ -32,7 +32,7 @@ const Hero = ({ heroImage, heroText, heroText2, subText, cta }: HeroProps) => {
                     <p className={`md:text-xl text-base font-medium text-white max-w-[730px] ${(location.includes('/mirasol') || location.includes('/hexahomes')) && "text-center mx-auto max-w-[603px]"}`}>{subText}</p>
 
                     {location === "/about" || location.includes('/mirasol') || location.includes('/hexahomes') ? (
-                        <button type="submit" className={`bg-white w-[224px] text-black p-2.5 sm:text-xl text-[17px] rounded-full mt-4 hover:bg-white/95 ${(location.includes('/mirasol') || location.includes('/hexahomes')) && "flex justify-center mx-auto w-[261px] p-3"}`}>
+                        <button type="submit" className={`bg-white sm:w-[224px] w-[180px] text-black sm:p-4 p-2 sm:text-lg text-[16px] rounded-full mt-4 hover:bg-white/95 ${(location.includes('/mirasol') || location.includes('/hexahomes')) && "flex justify-center mx-auto w-[260px] p-3"}`}>
                             {cta}
                         </button>
                     ) : location === '/' ? (
