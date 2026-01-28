@@ -64,7 +64,7 @@ const LatestSmart = ({ image, text, index }: LatestSmartProps) => {
     if (smallScreen) {
         return (
             <motion.div
-                className={`relative mc:mt-20 mt-5 ${heightClass}`}
+                className={`relative mc:mt-20 mt-5 h-[400px] object-cover`}
                 style={{
                     backgroundImage: `url(${image})`,
                     backgroundSize: "cover",
@@ -74,7 +74,7 @@ const LatestSmart = ({ image, text, index }: LatestSmartProps) => {
                 variants={cardVariants}
                 initial="hidden"
                 whileInView="visible"
-                viewport={{ once: true, amount: 0.3 }}
+                viewport={{ once: true, amount: 0.15 }}
                 whileHover={{ scale: 1.02, y: -3, transition: { duration: 0.3 } }}
             >
                 <div className="absolute inset-0 bg-gradient-to-b from-white/0 via-white/0 to-[#244975]" />
@@ -88,6 +88,7 @@ const LatestSmart = ({ image, text, index }: LatestSmartProps) => {
             </motion.div>
         )
     }
+
     return (
         <motion.div
             className={`relative mt-20 ${heightClass} ${layoutMap[index]}`}
@@ -100,7 +101,7 @@ const LatestSmart = ({ image, text, index }: LatestSmartProps) => {
             variants={cardVariants}
             initial="hidden"
             whileInView="visible"
-            viewport={{ once: true, amount: 0.3 }}
+            viewport={{ once: true, amount: 0.15 }}
             whileHover={{ scale: 1.02, y: -3, transition: { duration: 0.3 } }}
         >
             <div className="absolute inset-0 bg-gradient-to-b from-white/0 via-white/0 to-[#244975]" />

@@ -161,7 +161,7 @@ const MirasolPage = () => {
                         className="space-y-5"
                         initial="hidden"
                         whileInView="visible"
-                        viewport={{ once: true, amount: 0.3 }}
+                        viewport={{ once: true, amount: 0.15 }}
                         variants={textVariants}
                     >
                         <motion.h1
@@ -183,13 +183,13 @@ const MirasolPage = () => {
                         className="rx:flex grid md:grid-cols-3 grid-cols-1 items-center gap-4 mx-auto justify-center rx:justify-normal"
                         initial="hidden"
                         whileInView="visible"
-                        viewport={{ once: true, amount: 0.3 }}
+                        viewport={{ once: true, amount: 0.15 }}
                         variants={imageContainerVariants}
                     >
                         <motion.img
                             src={mira8}
                             alt=""
-                            className="w-screen md:w-auto rounded-md"
+                            className="w-screen sm:h-auto h-[400px] md:w-auto rounded-md"
                             variants={imageVariants}
                             whileHover="hover"
                         />
@@ -208,7 +208,7 @@ const MirasolPage = () => {
                             <motion.img
                                 src={mira10}
                                 alt=""
-                                className="w-screen md:w-auto"
+                                className="w-screen sm:h-auto h-[400px] md:w-auto"
                                 variants={imageVariants}
                                 whileHover="hover"
                             />

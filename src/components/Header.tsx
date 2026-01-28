@@ -53,7 +53,7 @@ const Header = () => {
                 }`}
         >
             {/* TOP BAR */}
-            <div className="flex items-center justify-between py-10 pb-6 mx-9 3xl:max-w-[1512px]  3xl:mx-auto">
+            <div className="flex items-center justify-between sm:py-10 py-4 sm:pb-6 mx-9 3xl:max-w-[1512px]  3xl:mx-auto">
                 {/* LOGO */}
                 <motion.a variants={itemVariants} href="/">
                     <img src={contactURL ? Logo2 : Logo} alt="Logo" />

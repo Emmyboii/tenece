@@ -52,7 +52,7 @@ const HIS = ({ icon, title, description, index, normal }: HISProps) => {
                 variants={cardVariants}
                 initial="hidden"
                 whileInView="visible"
-                viewport={{ once: true, amount: 0.3 }}
+                viewport={{ once: true, amount: 0.15 }}
                 whileHover={{ y: -5, scale: 1.02, transition: { duration: 0.3, ease: [0.42, 0, 0.58, 1] } }}
                 className={`${baseClasses} p-4 2xl:w-[360px] h-[280px]`}
             >
@@ -69,7 +69,7 @@ const HIS = ({ icon, title, description, index, normal }: HISProps) => {
                 variants={cardVariants}
                 initial="hidden"
                 whileInView="visible"
-                viewport={{ once: true, amount: 0.3 }}
+                viewport={{ once: true, amount: 0.15 }}
                 whileHover={{ y: -5, scale: 1.02, transition: { duration: 0.3, ease: [0.42, 0, 0.58, 1] } }}
                 className={`${baseClasses} p-4 h-[260px]`}
             >
@@ -86,7 +86,7 @@ const HIS = ({ icon, title, description, index, normal }: HISProps) => {
                 variants={cardVariants}
                 initial="hidden"
                 whileInView="visible"
-                viewport={{ once: true, amount: 0.3 }}
+                viewport={{ once: true, amount: 0.15 }}
                 whileHover={{ y: -5, scale: 1.02, transition: { duration: 0.3, ease: [0.42, 0, 0.58, 1] } }}
                 className={`${baseClasses} rx:px-20 px-11 rx:sm:py-20 py-10 ${layoutMap[index]}`}
             >

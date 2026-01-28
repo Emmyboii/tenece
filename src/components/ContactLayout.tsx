@@ -164,7 +164,7 @@ const ContactLayout = () => {
             variants={containerVariants}
             initial="hidden"
             whileInView="visible"
-            viewport={{ once: true, amount: 0.3 }}
+            viewport={{ once: true, amount: 0.15 }}
         >
             <motion.div
                 variants={itemVariants}
@@ -174,7 +174,7 @@ const ContactLayout = () => {
                 transition={{ duration: 0.8, ease: "easeOut" }}
             >
                 {hexa ? (
-                    <img src={contact2} alt="" className="w-[705px]" />
+                    <img src={contact2} alt="" className="md:w-[705px] sd:w-[400px] w-[300px] mx-auto" />
                 ) : (
                     <img src={contact} alt="" className={`${ignoreFields && 'w-[705px]'} lg:w-auto w-full`} />
                 )}

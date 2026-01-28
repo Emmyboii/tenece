@@ -51,7 +51,7 @@ const Projects = () => {
                     variants={sectionVariants}
                     initial="hidden"
                     whileInView="visible"
-                    viewport={{ once: true, amount: 0.2 }}
+                    viewport={{ once: true, amount: 0.15 }}
                     className="sm:py-20 py-10 3xl:max-w-[1512px] sh:mx-9 mx-4 3xl:mx-auto"
                 >
                     <div className="max-w-[980px] text-center 3xl:mx-auto mb-16">

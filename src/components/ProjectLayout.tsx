@@ -46,7 +46,7 @@ const ProjectLayout = ({ text, subText, cta, ctaLink, smallImg, largeImg, revers
                 variants={containerVariants}
                 initial="hidden"
                 whileInView="visible"
-                viewport={{ once: true, amount: 0.3 }}
+                viewport={{ once: true, amount: 0.15 }}
                 className={"flex lg:flex-row flex-col gap-4 justify-between lg:items-start items-center" + (reverse ? " flex-row-reverse" : "")}
             >
                 <motion.div variants={fadeSlide(reverse)} className="lg:text-start text-center mb-2 lg:mb-0 lg:w-[1000px]">

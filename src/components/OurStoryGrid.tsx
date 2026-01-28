@@ -34,7 +34,7 @@ const OurStoryGrid = ({ image, title, text }: OurStoryGridProps) => {
             className="flex rx:flex-row flex-col rx:text-start text-center items-center justify-between gap-5 mt-20 text-[#1F262B]"
             initial="hidden"
             whileInView="visible"
-            viewport={{ once: true, amount: 0.3 }}
+            viewport={{ once: true, amount: 0.15 }}
         >
             {/* Image */}
             <motion.img

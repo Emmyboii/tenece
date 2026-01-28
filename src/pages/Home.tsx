@@ -38,7 +38,7 @@ const sectionVariants: Variants = {
     visible: {
         opacity: 1,
         transition: {
-            staggerChildren: 0.15,
+            staggerChildren: 0.2,
         },
     },
 };
@@ -141,7 +141,7 @@ const Home = () => {
                 variants={sectionVariants}
                 initial="hidden"
                 whileInView="visible"
-                viewport={{ once: true, amount: 0.2 }}
+                viewport={{ once: true, amount: 0.11 }}
                 className="sm:py-20 py-10 3xl:max-w-[1512px] sh:mx-9 mx-4 3xl:mx-auto"
             >
                 <motion.h1
@@ -174,7 +174,7 @@ const Home = () => {
                     variants={sectionVariants}
                     initial="hidden"
                     whileInView="visible"
-                    viewport={{ once: true, amount: 0.2 }}
+                    viewport={{ once: true, amount: 0.15 }}
                     className="sm:py-20 py-10 3xl:max-w-[1512px] sh:mx-9 mx-4 3xl:mx-auto"
                 >
                     <motion.h1
@@ -191,7 +191,7 @@ const Home = () => {
                 variants={sectionVariants}
                 initial="hidden"
                 whileInView="visible"
-                viewport={{ once: true, amount: 0.2 }}
+                viewport={{ once: true, amount: 0.15 }}
                 className="sm:py-20 py-10 3xl:max-w-[1512px] sh:mx-9 mx-4 3xl:mx-auto"
             >
                 <HexaHomesLayout />
@@ -201,7 +201,7 @@ const Home = () => {
                 variants={sectionVariants}
                 initial="hidden"
                 whileInView="visible"
-                viewport={{ once: true, amount: 0.2 }}
+                viewport={{ once: true, amount: 0.15 }}
                 className="sm:py-20 py-10 3xl:max-w-[1512px] sh:mx-9 mx-4 3xl:mx-auto"
             >
                 <motion.h1
@@ -249,7 +249,7 @@ const Home = () => {
                         variants={containerVariants}
                         initial="hidden"
                         whileInView="visible"
-                        viewport={{ once: true, amount: 0.3 }}
+                        viewport={{ once: true, amount: 0.15 }}
                         className="grid lg:grid-cols-16 md:grid-cols-2 gap-x-5 lg:gap-y-10 gap-y-5 relative z-10"
                     >
                         {HISData.map((hisItem, index) => (
@@ -270,12 +270,12 @@ const Home = () => {
                 variants={containerVariants2}
                 initial="hidden"
                 whileInView="visible"
-                viewport={{ once: true, amount: 0.3 }}
+                viewport={{ once: true, amount: 0.15 }}
             >
                 <div className="sm:py-20 py-10 3xl:max-w-[1512px] 3xl:mx-auto sh:mx-9 mx-4 flex xl:flex-row flex-col-reverse items-center justify-between gap-8">
                     {/* Image Block */}
                     <motion.div className="relative" variants={fadeInScale} whileHover={{ scale: 1.02, y: -5, transition: { duration: 0.3 } }}>
-                        <motion.img src={luxury1} alt="" className="rounded-md shadow-lg" />
+                        <motion.img src={luxury1} alt="" className="rounded-md sm:h-auto h-[400px] w-full shadow-lg" />
                         <motion.img
                             src={luxury2}
                             alt=""
@@ -289,7 +289,7 @@ const Home = () => {
                         <motion.h1 className="sm:text-[40px] text-[30px] font-playfair font-medium text-white" variants={fadeUp2}>
                             Luxury That Performs Like an Asset
                         </motion.h1>
-                        <motion.p className="text-white font-normal" variants={fadeUp2}>
+                        <motion.p className="text-white sm:text-base text-sm font-normal" variants={fadeUp2}>
                             Our homes are not just designed for living — they’re built to outperform. Backed by top-tier
                             real estate data, TRE offers long-term appreciation, passive income, and security of value.
                         </motion.p>
@@ -302,14 +302,14 @@ const Home = () => {
                     variants={sectionVariants}
                     initial="hidden"
                     whileInView="visible"
-                    viewport={{ once: true, amount: 0.2 }}
+                    viewport={{ once: true, amount: 0.15 }}
                     className="sm:py-20 py-10 3xl:max-w-[1512px] sh:mx-9 mx-4 3xl:mx-auto"
                 >
                     <div className="max-w-[630px] text-center mx-auto">
                         <motion.h1
                             variants={fadeUp}
                             className="sm:text-[40px] text-[30px] font-playfair font-medium text-[#1F262B] mb-4 text-center">Latest in Smart Luxury Living</motion.h1>
-                        <motion.p variants={fadeUp}>Discover industry insights, architecture inspiration, and smart living breakthroughs — curated for future-focused homeowners and investors.</motion.p>
+                        <motion.p variants={fadeUp} className="sm:text-base text-sm">Discover industry insights, architecture inspiration, and smart living breakthroughs — curated for future-focused homeowners and investors.</motion.p>
                     </div>
 
                     <div className="grid mc:grid-cols-2 grid-cols-1 gap-x-4">
@@ -334,7 +334,7 @@ const Home = () => {
                     variants={sectionVariants}
                     initial="hidden"
                     whileInView="visible"
-                    viewport={{ once: true, amount: 0.2 }}
+                    viewport={{ once: true, amount: 0.15 }}
                     className="sm:py-20 py-10 3xl:max-w-[1512px] sh:mx-9 mx-4 3xl:mx-auto"
                 >
                     <div className="max-w-[860px] text-center mx-auto mb-16">

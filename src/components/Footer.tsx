@@ -47,7 +47,7 @@ const Footer = () => {
             variants={containerVariants}
             initial="hidden"
             whileInView="visible"
-            viewport={{ once: true, amount: 0.3 }}
+            viewport={{ once: true, amount: 0.15 }}
         >
             <motion.div
                 className="sm:py-20 py-10 3xl:max-w-[1512px] sh:mx-9 mx-4 3xl:mx-auto mf:flex grid md:grid-cols-2 md:justify-between justify-center md:items-start items-center mf:gap-4 gap-10 gap-y-14" variants={containerVariants}
@@ -58,7 +58,7 @@ const Footer = () => {
                     variants={columnVariants}
                     initial="hidden"
                     whileInView="visible"
-                    viewport={{ once: true, amount: 0.3 }}
+                    viewport={{ once: true, amount: 0.15 }}
                 >
                     <motion.h1 className="mh:text-2xl text-xl font-medium md:text-start text-center" variants={itemVariants}>
                         TENECE REAL ESTATE
@@ -75,7 +75,7 @@ const Footer = () => {
                     variants={columnVariants}
                     initial="hidden"
                     whileInView="visible"
-                    viewport={{ once: true, amount: 0.3 }}
+                    viewport={{ once: true, amount: 0.15 }}
                 >
                     <motion.h1 variants={itemVariants} className="mh:text-2xl text-xl font-medium">PROJECTS</motion.h1>
                     <motion.a href="/projects/mirasol" className="mh:text-xl font-normal" variants={itemVariants}>The Mirasol</motion.a>
@@ -133,7 +133,7 @@ const Footer = () => {
                     variants={columnVariants}
                     initial="hidden"
                     whileInView="visible"
-                    viewport={{ once: true, amount: 0.3 }}
+                    viewport={{ once: true, amount: 0.15 }}
                 >
                     <motion.h1 variants={itemVariants} className="mh:text-2xl text-xl font-medium">SUBSCRIBE</motion.h1>
                     <motion.p variants={itemVariants} className="mh:text-xl font-normal md:text-start text-center">

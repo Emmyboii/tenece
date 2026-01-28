@@ -42,7 +42,7 @@ const BelowHeroHomeAndMirasol = ({ text, text2, image, subText, textColor }: Bel
             variants={containerVariants}
             initial="hidden"
             whileInView="visible"
-            viewport={{ once: true, amount: 0.3 }}
+            viewport={{ once: true, amount: 0.15 }}
             className={`sm:py-20 py-10 flex lg:flex-row flex-col justify-between 
                 lg:items-start items-center gap-8 
                 3xl:max-w-[1512px] sh:mx-9 mx-4 3xl:mx-auto 
@@ -62,7 +62,7 @@ const BelowHeroHomeAndMirasol = ({ text, text2, image, subText, textColor }: Bel
                 variants={imageVariant}
                 src={image}
                 alt="future"
-                className="xl:w-[471px] w-[310px]"
+                className="xl:w-[471px] sm:w-[310px] w-[200px]"
             />
             <motion.h1
                 variants={fadeUp}

@@ -93,7 +93,7 @@ const About = () => {
                 variants={containerVariants}
                 initial="hidden"
                 whileInView="visible"
-                viewport={{ once: true, amount: 0.3 }}
+                viewport={{ once: true, amount: 0.15 }}
             >
                 <motion.p
                     className="sm:text-[32px] sd:text-2xl text-[17px] font-normal text-center"
@@ -123,7 +123,7 @@ const About = () => {
                     variants={sectionVariants}
                     initial="hidden"
                     whileInView="visible"
-                    viewport={{ once: true, amount: 0.2 }}
+                    viewport={{ once: true, amount: 0.15 }}
                     className="sm:py-20 py-10 3xl:max-w-[1512px] sh:mx-9 mx-4 3xl:mx-auto"
                 >
                     <motion.div
@@ -148,7 +148,7 @@ const About = () => {
                 className="bg-[#EEEEEE]"
                 initial="hidden"
                 whileInView="visible"
-                viewport={{ once: true, amount: 0.3 }}
+                viewport={{ once: true, amount: 0.15 }}
             >
                 <div className="py-20 3xl:max-w-[1512px] sh:mx-9 mx-4 3xl:mx-auto">
 
@@ -197,7 +197,7 @@ const About = () => {
                     </motion.div>
 
                     <motion.div
-                        className="mc:flex grid sh:grid-cols-2 items-center sh:justify-end mc:mt-16 mt-5 gap-5"
+                        className="flex flex-col gap-5 mt-5 sh:grid sh:grid-cols-2 sh:justify-end mc:flex mc:flex-row mc:mt-16"
                         variants={container}
                     >
                         {[

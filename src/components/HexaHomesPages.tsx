@@ -186,7 +186,7 @@ const HexaHomesPages = () => {
         className="bg-[#EEEEEE]"
         initial="hidden"
         whileInView="visible"
-        viewport={{ once: true, amount: 0.2 }}
+        viewport={{ once: true, amount: 0.15 }}
         variants={staggerContainer}
       >
         <div className="sm:py-20 py-10 3xl:max-w-[1512px] sh:mx-9 mx-4 3xl:mx-auto flex rx:flex-row flex-col items-center justify-between gap-8">
@@ -273,7 +273,7 @@ const HexaHomesPages = () => {
           <motion.div
             initial="hidden"
             whileInView="visible"
-            viewport={{ once: true, amount: 0.2 }}
+            viewport={{ once: true, amount: 0.15 }}
           >
             {/* Headline */}
             <motion.h1
@@ -300,7 +300,7 @@ const HexaHomesPages = () => {
           <motion.div
             initial="hidden"
             whileInView="visible"
-            viewport={{ once: true, amount: 0.2 }}
+            viewport={{ once: true, amount: 0.15 }}
           >
             <motion.button
               variants={popIn}
@@ -319,7 +319,7 @@ const HexaHomesPages = () => {
         className="bg-[#ffffff]"
         initial="hidden"
         whileInView="visible"
-        viewport={{ once: true, amount: 0.2 }}
+        viewport={{ once: true, amount: 0.15 }}
       >
         <div className="sm:py-20 py-10 3xl:max-w-[1512px] sh:mx-9 mx-4 3xl:mx-auto">
           <div className="flex lg:flex-row flex-col items-center justify-between gap-8">
@@ -398,7 +398,7 @@ const HexaHomesPages = () => {
         className="bg-[#EEEEEE]"
         initial="hidden"
         whileInView="visible"
-        viewport={{ once: true, amount: 0.2 }}
+        viewport={{ once: true, amount: 0.15 }}
       >
         <div className="sm:py-20 py-10 3xl:max-w-[1512px] sh:mx-9 mx-4 3xl:mx-auto">
 
@@ -415,7 +415,7 @@ const HexaHomesPages = () => {
           <motion.p
             variants={fadeInUp}
             custom={1}
-            className="font-normal font-poppins mt-6 text-center"
+            className="font-normal sm:text-base text-sm font-poppins mt-6 text-center"
           >
             In a world of noise and excess, true luxury is defined by what’s rare. <br className="md:block hidden" /> HexaHomes is a limited collection of 6 bespoke triplexes — and every one is uniquely crafted.
           </motion.p>
@@ -427,7 +427,7 @@ const HexaHomesPages = () => {
                 key={i}
                 src={img}
                 alt=""
-                className="w-full"
+                className="w-full sm:h-auto h-[340px]"
                 variants={imagePop2}
                 custom={i}
               />
@@ -457,7 +457,7 @@ const HexaHomesPages = () => {
         className="bg-[#1F262B] text-white"
         initial="hidden"
         whileInView="visible"
-        viewport={{ once: true, amount: 0.2 }}
+        viewport={{ once: true, amount: 0.15 }}
       >
         <div className="sm:py-20 py-10 3xl:max-w-[1512px] sh:mx-9 mx-4 3xl:mx-auto">
 
@@ -485,7 +485,7 @@ const HexaHomesPages = () => {
             variants={lotContainer}
             initial="hidden"
             whileInView="visible"
-            viewport={{ once: true, amount: 0.2 }}
+            viewport={{ once: true, amount: 0.15 }}
           >
             {LOTData.map((lot, index) => (
               <motion.div

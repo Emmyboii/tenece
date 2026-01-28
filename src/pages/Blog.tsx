@@ -112,7 +112,7 @@ const Blog = () => {
             <div className="bg-[#eeeeee] text-[#1F262B]">
                 {!hasArticles ? (
                     <motion.div
-                        className="sm:py-20 py-10 flex justify-center"
+                        className="sm:py-20 py-10 px-5 flex justify-center"
                         initial={{ opacity: 0, scale: 0.9 }}
                         animate={{ opacity: 1, scale: 1 }}
                         transition={{ duration: 0.7, ease: "easeOut" }}
@@ -154,7 +154,7 @@ const Blog = () => {
                         <motion.div
                             initial="hidden"
                             whileInView="visible"
-                            viewport={{ once: true, amount: 0.3 }}
+                            viewport={{ once: true, amount: 0.04 }}
                             variants={fadeUp}
                             className="sm:py-20 py-10 3xl:max-w-[1512px] sh:mx-9 mx-4 3xl:mx-auto"
                         >
@@ -181,11 +181,11 @@ const Blog = () => {
                                 className="mt-16"
                                 initial="hidden"
                                 whileInView="visible"
-                                viewport={{ once: true, amount: 0.3 }}
+                                viewport={{ once: true, amount: 0.05 }}
                                 variants={containerStagger}
                             >
                                 <motion.p
-                                    className="mk:text-[40px] text-[29px] font-medium mb-6"
+                                    className="mk:text-[40px] sm:text-start text-center text-[29px] font-medium mb-6"
                                     initial={{ opacity: 0, y: 20 }}
                                     whileInView={{ opacity: 1, y: 0 }}
                                     viewport={{ once: true }}
