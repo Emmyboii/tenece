@@ -6,6 +6,14 @@ import OurStoryGrid from "../components/OurStoryGrid"
 import { RiArrowLeftDoubleLine, RiArrowRightDoubleLine, RiFileSearchLine } from "react-icons/ri"
 import { Link } from "react-router-dom"
 import { motion, type Variants } from "framer-motion";
+import blogImg from "../assets/blogImg.svg";
+import blogImg2 from "../assets/blogImg2.svg";
+import blogImg3 from "../assets/blogImg3.png";
+import blogImg4 from "../assets/blogImg4.png";
+import blogImg5 from "../assets/blogImg5.svg";
+import blogImg6 from "../assets/blogImg6.svg";
+import blogImg7 from "../assets/blogImg7.svg";
+import blogHero from "../assets/blogHero.png";
 
 const fadeUp: Variants = {
     hidden: { opacity: 0, y: 30 },
@@ -31,21 +39,21 @@ const Blog = () => {
     const blogRef = useRef<HTMLDivElement>(null);
 
     const blogPosts = [
-        { image: "/src/assets/blogImg.svg", title: "Luxury Real Estate vs. Traditional Investments: Where Should You Put Your Money?", date: "25 Jan 2025", slug: "luxury-real-estate-vs-traditional-investments", },
-        { imageUrl: "/src/assets/blogImg2.svg", subText: "Design Without Compromise: The Architectural Philosophy Behind Tenece Residences", slug: "luxury-real-estate-vs-traditional-investments", variant: "standard" },
-        { imageUrl: "/src/assets/blogImg3.png", subText: "Design Without Compromise: The Architectural Philosophy Behind Tenece Residences", slug: "luxury-real-estate-vs-traditional-investments", variant: "standard" },
-        { imageUrl: "/src/assets/blogImg4.png", subText: "Design Without Compromise: The Architectural Philosophy Behind Tenece Residences", slug: "luxury-real-estate-vs-traditional-investments", variant: "standard" },
-        { imageUrl: "/src/assets/blogImg5.svg", subText: "Design Without Compromise: The Architectural Philosophy Behind Tenece Residences", slug: "luxury-real-estate-vs-traditional-investments", variant: "standard" },
-        { imageUrl: "/src/assets/blogImg6.svg", subText: "Design Without Compromise: The Architectural Philosophy Behind Tenece Residences", slug: "luxury-real-estate-vs-traditional-investments", variant: "standard" },
-        { imageUrl: "/src/assets/blogImg7.svg", subText: "Design Without Compromise: The Architectural Philosophy Behind Tenece Residences", slug: "luxury-real-estate-vs-traditional-investments", variant: "standard" },
-        { imageUrl: "/src/assets/blogImg5.svg", subText: "Design Without Compromise: The Architectural Philosophy Behind Tenece Residences", slug: "luxury-real-estate-vs-traditional-investments", variant: "standard" },
-        { imageUrl: "/src/assets/blogImg3.png", subText: "Design Without Compromise: The Architectural Philosophy Behind Tenece Residences", slug: "luxury-real-estate-vs-traditional-investments", variant: "standard" },
-        { imageUrl: "/src/assets/blogImg2.svg", subText: "Design Without Compromise: The Architectural Philosophy Behind Tenece Residences", slug: "luxury-real-estate-vs-traditional-investments", variant: "standard" },
-        { imageUrl: "/src/assets/blogImg4.png", subText: "Design Without Compromise: The Architectural Philosophy Behind Tenece Residences", slug: "luxury-real-estate-vs-traditional-investments", variant: "standard" },
-        { imageUrl: "/src/assets/blogImg6.svg", subText: "Design Without Compromise: The Architectural Philosophy Behind Tenece Residences", slug: "luxury-real-estate-vs-traditional-investments", variant: "standard" },
-        { imageUrl: "/src/assets/blogImg2.svg", subText: "Design Without Compromise: The Architectural Philosophy Behind Tenece Residences", slug: "luxury-real-estate-vs-traditional-investments", variant: "standard" },
-        { imageUrl: "/src/assets/blogImg2.svg", subText: "Design Without Compromise: The Architectural Philosophy Behind Tenece Residences", slug: "luxury-real-estate-vs-traditional-investments", variant: "standard" },
-    ]
+        { image: blogImg, title: "Luxury Real Estate vs. Traditional Investments: Where Should You Put Your Money?", date: "25 Jan 2025", slug: "luxury-real-estate-vs-traditional-investments" },
+        { imageUrl: blogImg2, subText: "Design Without Compromise: The Architectural Philosophy Behind Tenece Residences", slug: "luxury-real-estate-vs-traditional-investments", variant: "standard" },
+        { imageUrl: blogImg3, subText: "Design Without Compromise: The Architectural Philosophy Behind Tenece Residences", slug: "luxury-real-estate-vs-traditional-investments", variant: "standard" },
+        { imageUrl: blogImg4, subText: "Design Without Compromise: The Architectural Philosophy Behind Tenece Residences", slug: "luxury-real-estate-vs-traditional-investments", variant: "standard" },
+        { imageUrl: blogImg5, subText: "Design Without Compromise: The Architectural Philosophy Behind Tenece Residences", slug: "luxury-real-estate-vs-traditional-investments", variant: "standard" },
+        { imageUrl: blogImg6, subText: "Design Without Compromise: The Architectural Philosophy Behind Tenece Residences", slug: "luxury-real-estate-vs-traditional-investments", variant: "standard" },
+        { imageUrl: blogImg7, subText: "Design Without Compromise: The Architectural Philosophy Behind Tenece Residences", slug: "luxury-real-estate-vs-traditional-investments", variant: "standard" },
+        { imageUrl: blogImg5, subText: "Design Without Compromise: The Architectural Philosophy Behind Tenece Residences", slug: "luxury-real-estate-vs-traditional-investments", variant: "standard" },
+        { imageUrl: blogImg3, subText: "Design Without Compromise: The Architectural Philosophy Behind Tenece Residences", slug: "luxury-real-estate-vs-traditional-investments", variant: "standard" },
+        { imageUrl: blogImg2, subText: "Design Without Compromise: The Architectural Philosophy Behind Tenece Residences", slug: "luxury-real-estate-vs-traditional-investments", variant: "standard" },
+        { imageUrl: blogImg4, subText: "Design Without Compromise: The Architectural Philosophy Behind Tenece Residences", slug: "luxury-real-estate-vs-traditional-investments", variant: "standard" },
+        { imageUrl: blogImg6, subText: "Design Without Compromise: The Architectural Philosophy Behind Tenece Residences", slug: "luxury-real-estate-vs-traditional-investments", variant: "standard" },
+        { imageUrl: blogImg2, subText: "Design Without Compromise: The Architectural Philosophy Behind Tenece Residences", slug: "luxury-real-estate-vs-traditional-investments", variant: "standard" },
+        { imageUrl: blogImg2, subText: "Design Without Compromise: The Architectural Philosophy Behind Tenece Residences", slug: "luxury-real-estate-vs-traditional-investments", variant: "standard" },
+    ];
 
     const hasArticles = blogPosts.length > 0;
     const latestPost = blogPosts[0];
@@ -96,7 +104,7 @@ const Blog = () => {
     return (
         <div className="overflow-x-hidden">
             <Hero
-                heroImage="/src/assets/blogHero.png"
+                heroImage={blogHero}
                 heroText="Inside the World of Prestige, Design, and Smart Living"
                 subText="Discover trends, insights, and inspiration across architecture, smart homes, and luxury investments — curated for the modern elite."
             />

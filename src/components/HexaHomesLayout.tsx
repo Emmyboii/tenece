@@ -1,4 +1,6 @@
 import ProjectLayout from './ProjectLayout'
+import hexahomes1 from "../assets/hexahomes1.png";
+import hexahomes2 from "../assets/hexahomes2.png";
 
 const HexaHomesLayout = () => {
     return (
@@ -8,8 +10,8 @@ const HexaHomesLayout = () => {
                 subText="Crafted for High Performers. Built for Legacy."
                 cta="Explore Hexa Homes"
                 ctaLink='/projects/hexahomes'
-                smallImg="/src/assets/hexahomes1.png"
-                largeImg="/src/assets/hexahomes2.png"
+                smallImg={hexahomes1}
+                largeImg={hexahomes2}
                 reverse
             />
         </div>

@@ -4,14 +4,26 @@ import Future from "../assets/Future.png";
 import OurTeamImg from "./OurTeamImg";
 import Footer from "./Footer";
 import { motion, type Variants } from "framer-motion";
+import mira1 from "../assets/mira1.png";
+import mira2 from "../assets/mira2.png";
+import mira3 from "../assets/mira3.png";
+import mira4 from "../assets/mira4.png";
+import mira5 from "../assets/mira5.svg";
+import mira6 from "../assets/mira6.svg";
+import mira7 from "../assets/mira7.svg";
+import mira8 from "../assets/mira8.svg";
+import mira9 from "../assets/mira9.svg";
+import mira10 from "../assets/mira10.svg";
+import mirasolMap from "../assets/mirasolMap.png";
+import mirasolHero from "../assets/mirasolHero.png";
 
 const MirasolPage = () => {
 
     const images = [
-        { src: "/src/assets/mira1.png", name: "Smart Living Systems" },
-        { src: "/src/assets/mira2.png", name: "Kohler Smart Kitchens & Fixtures" },
-        { src: "/src/assets/mira3.png", name: "Fully Automated Curtains & Glass", height: "3rd" },
-        { src: "/src/assets/mira4.png", name: "High-Security Smart Surveillance", height: "3rd" },
+        { src: mira1, name: "Smart Living Systems" },
+        { src: mira2, name: "Kohler Smart Kitchens & Fixtures" },
+        { src: mira3, name: "Fully Automated Curtains & Glass", height: "3rd" },
+        { src: mira4, name: "High-Security Smart Surveillance", height: "3rd" },
     ];
 
     const textVariants: Variants = {
@@ -55,7 +67,7 @@ const MirasolPage = () => {
     return (
         <div className="overflow-x-hidden">
             <Hero
-                heroImage="/src/assets/mirasolHero.png"
+                heroImage={mirasolHero}
                 heroText="The Mirasol"
                 subText="Power. Privacy. Prestige — designed by the developers behind Lagos’ most iconic smart residences"
                 cta="Download Brochure"
@@ -134,9 +146,9 @@ const MirasolPage = () => {
                     </div>
 
                     <div className="flex items-center gap-4">
-                        <img src="/src/assets/mira5.svg" alt="" className="w-[990px h-[600px lg:block hidden" />
-                        <img src="/src/assets/mira6.svg" alt="" className="w-[990px h-[600px" />
-                        <img src="/src/assets/mira7.svg" alt="" className="w-[990px h-[600px lg:block hidden" />
+                        <img src={mira5} alt="" className="w-[990px h-[600px lg:block hidden" />
+                        <img src={mira6} alt="" className="w-[990px h-[600px" />
+                        <img src={mira7} alt="" className="w-[990px h-[600px lg:block hidden" />
                     </div>
 
                 </div>
@@ -175,7 +187,7 @@ const MirasolPage = () => {
                         variants={imageContainerVariants}
                     >
                         <motion.img
-                            src="/src/assets/mira8.svg"
+                            src={mira8}
                             alt=""
                             className="w-screen md:w-auto rounded-md"
                             variants={imageVariants}
@@ -187,14 +199,14 @@ const MirasolPage = () => {
                             variants={imageContainerVariants}
                         >
                             <motion.img
-                                src="/src/assets/mira9.svg"
+                                src={mira9}
                                 alt=""
                                 className="md:block hidden"
                                 variants={imageVariants}
                                 whileHover="hover"
                             />
                             <motion.img
-                                src="/src/assets/mira10.svg"
+                                src={mira10}
                                 alt=""
                                 className="w-screen md:w-auto"
                                 variants={imageVariants}
@@ -213,7 +225,7 @@ const MirasolPage = () => {
                         It isn’t just a location — it’s a symbol of status, influence, and generational wealth. From its tree-lined avenues to its world-class <br className="sm:block hidden" /> institutions, it remains the address of choice for Nigeria’s most powerful, affluent, and forward-looking individuals.
                     </p>
                     <div className="relative mt-20">
-                        <img src="/src/assets/mirasolMap.png" alt="" className="w-full" />
+                        <img src={mirasolMap} alt="" className="w-full" />
                         {/* <button type="submit" className={`bg-white w-[284px] absolute bottom-[116px] left-36 py-6 text-black p-2.5 sm:text-xl text-[17px] rounded-full mt-12 3xl:mx-auto flex justify-center hover:bg-white/95`}>
                             Download Brochure
                         </button> */}

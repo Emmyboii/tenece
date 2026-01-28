@@ -1,4 +1,5 @@
 // dummyBlogData.ts
+import blogImg from "../assets/blogImg.svg";
 
 import type { BlogPost } from "./types";
 
@@ -6,7 +7,7 @@ export const BLOG_POSTS: BlogPost[] = [
     {
         slug: "luxury-real-estate-vs-traditional-investments",
         title: "Luxury Real Estate vs. Traditional Investments: Where Should You Put Your Money?",
-        coverImage: "/src/assets/blogImg.svg",
+        coverImage: blogImg,
         date: "25 Jan 2025",
         author: "Tenece Editorial",
         content: [

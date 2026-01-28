@@ -9,6 +9,39 @@ import ContactLayout from "./ContactLayout";
 import Footer from "./Footer";
 import { Link } from "react-router-dom";
 import { motion, type Variants } from "framer-motion";
+import hexaIcon1 from "../assets/hexaIcon1.svg";
+import hexaIcon2 from "../assets/hexaIcon2.svg";
+import hexaIcon3 from "../assets/hexaIcon3.svg";
+import hexaIcon4 from "../assets/hexaIcon4.svg";
+import hexaIcon5 from "../assets/hexaIcon5.svg";
+import hexaIcon6 from "../assets/hexaIcon6.svg";
+import hexaIcon7 from "../assets/hexaIcon7.svg";
+import hexaIcon8 from "../assets/hexaIcon8.svg";
+import hexaIcon9 from "../assets/hexaIcon9.svg";
+import hexaIcon10 from "../assets/hexaIcon10.svg";
+import hexaIcon11 from "../assets/hexaIcon11.svg";
+import hexaIcon12 from "../assets/hexaIcon12.svg";
+import hexaIcon13 from "../assets/hexaIcon13.svg";
+import hexaIcon14 from "../assets/hexaIcon14.svg";
+import hexaIcon15 from "../assets/hexaIcon15.svg";
+import hexaIcon16 from "../assets/hexaIcon16.svg";
+import hexaIcon17 from "../assets/hexaIcon17.svg";
+import hexaIcon18 from "../assets/hexaIcon18.svg";
+import hexaIcon19 from "../assets/hexaIcon19.svg";
+import hexa9 from "../assets/hexa9.svg";
+import hexa10 from "../assets/hexa10.svg";
+import hexa11 from "../assets/hexa11.svg";
+import hexa1 from "../assets/hexa1.svg";
+import hexa2 from "../assets/hexa2.svg";
+import hexa3 from "../assets/hexa3.svg";
+import hexa4 from "../assets/hexa4.svg";
+import hexa5 from "../assets/hexa5.svg";
+import hexa7 from "../assets/hexa7.svg";
+import hexa8 from "../assets/hexa8.svg";
+import hexa6 from "../assets/hexa6.svg";
+import hexaMap from "../assets/hexaMap.svg";
+import hexa12 from "../assets/hexa12.svg";
+import hexaHero from "../assets/hexaHero.png";
 
 // Fade in + slide up animation for items
 const fadeInUp: Variants = {
@@ -112,35 +145,37 @@ const lotCard: Variants = {
 const HexaHomesPages = () => {
 
   const HISData = [
-    { icon: "/src/assets/hexaIcon1.svg", title: "Four Bedroom En-suite", description: "Spacious, private retreats with individual bathrooms designed for personal comfort and elegance." },
-    { icon: "/src/assets/hexaIcon2.svg", title: "Two Living Areas", description: "An expansive ground-floor living room and a private lounge designed for hosting and unwinding." },
-    { icon: "/src/assets/hexaIcon3.svg", title: "Two Walk-in Closets", description: "Luxurious, custom-fitted dressing spaces for an organized, indulgent lifestyle." },
-    { icon: "/src/assets/hexaIcon4.svg", title: "An Elevator Shaft", description: "Future-ready vertical mobility with space to install a personal lift connecting all floors." },
-    { icon: "/src/assets/hexaIcon5.svg", title: "An Office / Study", description: "A private, sound-conscious workspace ideal for productivity, reading, or meetings." },
-    { icon: "/src/assets/hexaIcon6.svg", title: "Dry & Wet Kitchen Area", description: "Dual-kitchen layout for style and practicality — one for show, one for real cooking." },
-    { icon: "/src/assets/hexaIcon7.svg", title: "A Multipurpose Room", description: "Customizable space perfect for a home gym, theater, or guest suite." },
-    { icon: "/src/assets/hexaIcon8.svg", title: "Laundry Area", description: "Dedicated utility space for seamless, discreet clothing care." },
-    { icon: "/src/assets/hexaIcon9.svg", title: "Green Area", description: "A private pocket of nature to relax, recharge, or host outdoors." },
-    { icon: "/src/assets/hexaIcon10.svg", title: "Three Car Garages", description: "Secure, spacious garage for up to 3 vehicles with smooth access." },
-    { icon: "/src/assets/hexaIcon11.svg", title: "Laminated Glass Staircase", description: "Statement staircase combining elegance, safety, and light." },
-    { icon: "/src/assets/hexaIcon12.svg", title: "A Box Room", description: "A compact storage room for seasonal items, luggage, or valuables.." },
-    { icon: "/src/assets/hexaIcon13.svg", title: "Uninterrupted Power Supply", description: "A private pocket of nature to relax, recharge, or host outdoors." },
-    { icon: "/src/assets/hexaIcon14.svg", title: "Uninterrupted Water Supply", description: "Secure, spacious garage for up to 3 vehicles with smooth access." },
-    { icon: "/src/assets/hexaIcon15.svg", title: "Security Surveillance System", description: "Statement staircase combining elegance, safety, and light." },
-    { icon: "/src/assets/hexaIcon16.svg", title: "Fibre-to-the-home", description: " A compact storage room for seasonal items, luggage, or valuables." },
-  ]
+    { icon: hexaIcon1, title: "Four Bedroom En-suite", description: "Spacious, private retreats with individual bathrooms designed for personal comfort and elegance." },
+    { icon: hexaIcon2, title: "Two Living Areas", description: "An expansive ground-floor living room and a private lounge designed for hosting and unwinding." },
+    { icon: hexaIcon3, title: "Two Walk-in Closets", description: "Luxurious, custom-fitted dressing spaces for an organized, indulgent lifestyle." },
+    { icon: hexaIcon4, title: "An Elevator Shaft", description: "Future-ready vertical mobility with space to install a personal lift connecting all floors." },
+    { icon: hexaIcon5, title: "An Office / Study", description: "A private, sound-conscious workspace ideal for productivity, reading, or meetings." },
+    { icon: hexaIcon6, title: "Dry & Wet Kitchen Area", description: "Dual-kitchen layout for style and practicality — one for show, one for real cooking." },
+    { icon: hexaIcon7, title: "A Multipurpose Room", description: "Customizable space perfect for a home gym, theater, or guest suite." },
+    { icon: hexaIcon8, title: "Laundry Area", description: "Dedicated utility space for seamless, discreet clothing care." },
+    { icon: hexaIcon9, title: "Green Area", description: "A private pocket of nature to relax, recharge, or host outdoors." },
+    { icon: hexaIcon10, title: "Three Car Garages", description: "Secure, spacious garage for up to 3 vehicles with smooth access." },
+    { icon: hexaIcon11, title: "Laminated Glass Staircase", description: "Statement staircase combining elegance, safety, and light." },
+    { icon: hexaIcon12, title: "A Box Room", description: "A compact storage room for seasonal items, luggage, or valuables." },
+    { icon: hexaIcon13, title: "Uninterrupted Power Supply", description: "Reliable backup power ensures uninterrupted comfort and security." },
+    { icon: hexaIcon14, title: "Uninterrupted Water Supply", description: "Continuous water availability for seamless daily living." },
+    { icon: hexaIcon15, title: "Security Surveillance System", description: "Advanced monitoring for safety, privacy, and peace of mind." },
+    { icon: hexaIcon16, title: "Fibre-to-the-home", description: "High-speed internet directly to your residence for smart living." },
+  ];
+
+  const featureIcons = [hexaIcon17, hexaIcon18, hexaIcon19];
 
   const LOTData = [
-    { imageUrl: "/src/assets/hexa9.svg", subText: "Doors" },
-    { imageUrl: "/src/assets/hexa10.svg", subText: "Curtains", reverse: true },
-    { imageUrl: "/src/assets/hexa11.svg", subText: "Appliances" },
-    { imageUrl: "/src/assets/hexa12.svg", subText: "Gates", reverse: true },
-  ]
+    { imageUrl: hexa9, subText: "Doors" },
+    { imageUrl: hexa10, subText: "Curtains", reverse: true },
+    { imageUrl: hexa11, subText: "Appliances" },
+    { imageUrl: hexa12, subText: "Gates", reverse: true },
+  ];
 
   return (
     <div className="overflow-x-hidden">
       <Hero
-        heroImage="/src/assets/hexaHero.png"
+        heroImage={hexaHero}
         heroText="HexaHomes"
         heroText2="Where innovation meets Elegance"
         subText="A deluxe home with upscale infrastructure in an exclusive location."
@@ -316,16 +351,15 @@ const HexaHomesPages = () => {
                   custom={i + 2}
                   className="mt-5 flex items-center gap-4"
                 >
-                  <img src={`/src/assets/hexaIcon${17 + i}.svg`} alt="" />
+                  <img src={featureIcons[i]} alt="" />
                   <p className="md:text-xl sm:text-lg font-medium">{text}</p>
                 </motion.div>
               ))}
-
             </div>
 
             {/* Right Image */}
             <motion.img
-              src="/src/assets/hexa1.svg"
+              src={hexa1}
               alt=""
               className="lg:w-auto w-max"
               variants={imagePop}
@@ -337,7 +371,7 @@ const HexaHomesPages = () => {
           {/* Bottom Overlay Image */}
           <motion.div className="relative mt-10">
             <motion.img
-              src="/src/assets/hexa2.svg"
+              src={hexa2}
               alt=""
               className="w-screen"
               variants={imagePop}
@@ -388,10 +422,10 @@ const HexaHomesPages = () => {
 
           {/* Image Grid */}
           <div className="grid mk:grid-cols-3 sh:grid-cols-2 gap-4 mt-16">
-            {["hexa3", "hexa4", "hexa5", "hexa6", "hexa7", "hexa8"].map((img, i) => (
+            {[hexa3, hexa4, hexa5, hexa6, hexa7, hexa8].map((img, i) => (
               <motion.img
                 key={i}
-                src={`/src/assets/${img}.svg`}
+                src={img}
                 alt=""
                 className="w-full"
                 variants={imagePop2}
@@ -480,7 +514,7 @@ const HexaHomesPages = () => {
           <p className="font-normal font-poppins mt-6 text-center px-2">
             Centrally located in Lekki Phase 1 — minutes from fine dining, world-class schools, and Lagos’ tech and business district — <br className="md:block hidden" /> HexaHomes is positioned for those who thrive at the center of culture and capital.
           </p>
-          <img src="/src/assets/hexaMap.svg" alt="" className="w-full" />
+          <img src={hexaMap} alt="" className="w-full" />
         </div>
       </div>
 

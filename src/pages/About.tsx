@@ -1,5 +1,11 @@
 import Hero from "../components/Hero"
 import story from "../assets/aboutStory.png";
+import AboutHero from "../assets/aboutHero.png";
+import team1 from "../assets/team1.png";
+import team2 from "../assets/team2.svg";
+import team3 from "../assets/team3.svg";
+import team4 from "../assets/team4.svg";
+import team5 from "../assets/team5.svg";
 import mission from "../assets/aboutMisson.png";
 import vision from "../assets/aboutVision.png";
 import LOT from "../components/LOT";
@@ -75,7 +81,7 @@ const About = () => {
     return (
         <div className="overflow-x-hidden">
             <Hero
-                heroImage="/src/assets/aboutHero.png"
+                heroImage={AboutHero}
                 heroText="Redefining Luxury. Elevating Smart Living."
                 subText="From visionary designs to intelligent homes, we build more than properties. We create timeless experiences in the heart of Lagos."
                 cta="Explore our story"
@@ -181,11 +187,11 @@ const About = () => {
                             variants={container}
                         >
                             <motion.div variants={teamCard}>
-                                <OurTeamImg image="/src/assets/team1.png" name="KINGSLEY EZE" position="CEO Tenece Group" />
+                                <OurTeamImg image={team1} name="KINGSLEY EZE" position="CEO Tenece Group" />
                             </motion.div>
 
                             <motion.div variants={teamCard}>
-                                <OurTeamImg image="/src/assets/team2.svg" name="KINGSLEY EZE" position="CEO Tenece Group" />
+                                <OurTeamImg image={team2} name="KINGSLEY EZE" position="CEO Tenece Group" />
                             </motion.div>
                         </motion.div>
                     </motion.div>
@@ -195,9 +201,9 @@ const About = () => {
                         variants={container}
                     >
                         {[
-                            "/src/assets/team3.svg",
-                            "/src/assets/team4.svg",
-                            "/src/assets/team5.svg",
+                            team3,
+                            team4,
+                            team5,
                         ].map((img, i) => (
                             <motion.div key={i} variants={teamCard}>
                                 <OurTeamImg image={img} name="KINGSLEY EZE" position="CEO Tenece Group" />

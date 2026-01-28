@@ -5,16 +5,20 @@ import { Link, useParams } from "react-router-dom";
 import { BLOG_POSTS } from "../components/dummyBlogData";
 import LOT from "../components/LOT";
 import { RiFileSearchLine } from "react-icons/ri";
+import blogImg2 from "../assets/blogImg2.svg";
+import blogImg3 from "../assets/blogImg3.png";
+import blogImg4 from "../assets/blogImg4.png";
+import blogImg5 from "../assets/blogImg5.svg";
 
 const BlogDetails = () => {
   const { slug } = useParams();
   const post = BLOG_POSTS.find((p) => p.slug === slug);
 
   const blogPosts = [
-    { imageUrl: "/src/assets/blogImg2.svg", subText: "Design Without Compromise: The Architectural Philosophy Behind Tenece Residences", slug: "luxury-real-estate-vs-traditional-investments" },
-    { imageUrl: "/src/assets/blogImg3.png", subText: "Design Without Compromise: The Architectural Philosophy Behind Tenece Residences", slug: "luxury-real-estate-vs-traditional-investments" },
-    { imageUrl: "/src/assets/blogImg4.png", subText: "Design Without Compromise: The Architectural Philosophy Behind Tenece Residences", slug: "luxury-real-estate-vs-traditional-investments" },
-    { imageUrl: "/src/assets/blogImg5.svg", subText: "Design Without Compromise: The Architectural Philosophy Behind Tenece Residences", slug: "luxury-real-estate-vs-traditional-investments" },
+    { imageUrl: blogImg2, subText: "Design Without Compromise: The Architectural Philosophy Behind Tenece Residences", slug: "luxury-real-estate-vs-traditional-investments" },
+    { imageUrl: blogImg3, subText: "Design Without Compromise: The Architectural Philosophy Behind Tenece Residences", slug: "luxury-real-estate-vs-traditional-investments" },
+    { imageUrl: blogImg4, subText: "Design Without Compromise: The Architectural Philosophy Behind Tenece Residences", slug: "luxury-real-estate-vs-traditional-investments" },
+    { imageUrl: blogImg5, subText: "Design Without Compromise: The Architectural Philosophy Behind Tenece Residences", slug: "luxury-real-estate-vs-traditional-investments" },
   ];
 
   // Variants

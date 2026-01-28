@@ -1,5 +1,6 @@
 import Hero from "../components/Hero"
 import Future from "../assets/Future.png";
+import HomeHero from "../assets/HomeHero.png";
 import Legacy1 from "../assets/Legacy1.png";
 import Legacy2 from "../assets/Legacy2.png";
 import Legacy3 from "../assets/Legacy3.png";
@@ -20,6 +21,16 @@ import Footer from "../components/Footer";
 import BelowHeroHomeAndMirasol from "../components/BelowHeroHomeAndMirasol";
 import { Link } from "react-router-dom";
 import { motion, type Variants } from "framer-motion";
+import cac from "../assets/cac.svg";
+import gca from "../assets/gca.svg";
+import rta from "../assets/rta.svg";
+import ta from "../assets/ta.svg";
+import eec from "../assets/eec.svg";
+import sgm from "../assets/sgm.svg";
+import val from "../assets/val.svg";
+import latest1 from "../assets/latest1.svg";
+import latest2 from "../assets/latest2.svg";
+import latest3 from "../assets/latest3.png";
 
 
 const sectionVariants: Variants = {
@@ -93,25 +104,25 @@ const Home = () => {
     ]
 
     const HISData = [
-        { icon: "/src/assets/cac.svg", title: "Centralized App Control", description: "Manage lighting, climate, access, and security from one intuitive mobile dashboard." },
-        { icon: "/src/assets/gca.svg", title: "Gate & Curtain Automation", description: "Effortless open/close of gates and drapes at scheduled times or voice command." },
-        { icon: "/src/assets/rta.svg", title: "Real-Time Alerts", description: "Get instant updates on movement, entry, and environmental changes." },
-        { icon: "/src/assets/ta.svg", title: "Touchless Access", description: "Unlock doors via biometric or phone proximity — no keys needed." },
-        { icon: "/src/assets/eec.svg", title: "Energy-Efficient Comfort Zones", description: "Personalized temperature and lighting settings that save energy and enhance comfort." },
-        { icon: "/src/assets/sgm.svg", title: "Smart Glass + Motion Sensors", description: "Glass that tints for privacy, paired with motion-activated lighting and systems." },
-        { icon: "/src/assets/val.svg", title: "Voice Activated Living", description: "Control your environment hands-free with integrated voice assistants." },
-    ]
+        { icon: cac, title: "Centralized App Control", description: "Manage lighting, climate, access, and security from one intuitive mobile dashboard." },
+        { icon: gca, title: "Gate & Curtain Automation", description: "Effortless open/close of gates and drapes at scheduled times or voice command." },
+        { icon: rta, title: "Real-Time Alerts", description: "Get instant updates on movement, entry, and environmental changes." },
+        { icon: ta, title: "Touchless Access", description: "Unlock doors via biometric or phone proximity — no keys needed." },
+        { icon: eec, title: "Energy-Efficient Comfort Zones", description: "Personalized temperature and lighting settings that save energy and enhance comfort." },
+        { icon: sgm, title: "Smart Glass + Motion Sensors", description: "Glass that tints for privacy, paired with motion-activated lighting and systems." },
+        { icon: val, title: "Voice Activated Living", description: "Control your environment hands-free with integrated voice assistants." },
+    ];
 
     const LatestSmartData = [
-        { image: "/src/assets/latest1.svg", text: "Smart Homes, Smarter Living: How Technology is Redefining Luxury in Lagos" },
-        { image: "/src/assets/latest2.svg", text: "Smart Homes, Smarter Living: How Technology is Redefining Luxury in Lagos" },
-        { image: "/src/assets/latest3.png", text: "Smart Homes, Smarter Living: How Technology is Redefining Luxury in Lagos" },
-    ]
+        { image: latest1, text: "Smart Homes, Smarter Living: How Technology is Redefining Luxury in Lagos" },
+        { image: latest2, text: "Smart Homes, Smarter Living: How Technology is Redefining Luxury in Lagos" },
+        { image: latest3, text: "Smart Homes, Smarter Living: How Technology is Redefining Luxury in Lagos" },
+    ];
 
     return (
         <div className="overflow-x-hidden">
             <Hero
-                heroImage="/src/assets/HomeHero.png"
+                heroImage={HomeHero}
                 heroText="Shaping Africa’s Most Exclusive Luxury Residences"
                 subText="From client-led residences to iconic addresses like HexaHomes and The Mirasol, Tenece crafts real estate legacies powered by innovation, precision, and prestige"
             />

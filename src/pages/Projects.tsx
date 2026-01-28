@@ -4,7 +4,7 @@ import Hero from '../components/Hero'
 import HexaHomesLayout from '../components/HexaHomesLayout'
 import MirasolLayout from '../components/MirasolLayout'
 import { motion, type Variants } from "framer-motion";
-
+import projectHero from "../assets/projectHero.png";
 
 const sectionVariants: Variants = {
     hidden: { opacity: 0 },
@@ -29,7 +29,7 @@ const Projects = () => {
     return (
         <div className="overflow-x-hidden">
             <Hero
-                heroImage="/src/assets/projectHero.png"
+                heroImage={projectHero}
                 heroText="Transforming Ideas into Exceptional Spaces"
                 subText="We blend creativity, functionality, and innovation to design spaces that inspire, engage, and elevate everyday living."
             />
