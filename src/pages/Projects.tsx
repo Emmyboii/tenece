@@ -36,7 +36,7 @@ const Projects = () => {
 
             <div className="bg-[#C0C0C0]">
                 <div className="sm:py-20 py-10 3xl:max-w-[1512px]  sh:mx-9 mx-4 3xl:mx-auto">
-                    <h1 className="sm:text-[40px] text-[26px] font-playfair font-medium text-[#1F262B] sm:mb-16 mb-6 text-center">Our Signature Developments</h1>
+                    <h1 className="sm:text-[40px] text-[24px] font-playfair font-medium text-[#1F262B] sm:mb-16 mb-6 text-center">Our Signature Developments</h1>
 
                     <MirasolLayout />
                 </div>

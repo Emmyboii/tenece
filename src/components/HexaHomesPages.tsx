@@ -510,7 +510,7 @@ const HexaHomesPages = () => {
 
       <div className="bg-[#ffffff]">
         <div className="pt-20 max-w-[1512px 3xl:mx-auto">
-          <h1 className="sm:text-[40px] text-[30px] font-playfair font-medium text-[#1F262B] text-center">The Right Place; The Right Time</h1>
+          <h1 className="sm:text-[40px] text-[30px] font-playfair px-2 font-medium text-[#1F262B] text-center">The Right Place; The Right Time</h1>
           <p className="font-normal font-poppins mt-6 text-center px-2">
             Centrally located in Lekki Phase 1 — minutes from fine dining, world-class schools, and Lagos’ tech and business district — <br className="md:block hidden" /> HexaHomes is positioned for those who thrive at the center of culture and capital.
           </p>

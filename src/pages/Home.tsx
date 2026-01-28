@@ -179,7 +179,7 @@ const Home = () => {
                 >
                     <motion.h1
                         variants={fadeUp}
-                        className="sm:text-[40px] text-[26px] font-playfair font-medium text-[#1F262B] sm:mb-16 mb-6 text-center">
+                        className="sm:text-[40px] text-[24px] font-playfair font-medium text-[#1F262B] sm:mb-16 mb-6 text-center">
                         Our Signature Developments
                     </motion.h1>
 

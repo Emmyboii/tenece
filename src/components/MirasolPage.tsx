@@ -183,7 +183,7 @@ const MirasolPage = () => {
                         className="rx:flex grid md:grid-cols-3 grid-cols-1 items-center gap-4 mx-auto justify-center rx:justify-normal"
                         initial="hidden"
                         whileInView="visible"
-                        viewport={{ once: true, amount: 0.15 }}
+                        viewport={{ once: true, amount: 0.12 }}
                         variants={imageContainerVariants}
                     >
                         <motion.img
