@@ -1,10 +1,29 @@
 import { useEffect, useState } from "react";
+import { motion, type Variants } from "framer-motion";
 
 interface LatestSmartProps {
     image?: string;
     text?: string;
     index: number
 }
+
+const cardVariants: Variants = {
+    hidden: { opacity: 0, y: 40, scale: 0.97 },
+    visible: {
+        opacity: 1,
+        y: 0,
+        scale: 1,
+        transition: {
+            duration: 0.8,
+            ease: [0.42, 0, 0.58, 1],
+        },
+    },
+};
+
+const textVariants: Variants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.7, ease: [0.42, 0, 0.58, 1] } },
+};
 
 const LatestSmart = ({ image, text, index }: LatestSmartProps) => {
 
@@ -44,7 +63,7 @@ const LatestSmart = ({ image, text, index }: LatestSmartProps) => {
 
     if (smallScreen) {
         return (
-            <div
+            <motion.div
                 className={`relative mc:mt-20 mt-5 ${heightClass}`}
                 style={{
                     backgroundImage: `url(${image})`,
@@ -52,18 +71,25 @@ const LatestSmart = ({ image, text, index }: LatestSmartProps) => {
                     backgroundPosition: "center",
                     backgroundRepeat: "no-repeat",
                 }}
+                variants={cardVariants}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, amount: 0.3 }}
+                whileHover={{ scale: 1.02, y: -3, transition: { duration: 0.3 } }}
             >
-
                 <div className="absolute inset-0 bg-gradient-to-b from-white/0 via-white/0 to-[#244975]" />
 
-                <p className={`absolute bottom-6 left-6 right-6 text-white font-medium ${lastItem ? "max-w-[500px]" : "max-w-[450px]"}`}>
+                <motion.p
+                    className={`absolute bottom-6 left-6 right-6 text-white font-medium ${lastItem ? "max-w-[500px]" : "max-w-[450px]"}`}
+                    variants={textVariants}
+                >
                     {text}
-                </p>
-            </div>
+                </motion.p>
+            </motion.div>
         )
     }
     return (
-        <div
+        <motion.div
             className={`relative mt-20 ${heightClass} ${layoutMap[index]}`}
             style={{
                 backgroundImage: `url(${image})`,
@@ -71,14 +97,21 @@ const LatestSmart = ({ image, text, index }: LatestSmartProps) => {
                 backgroundPosition: "center",
                 backgroundRepeat: "no-repeat",
             }}
+            variants={cardVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.3 }}
+            whileHover={{ scale: 1.02, y: -3, transition: { duration: 0.3 } }}
         >
-
             <div className="absolute inset-0 bg-gradient-to-b from-white/0 via-white/0 to-[#244975]" />
 
-            <p className={`absolute bottom-6 left-6 right-6 text-white font-medium ${lastItem ? "max-w-[500px]" : "max-w-[450px]"}`}>
+            <motion.p
+                className={`absolute bottom-6 left-6 right-6 text-white font-medium ${lastItem ? "max-w-[500px]" : "max-w-[450px]"}`}
+                variants={textVariants}
+            >
                 {text}
-            </p>
-        </div>
+            </motion.p>
+        </motion.div>
     )
 }
 

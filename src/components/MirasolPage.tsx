@@ -3,8 +3,55 @@ import Hero from "./Hero"
 import Future from "../assets/Future.png";
 import OurTeamImg from "./OurTeamImg";
 import Footer from "./Footer";
+import { motion, type Variants } from "framer-motion";
 
 const MirasolPage = () => {
+
+    const images = [
+        { src: "/src/assets/mira1.png", name: "Smart Living Systems" },
+        { src: "/src/assets/mira2.png", name: "Kohler Smart Kitchens & Fixtures" },
+        { src: "/src/assets/mira3.png", name: "Fully Automated Curtains & Glass", height: "3rd" },
+        { src: "/src/assets/mira4.png", name: "High-Security Smart Surveillance", height: "3rd" },
+    ];
+
+    const textVariants: Variants = {
+        hidden: { opacity: 0, y: 40 },
+        visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: "easeOut" } },
+    };
+
+    // Variants for the image container
+    const imageContainerVariants: Variants = {
+        hidden: {},
+        visible: {
+            transition: {
+                staggerChildren: 0.2,
+            },
+        },
+    };
+
+    // Variants for each image
+    const imageVariants: Variants = {
+        hidden: { opacity: 0, y: 50, scale: 0.95 },
+        visible: { opacity: 1, y: 0, scale: 1, transition: { type: "spring", stiffness: 120, damping: 20 } },
+        hover: { scale: 1.05, y: -5, transition: { duration: 0.3 } },
+    };
+
+    // Variants
+    const containerVariants: Variants = {
+        hidden: {},
+        visible: {
+            transition: {
+                staggerChildren: 0.2,
+            },
+        },
+    };
+
+    const itemVariants: Variants = {
+        hidden: { opacity: 0, y: 40, scale: 0.95 },
+        visible: { opacity: 1, y: 0, scale: 1, transition: { type: "spring", stiffness: 120, damping: 20 } },
+        hover: { scale: 1.05, y: -5, transition: { duration: 0.3 } },
+    };
+
     return (
         <div className="overflow-x-hidden">
             <Hero
@@ -25,35 +72,58 @@ const MirasolPage = () => {
             </div>
 
 
-            <div className="sm:py-20 py-10 3xl:max-w-[1512px]  sh:mx-9 mx-4 3xl:mx-auto">
-                <h1 className="sm:text-[40px] text-[26px] font-playfair font-medium text-[#1F262B] sm:mb-16 mb-9 text-center">Crafted for the Privileged Few</h1>
+            <div className="sm:py-20 py-10 3xl:max-w-[1512px] sh:mx-9 mx-4 3xl:mx-auto">
+                {/* Heading */}
+                <motion.h1
+                    className="sm:text-[40px] text-[26px] font-playfair font-medium text-[#1F262B] sm:mb-16 mb-9 text-center"
+                    initial={{ opacity: 0, y: 30 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.8 }}
+                >
+                    Crafted for the Privileged Few
+                </motion.h1>
 
-                <div className="grid rk:grid-cols-3 md:grid-cols-2 gap-4">
-                    <div className="space-y-4">
+                {/* Grid */}
+                <motion.div
+                    className="grid rk:grid-cols-3 md:grid-cols-2 gap-4"
+                    initial="hidden"
+                    animate="visible"
+                    variants={containerVariants}
+                >
+                    <motion.div className="space-y-4" variants={containerVariants}>
+                        {[images[0], images[1]].map((img, index) => (
+                            <motion.div
+                                key={index}
+                                variants={itemVariants}
+                                whileHover="hover"
+                            >
+                                <OurTeamImg
+                                    image={img.src}
+                                    name={img.name}
+                                    rounded
+                                />
+                            </motion.div>
+                        ))}
+                    </motion.div>
+
+                    <motion.div variants={itemVariants} whileHover="hover">
                         <OurTeamImg
-                            image="/src/assets/mira1.png"
-                            name="Smart Living Systems"
+                            image={images[2].src}
+                            name={images[2].name}
+                            height={images[2].height}
                             rounded
                         />
+                    </motion.div>
+
+                    <motion.div variants={itemVariants} whileHover="hover">
                         <OurTeamImg
-                            image="/src/assets/mira2.png"
-                            name="Kohler Smart Kitchens & Fixtures"
+                            image={images[3].src}
+                            name={images[3].name}
+                            height={images[3].height}
                             rounded
                         />
-                    </div>
-                    <OurTeamImg
-                        image="/src/assets/mira3.png"
-                        name="Fully Automated Curtains & Glass"
-                        height='3rd'
-                        rounded
-                    />
-                    <OurTeamImg
-                        image="/src/assets/mira4.png"
-                        name="High-Security Smart Surveillance"
-                        rounded
-                        height='3rd'
-                    />
-                </div>
+                    </motion.div>
+                </motion.div>
             </div>
 
             <div className="bg-[#eeeeee]">
@@ -72,22 +142,67 @@ const MirasolPage = () => {
                 </div>
             </div>
             <div className="bg-[#C0C0C0]">
-                <div className="sm:py-20 py-10 3xl:max-w-[1512px]  sh:mx-9 mx-4 3xl:mx-auto grid rx:grid-cols-2 gap-5 items-center">
-                    <div className="space-y-5">
-                        <h1 className="md:text-[40px] sm:text-[30px] text-[23px] font-playfair font-medium rx:max-w-[496px] rx:text-start text-center">Made for High Performers, Built for Legacy</h1>
-                        <p className="mc:text-2xl sm:text-xl font-normal rx:max-w-[523px] rx:text-start text-center">
+                <div className="sm:py-20 py-10 3xl:max-w-[1512px] sh:mx-9 mx-4 3xl:mx-auto grid rx:grid-cols-2 gap-5 items-center">
+
+                    {/* Text Content */}
+                    <motion.div
+                        className="space-y-5"
+                        initial="hidden"
+                        whileInView="visible"
+                        viewport={{ once: true, amount: 0.3 }}
+                        variants={textVariants}
+                    >
+                        <motion.h1
+                            className="md:text-[40px] sm:text-[30px] text-[23px] font-playfair font-medium rx:max-w-[496px] rx:text-start text-center"
+                        >
+                            Made for High Performers, Built for Legacy
+                        </motion.h1>
+                        <motion.p
+                            className="mc:text-2xl sm:text-xl font-normal rx:max-w-[523px] rx:text-start text-center"
+                        >
                             The Mirasol is crafted for those who demand more than just a place to live. Designed with precision, sophistication,
                             and vision, it caters to executive buyers, global investors, and families who seek to build a lasting legacy. Every
                             detail reflects excellence — a statement of success today, and an inheritance for generations to come.
-                        </p>
-                    </div>
-                    <div className="rx:flex grid md:grid-cols-3 grid-cols-1 items-center gap-4 mx-auto justify-center rx:justify-normal">
-                        <img src="/src/assets/mira8.svg" alt="" className="w-screen md:w-auto rounded-md"  />
-                        <div className="rx:space-y-4 md:space-y-0 space-y-4 md:flex gap-4 items-center rx:block">
-                            <img src="/src/assets/mira9.svg" alt="" className="md:block hidden" />
-                            <img src="/src/assets/mira10.svg" alt="" className="w-screen md:w-auto" />
-                        </div>
-                    </div>
+                        </motion.p>
+                    </motion.div>
+
+                    {/* Image Grid */}
+                    <motion.div
+                        className="rx:flex grid md:grid-cols-3 grid-cols-1 items-center gap-4 mx-auto justify-center rx:justify-normal"
+                        initial="hidden"
+                        whileInView="visible"
+                        viewport={{ once: true, amount: 0.3 }}
+                        variants={imageContainerVariants}
+                    >
+                        <motion.img
+                            src="/src/assets/mira8.svg"
+                            alt=""
+                            className="w-screen md:w-auto rounded-md"
+                            variants={imageVariants}
+                            whileHover="hover"
+                        />
+
+                        <motion.div
+                            className="rx:space-y-4 md:space-y-0 space-y-4 md:flex gap-4 items-center rx:block"
+                            variants={imageContainerVariants}
+                        >
+                            <motion.img
+                                src="/src/assets/mira9.svg"
+                                alt=""
+                                className="md:block hidden"
+                                variants={imageVariants}
+                                whileHover="hover"
+                            />
+                            <motion.img
+                                src="/src/assets/mira10.svg"
+                                alt=""
+                                className="w-screen md:w-auto"
+                                variants={imageVariants}
+                                whileHover="hover"
+                            />
+                        </motion.div>
+                    </motion.div>
+
                 </div>
             </div>
 

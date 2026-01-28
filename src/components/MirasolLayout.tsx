@@ -8,8 +8,8 @@ const MirasolLayout = () => {
                 subText="Crafted for High Performers. Built for Legacy."
                 cta="Explore The Mirasol"
                 ctaLink='/projects/mirasol'
-                smallImg="/src/assets/mirasol1.svg"
-                largeImg="/src/assets/mirasol2.svg"
+                smallImg="/src/assets/mirasol1.png"
+                largeImg="/src/assets/mirasol2.png"
             />
         </div>
     )

@@ -8,6 +8,106 @@ import LOT from "./LOT";
 import ContactLayout from "./ContactLayout";
 import Footer from "./Footer";
 import { Link } from "react-router-dom";
+import { motion, type Variants } from "framer-motion";
+
+// Fade in + slide up animation for items
+const fadeInUp: Variants = {
+  hidden: { opacity: 0, y: 40 },
+  visible: (i = 1) => ({
+    opacity: 1,
+    y: 0,
+    transition: { delay: i * 0.2, duration: 0.8, ease: "easeOut" },
+  }),
+};
+
+// Container to stagger children
+const staggerContainer: Variants = {
+  hidden: {},
+  visible: {
+    transition: {
+      staggerChildren: 0.2,
+    },
+  },
+};
+
+const popIn: Variants = {
+  hidden: { opacity: 0, scale: 0.8 },
+  visible: {
+    opacity: 1,
+    scale: 1,
+    transition: { duration: 0.6, ease: "backOut" }
+  },
+};
+
+// Main text variants
+const textUp: Variants = {
+  hidden: { opacity: 0, y: 50 },
+  visible: (i = 0) => ({
+    opacity: 1,
+    y: 0,
+    transition: { delay: i * 0.2, duration: 0.8, ease: "easeOut" },
+  }),
+};
+
+// Features slide from right
+const featureSlide: Variants = {
+  hidden: { opacity: 0, x: 50 },
+  visible: (i = 0) => ({
+    opacity: 1,
+    x: 0,
+    transition: { delay: i * 0.2, duration: 0.8, ease: "easeOut" },
+  }),
+};
+
+// Image scale + fade
+const imagePop2: Variants = {
+  hidden: { opacity: 0, scale: 0.95 },
+  visible: { opacity: 1, scale: 1, transition: { duration: 0.8, ease: "easeOut" } },
+};
+
+const imagePop: Variants = {
+  hidden: { opacity: 0, scale: 0.9 },
+  visible: (i = 0) => ({
+    opacity: 1,
+    scale: 1,
+    transition: { delay: i * 0.15, duration: 0.8, ease: "easeOut" },
+  }),
+};
+
+// Overlay fade
+const overlayFade: Variants = {
+  hidden: { opacity: 0 },
+  visible: { opacity: 1, transition: { duration: 0.8, delay: 0.5 } },
+};
+
+const buttonPop: Variants = {
+  hidden: { opacity: 0, scale: 0.8 },
+  visible: {
+    opacity: 1,
+    scale: 1,
+    transition: { duration: 0.6, ease: "backOut" }
+  },
+};
+
+const lotContainer: Variants = {
+  hidden: {},
+  visible: {
+    transition: {
+      staggerChildren: 0.15, // delay between cards
+    },
+  },
+};
+
+// Each LOT card
+const lotCard: Variants = {
+  hidden: { opacity: 0, y: 30, scale: 0.95 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    scale: 1,
+    transition: { duration: 0.7, ease: "easeOut" }
+  },
+};
 
 const HexaHomesPages = () => {
 
@@ -47,45 +147,79 @@ const HexaHomesPages = () => {
         cta="Schedule Private Tour"
       />
 
-      <div className="bg-[#EEEEEE]">
-        <div className="sm:py-20 py-10 3xl:max-w-[1512px]  sh:mx-9 mx-4 3xl:mx-auto flex rx:flex-row flex-col items-center justify-between gap-8">
-          <div className="relative">
-            <img src={luxury1} alt="" className="w-[440px] 2xl:w-auto" />
-            <img src={luxury2} alt="" className="absolute top-1/2 mk:block hidden -translate-y-1/2 2xl:left-[400px] left-[300px] 2xl:w-auto w-[250px]" />
-          </div>
+      <motion.div
+        className="bg-[#EEEEEE]"
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.2 }}
+        variants={staggerContainer}
+      >
+        <div className="sm:py-20 py-10 3xl:max-w-[1512px] sh:mx-9 mx-4 3xl:mx-auto flex rx:flex-row flex-col items-center justify-between gap-8">
 
-          <div className="max-w-[700px]">
-            <h1 className="sm:text-[40px] text-[30px] text-center rx:text-start font-playfair font-medium text-[#1F262B]">Our Unique Features</h1>
-            <p className="font-normal font-poppins text-center rx:text-start mt-6">
+          {/* Images */}
+          <motion.div className="relative" variants={fadeInUp} custom={0}>
+            <motion.img
+              src={luxury1}
+              alt=""
+              className="w-[440px] 2xl:w-auto"
+              variants={fadeInUp}
+              custom={0.1}
+            />
+
+            <motion.img
+              src={luxury2}
+              alt=""
+              className="absolute top-1/2 mk:block hidden -translate-y-1/2 2xl:left-[400px] left-[300px] 2xl:w-auto w-[250px]"
+              // variants={fadeInUp}
+              custom={0.2}
+            />
+          </motion.div>
+
+          {/* Text & Features */}
+          <motion.div className="max-w-[700px]" variants={fadeInUp} custom={0.3}>
+            <motion.h1 variants={fadeInUp} custom={0.4} className="sm:text-[40px] text-[30px] text-center rx:text-start font-playfair font-medium text-[#1F262B]">
+              Our Unique Features
+            </motion.h1>
+
+            <motion.p variants={fadeInUp} custom={0.5} className="font-normal font-poppins text-center rx:text-start mt-6">
               Our projects made with the finest quality materials, world-class infrastructure, and some of the most sophisticated,
               state-of-the-art security protocols and advanced home automation
-            </p>
+            </motion.p>
 
-            <div className="flex mh:flex-row flex-col items-center gap-4 mt-10 mb-4">
-              <UniqueFeatures
-                text="Spacious and Elegant"
-                subText="Designed for utmost comfort. Enjoy the best family experiences without restriction."
-                width
-              />
-              <UniqueFeatures
-                text="Stunning & Sophisticatedt"
-                subText="Built to contemporary taste with aesthetic features, designed to the high standards of comfort, style and sustainability."
-                width
-              />
-            </div>
-            <div className="mb-4">
+            <motion.div className="flex mh:flex-row flex-col items-center gap-4 mt-10 mb-4" variants={staggerContainer} initial="hidden" animate="visible">
+              <motion.div variants={fadeInUp} custom={0.6}>
+                <UniqueFeatures
+                  text="Spacious and Elegant"
+                  subText="Designed for utmost comfort. Enjoy the best family experiences without restriction."
+                  width
+                />
+              </motion.div>
+              <motion.div variants={fadeInUp} custom={0.7}>
+                <UniqueFeatures
+                  text="Stunning & Sophisticated"
+                  subText="Built to contemporary taste with aesthetic features, designed to the high standards of comfort, style and sustainability."
+                  width
+                />
+              </motion.div>
+            </motion.div>
+
+            <motion.div variants={fadeInUp} custom={0.8} className="mb-4 w-full">
               <UniqueFeatures
                 text="Tech Enabled"
                 subText="Be in control of your home. Our tech-enabled homes make your life easier, filled with comfort and ensures peace of mind. Monitor and control everything, including doors, curtains, electrical appliances, and gates using a smartphone or tablet."
               />
-            </div>
-            <UniqueFeatures
-              text="Exquisite Architecture"
-              subText="Upscale luxury with aesthetic features such as concealed roofs, glass railings, high ceilings, sky lighting and a green area."
-            />
-          </div>
+            </motion.div>
+
+            <motion.div variants={fadeInUp} custom={0.9} className="w-full">
+              <UniqueFeatures
+                text="Exquisite Architecture"
+                subText="Upscale luxury with aesthetic features such as concealed roofs, glass railings, high ceilings, sky lighting and a green area."
+              />
+            </motion.div>
+
+          </motion.div>
         </div>
-      </div>
+      </motion.div>
 
       <div
         className="relative"
@@ -101,9 +235,19 @@ const HexaHomesPages = () => {
 
 
         <div className="relative z-10 sm:py-20 py-10 3xl:max-w-[1512px]  sh:mx-9 mx-4 3xl:mx-auto">
-          <h1 className="sm:text-[40px] text-[30px] font-playfair font-medium text-white mb-16 text-center">
-            Triplex Home Excellence
-          </h1>
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.2 }}
+          >
+            {/* Headline */}
+            <motion.h1
+              variants={fadeInUp}
+              className="sm:text-[40px] text-[30px] font-playfair font-medium text-white mb-16 text-center"
+            >
+              Triplex Home Excellence
+            </motion.h1>
+          </motion.div>
 
           <div className="grid 2xl:grid-cols-4 mf:grid-cols-3 md:grid-cols-2 gap-x-5 gap-y-10 relative z-10">
             {HISData.map((hisItem, index) => (
@@ -118,94 +262,217 @@ const HexaHomesPages = () => {
             ))}
           </div>
 
-          <button type="submit" className={`bg-white w-[244px] py-3 text-black p-2.5 sm:text-xl text-[17px] rounded-full mt-12 mx-auto flex justify-center hover:bg-white/95`}>
-            Download Brochure
-          </button>
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.2 }}
+          >
+            <motion.button
+              variants={popIn}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              type="submit"
+              className="bg-white w-[244px] py-3 text-black p-2.5 sm:text-xl text-[17px] rounded-full mt-12 mx-auto flex justify-center hover:bg-white/95"
+            >
+              Download Brochure
+            </motion.button>
+          </motion.div>
         </div>
       </div>
 
-      <div className="bg-[#ffffff]">
-        <div className="sm:py-20 py-10 3xl:max-w-[1512px]  sh:mx-9 mx-4 3xl:mx-auto">
+      <motion.div
+        className="bg-[#ffffff]"
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.2 }}
+      >
+        <div className="sm:py-20 py-10 3xl:max-w-[1512px] sh:mx-9 mx-4 3xl:mx-auto">
           <div className="flex lg:flex-row flex-col items-center justify-between gap-8">
+
+            {/* Left Text */}
             <div className="lg:max-w-[753px]">
-              <h1 className="sm:text-[40px] text-[30px] font-playfair lg:text-start text-center font-medium text-[#1F262B] lg:max-w-[703px]">Designed for the Few Who Live Ahead of the Curve</h1>
-              <p className="sm:text-[24px] text-[17px] font-normal text-[#1F262B] mt-5 leading-loose">
+              <motion.h1
+                variants={textUp}
+                custom={0}
+                className="sm:text-[40px] text-[30px] font-playfair lg:text-start text-center font-medium text-[#1F262B] lg:max-w-[703px]"
+              >
+                Designed for the Few Who Live Ahead of the Curve
+              </motion.h1>
+
+              <motion.p
+                variants={textUp}
+                custom={1}
+                className="sm:text-[24px] text-[17px] font-normal text-[#1F262B] mt-5 leading-loose"
+              >
                 HexaHomes isn’t a mass-produced home. We craft lasting assets — with limited availability — for individuals who understand
                 the value of timing, location, and legacy. <br className="md:block hidden" /> Every HexaHome is a statement of refined intelligence:
-              </p>
+              </motion.p>
 
-              <div className="mt-5 flex items-center gap-4">
-                <img src="/src/assets/hexaIcon17.svg" alt="" />
-                <p className="md:text-xl sm:text-lg font-medium">Built with the highest-grade materials</p>
-              </div>
-              <div className="mt-5 flex items-center gap-4">
-                <img src="/src/assets/hexaIcon18.svg" alt="" />
-                <p className="md:text-xl sm:text-lg font-medium">Powered by smart automation</p>
-              </div>
-              <div className="mt-5 flex items-center gap-4">
-                <img src="/src/assets/hexaIcon19.svg" alt="" />
-                <p className="md:text-xl sm:text-lg font-medium">Framed to hold generational value</p>
-              </div>
+              {/* Feature Items */}
+              {["Built with the highest-grade materials", "Powered by smart automation", "Framed to hold generational value"].map((text, i) => (
+                <motion.div
+                  key={i}
+                  variants={featureSlide}
+                  custom={i + 2}
+                  className="mt-5 flex items-center gap-4"
+                >
+                  <img src={`/src/assets/hexaIcon${17 + i}.svg`} alt="" />
+                  <p className="md:text-xl sm:text-lg font-medium">{text}</p>
+                </motion.div>
+              ))}
+
             </div>
 
-            <img src="/src/assets/hexa1.svg" alt="" className="lg:w-auto w-max" />
+            {/* Right Image */}
+            <motion.img
+              src="/src/assets/hexa1.svg"
+              alt=""
+              className="lg:w-auto w-max"
+              variants={imagePop}
+              custom={0}
+            />
+
           </div>
 
-          <div className="relative">
-            <img src="/src/assets/hexa2.svg" alt="" className="w-screen mt-10" />
-            <div className="absolute text-white bg-[#031E424D] backdrop-blur-sm bottom-0 right-0 max-w-[702px] p-4 md:px-12 px-4">
+          {/* Bottom Overlay Image */}
+          <motion.div className="relative mt-10">
+            <motion.img
+              src="/src/assets/hexa2.svg"
+              alt=""
+              className="w-screen"
+              variants={imagePop}
+              custom={0.5}
+            />
+
+            {/* Overlay Text */}
+            <motion.div
+              className="absolute text-white bg-[#031E424D] backdrop-blur-sm bottom-0 right-0 max-w-[702px] p-4 md:px-12 px-4"
+              variants={overlayFade}
+              custom={1}
+            >
               <p className="font-normal mh:text-base text-sm">
                 “This isn’t a home you upgrade — it’s one you pass down. Reserved for a select few, HexaHomes offers
                 the kind of exclusivity money alone can’t buy — a timeless statement of status, built to remain rare.”
               </p>
-            </div>
-          </div>
+            </motion.div>
+          </motion.div>
 
         </div>
-      </div>
+      </motion.div>
 
-      <div className="bg-[#EEEEEE]">
-        <div className="sm:py-20 py-10 3xl:max-w-[1512px]  sh:mx-9 mx-4 3xl:mx-auto">
-          <h1 className="sm:text-[40px] text-[30px] font-playfair font-medium text-[#1F262B] text-center">Just 6 Private Units. No More, No Later.</h1>
-          <p className="font-normal font-poppins mt-6 text-center">
+      <motion.div
+        className="bg-[#EEEEEE]"
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.2 }}
+      >
+        <div className="sm:py-20 py-10 3xl:max-w-[1512px] sh:mx-9 mx-4 3xl:mx-auto">
+
+          {/* Headline */}
+          <motion.h1
+            variants={fadeInUp}
+            custom={0}
+            className="sm:text-[40px] text-[30px] font-playfair font-medium text-[#1F262B] text-center"
+          >
+            Just 6 Private Units. No More, No Later.
+          </motion.h1>
+
+          {/* Paragraph */}
+          <motion.p
+            variants={fadeInUp}
+            custom={1}
+            className="font-normal font-poppins mt-6 text-center"
+          >
             In a world of noise and excess, true luxury is defined by what’s rare. <br className="md:block hidden" /> HexaHomes is a limited collection of 6 bespoke triplexes — and every one is uniquely crafted.
-          </p>
+          </motion.p>
 
+          {/* Image Grid */}
           <div className="grid mk:grid-cols-3 sh:grid-cols-2 gap-4 mt-16">
-            <img src="/src/assets/hexa3.svg" alt="" className="w-full" />
-            <img src="/src/assets/hexa4.svg" alt="" className="w-full" />
-            <img src="/src/assets/hexa5.svg" alt="" className="w-full" />
-            <img src="/src/assets/hexa6.svg" alt="" className="w-full" />
-            <img src="/src/assets/hexa7.svg" alt="" className="w-full" />
-            <img src="/src/assets/hexa8.svg" alt="" className="w-full" />
-          </div>
-
-          <Link to={'/contact'} onClick={() => window.scrollTo(0, 0)} className={`bg-black w-[264px] text-white p-2.5 py-3 sm:text-xl text-[17px] rounded-full mt-12 mx-auto flex justify-center hover:bg-black/95`}>
-            Join the Property List
-          </Link>
-        </div>
-      </div>
-
-      <div className="bg-[#1F262B] text-white">
-        <div className="sm:py-20 py-10 3xl:max-w-[1512px]  sh:mx-9 mx-4 3xl:mx-auto">
-          <h1 className="sm:text-[40px] text-[30px] font-playfair font-medium text-[#ffffff] text-center">Live in Sync With Your Home</h1>
-          <p className="font-normal font-poppins mt-6 text-center">
-            Designed with intelligent automation at its core, every system responds to your preferences in real time. <br className="mp:block hidden" /> With a single app, you control your entire home environment — effortlessly.
-          </p>
-
-          <div className="grid lg:grid-cols-4 mk:grid-cols-3 sh:grid-cols-2 gap-[36px] mt-20">
-            {LOTData.map((lot, index) => (
-              <LOT
-                key={index}
-                imageUrl={lot.imageUrl}
-                subText={lot.subText}
-                reverse={lot.reverse}
-                textColor
+            {["hexa3", "hexa4", "hexa5", "hexa6", "hexa7", "hexa8"].map((img, i) => (
+              <motion.img
+                key={i}
+                src={`/src/assets/${img}.svg`}
+                alt=""
+                className="w-full"
+                variants={imagePop2}
+                custom={i}
               />
             ))}
           </div>
+
+          {/* Button */}
+          <motion.div
+            className="mt-12 flex justify-center"
+            variants={buttonPop}
+            custom={0}
+          >
+            <Link
+              to={'/contact'}
+              onClick={() => window.scrollTo(0, 0)}
+              className="bg-black w-[264px] text-white p-2.5 py-3 sm:text-xl text-[17px] rounded-full flex justify-center hover:bg-black/95 hover:scale-105 transition-transform"
+            >
+              Join the Property List
+            </Link>
+          </motion.div>
+
         </div>
-      </div>
+      </motion.div>
+
+
+      <motion.div
+        className="bg-[#1F262B] text-white"
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.2 }}
+      >
+        <div className="sm:py-20 py-10 3xl:max-w-[1512px] sh:mx-9 mx-4 3xl:mx-auto">
+
+          {/* Headline */}
+          <motion.h1
+            variants={fadeInUp}
+            custom={0}
+            className="sm:text-[40px] text-[30px] font-playfair font-medium text-[#ffffff] text-center"
+          >
+            Live in Sync With Your Home
+          </motion.h1>
+
+          {/* Paragraph */}
+          <motion.p
+            variants={fadeInUp}
+            custom={1}
+            className="font-normal font-poppins mt-6 text-center"
+          >
+            Designed with intelligent automation at its core, every system responds to your preferences in real time. <br className="mp:block hidden" /> With a single app, you control your entire home environment — effortlessly.
+          </motion.p>
+
+          {/* LOT cards grid */}
+          <motion.div
+            className="grid lg:grid-cols-4 mk:grid-cols-3 sh:grid-cols-2 gap-[36px] mt-20"
+            variants={lotContainer}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.2 }}
+          >
+            {LOTData.map((lot, index) => (
+              <motion.div
+                key={index}
+                variants={lotCard}
+                whileHover={{ scale: 1.05 }} // subtle hover pop
+                whileTap={{ scale: 0.95 }}
+              >
+                <LOT
+                  imageUrl={lot.imageUrl}
+                  subText={lot.subText}
+                  reverse={lot.reverse}
+                  textColor
+                />
+              </motion.div>
+            ))}
+          </motion.div>
+
+        </div>
+      </motion.div>
+
 
       <div className="bg-[#ffffff]">
         <div className="pt-20 max-w-[1512px 3xl:mx-auto">

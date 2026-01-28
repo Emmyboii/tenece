@@ -1,9 +1,9 @@
 import Hero from "../components/Hero"
 import Future from "../assets/Future.png";
-import Legacy1 from "../assets/Legacy1.svg";
-import Legacy2 from "../assets/Legacy2.svg";
-import Legacy3 from "../assets/Legacy3.svg";
-import Legacy4 from "../assets/Legacy4.svg";
+import Legacy1 from "../assets/Legacy1.png";
+import Legacy2 from "../assets/Legacy2.png";
+import Legacy3 from "../assets/Legacy3.png";
+import Legacy4 from "../assets/Legacy4.png";
 import capa1 from "../assets/capa1.svg";
 import capa2 from "../assets/capa2.svg";
 import capa3 from "../assets/capa3.png";
@@ -19,6 +19,63 @@ import ContactLayout from "../components/ContactLayout";
 import Footer from "../components/Footer";
 import BelowHeroHomeAndMirasol from "../components/BelowHeroHomeAndMirasol";
 import { Link } from "react-router-dom";
+import { motion, type Variants } from "framer-motion";
+
+
+const sectionVariants: Variants = {
+    hidden: { opacity: 0 },
+    visible: {
+        opacity: 1,
+        transition: {
+            staggerChildren: 0.15,
+        },
+    },
+};
+
+const fadeUp: Variants = {
+    hidden: { opacity: 0, y: 40 },
+    visible: {
+        opacity: 1,
+        y: 0,
+        transition: { duration: 0.8, ease: "easeOut" },
+    },
+};
+
+const containerVariants: Variants = {
+    hidden: {},
+    visible: {
+        transition: {
+            staggerChildren: 0.15,
+            delayChildren: 0.2,
+        },
+    },
+};
+
+const containerVariants2: Variants = {
+    hidden: {},
+    visible: {
+        transition: {
+            staggerChildren: 0.2, // stagger text and images
+            delayChildren: 0.2,
+        },
+    },
+};
+
+const fadeUp2: Variants = {
+    hidden: { opacity: 0, y: 30 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: [0.42, 0, 0.58, 1] } },
+};
+
+const fadeInScale: Variants = {
+    hidden: { opacity: 0, scale: 0.95 },
+    visible: { opacity: 1, scale: 1, transition: { duration: 0.9, ease: [0.42, 0, 0.58, 1] } },
+};
+
+// const slideInLeft: Variants = {
+//     hidden: { opacity: 0, x: -80 },
+//     visible: { opacity: 1, x: 0, transition: { duration: 1, ease: [0.42, 0, 0.58, 1] } },
+// };
+
 
 const Home = () => {
 
@@ -69,10 +126,24 @@ const Home = () => {
                 />
             </div>
 
-            <div className="sm:py-20 py-10 3xl:max-w-[1512px]  sh:mx-9 mx-4 3xl:mx-auto">
-                <h1 className="sm:text-[40px] text-[30px] font-playfair font-medium text-[#1F262B] mb-16 text-center">A Legacy of Trust. The Future of Innovation.</h1>
+            <motion.div
+                variants={sectionVariants}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, amount: 0.2 }}
+                className="sm:py-20 py-10 3xl:max-w-[1512px] sh:mx-9 mx-4 3xl:mx-auto"
+            >
+                <motion.h1
+                    variants={fadeUp}
+                    className="sm:text-[40px] text-[30px] font-playfair font-medium text-[#1F262B] mb-16 text-center"
+                >
+                    A Legacy of Trust. The Future of Innovation.
+                </motion.h1>
 
-                <div className="grid mf:grid-cols-4 sd:grid-cols-2 gap-[76px]">
+                <motion.div
+                    variants={{ visible: { transition: { staggerChildren: 0.2 } } }}
+                    className="grid mf:grid-cols-4 sd:grid-cols-2 gap-[76px]"
+                >
                     {LOTData.map((lot, index) => (
                         <LOT
                             key={index}
@@ -84,25 +155,53 @@ const Home = () => {
                             subTextFont="manrope"
                         />
                     ))}
-                </div>
-            </div>
+                </motion.div>
+            </motion.div>
 
             <div className="bg-[#C0C0C0]">
-                <div className="sm:py-20 py-10 3xl:max-w-[1512px]  sh:mx-9 mx-4 3xl:mx-auto">
-                    <h1 className="sm:text-[40px] text-[26px] font-playfair font-medium text-[#1F262B] sm:mb-16 mb-6 text-center">Our Signature Developments</h1>
+                <motion.div
+                    variants={sectionVariants}
+                    initial="hidden"
+                    whileInView="visible"
+                    viewport={{ once: true, amount: 0.2 }}
+                    className="sm:py-20 py-10 3xl:max-w-[1512px] sh:mx-9 mx-4 3xl:mx-auto"
+                >
+                    <motion.h1
+                        variants={fadeUp}
+                        className="sm:text-[40px] text-[26px] font-playfair font-medium text-[#1F262B] sm:mb-16 mb-6 text-center">
+                        Our Signature Developments
+                    </motion.h1>
 
                     <MirasolLayout />
-                </div>
+                </motion.div>
             </div>
 
-            <div className="sm:py-20 py-10 3xl:max-w-[1512px]  sh:mx-9 mx-4 3xl:mx-auto">
+            <motion.div
+                variants={sectionVariants}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, amount: 0.2 }}
+                className="sm:py-20 py-10 3xl:max-w-[1512px] sh:mx-9 mx-4 3xl:mx-auto"
+            >
                 <HexaHomesLayout />
-            </div>
+            </motion.div>
 
-            <div className="sm:py-20 py-10 3xl:max-w-[1512px]  sh:mx-9 mx-4 3xl:mx-auto">
-                <h1 className="sm:text-[40px] text-[30px] font-playfair font-medium text-[#1F262B] mb-16 text-center">Capabilities That Set Us Apart</h1>
+            <motion.div
+                variants={sectionVariants}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, amount: 0.2 }}
+                className="sm:py-20 py-10 3xl:max-w-[1512px] sh:mx-9 mx-4 3xl:mx-auto"
+            >
+                <motion.h1
+                    variants={fadeUp}
+                    className="sm:text-[40px] text-[30px] font-playfair font-medium text-[#1F262B] mb-16 text-center">
+                    Capabilities That Set Us Apart
+                </motion.h1>
 
-                <div className="grid lg:grid-cols-3 sh:grid-cols-2 gap-[40px]">
+                <motion.div
+                    variants={{ visible: { transition: { staggerChildren: 0.2 } } }}
+                    className="grid lg:grid-cols-3 sh:grid-cols-2 gap-[40px]">
                     {Capabilities.map((capability, index) => (
                         <LOT
                             key={index}
@@ -113,8 +212,8 @@ const Home = () => {
                             subTextFont=""
                         />
                     ))}
-                </div>
-            </div>
+                </motion.div>
+            </motion.div>
 
             <div
                 className="relative mt-24 pb-20"
@@ -130,11 +229,18 @@ const Home = () => {
 
                 {/* Content */}
                 <div className="relative z-10 sm:py-20 py-10 3xl:max-w-[1512px] sh:mx-9 mx-4 3xl:mx-auto">
-                    <h1 className="sm:text-[40px] text-[30px] font-playfair font-medium text-white mb-16 text-center">
+                    <motion.h1
+                        variants={fadeUp} className="sm:text-[40px] text-[30px] font-playfair font-medium text-white mb-16 text-center">
                         You and your Home in Sync
-                    </h1>
+                    </motion.h1>
 
-                    <div className="grid lg:grid-cols-16 md:grid-cols-2 gap-x-5 lg:gap-y-10 gap-y-5 relative z-10">
+                    <motion.div
+                        variants={containerVariants}
+                        initial="hidden"
+                        whileInView="visible"
+                        viewport={{ once: true, amount: 0.3 }}
+                        className="grid lg:grid-cols-16 md:grid-cols-2 gap-x-5 lg:gap-y-10 gap-y-5 relative z-10"
+                    >
                         {HISData.map((hisItem, index) => (
                             <HIS
                                 key={index}
@@ -144,33 +250,55 @@ const Home = () => {
                                 index={index}
                             />
                         ))}
-                    </div>
+                    </motion.div>
                 </div>
             </div>
 
-            <div className="bg-[#36454F]">
-                <div className="sm:py-20 py-10 3xl:max-w-[1512px] sh:mx-9 mx-4 3xl:mx-auto flex xl:flex-row flex-col-reverse items-center justify-between gap-8">
-                    <div className="relative">
-                        <img src={luxury1} alt="" />
-                        <img src={luxury2} alt="" className="absolute top-1/2 mk:block hidden -translate-y-1/2 left-[400px]" />
-                    </div>
-                    <div className="space-y-4 xl:text-start text-center xl:max-w-[450px]">
-                        <h1 className="sm:text-[40px] text-[30px] font-playfair font-medium text-white ">
+            <motion.div
+                className="bg-[#36454F]"
+                variants={containerVariants2}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, amount: 0.3 }}
+            >
+                <div className="sm:py-20 py-10 3xl:max-w-[1512px] 3xl:mx-auto sh:mx-9 mx-4 flex xl:flex-row flex-col-reverse items-center justify-between gap-8">
+                    {/* Image Block */}
+                    <motion.div className="relative" variants={fadeInScale} whileHover={{ scale: 1.02, y: -5, transition: { duration: 0.3 } }}>
+                        <motion.img src={luxury1} alt="" className="rounded-md shadow-lg" />
+                        <motion.img
+                            src={luxury2}
+                            alt=""
+                            className="absolute top-1/2 mk:block hidden -translate-y-1/2 left-[400px] rounded-md shadow-xl"
+                        // variants={slideInLeft}
+                        />
+                    </motion.div>
+
+                    {/* Text Block */}
+                    <motion.div className="space-y-4 xl:text-start text-center xl:max-w-[450px]" variants={fadeUp2}>
+                        <motion.h1 className="sm:text-[40px] text-[30px] font-playfair font-medium text-white" variants={fadeUp2}>
                             Luxury That Performs Like an Asset
-                        </h1>
-                        <p className="text-white font-normal">
+                        </motion.h1>
+                        <motion.p className="text-white font-normal" variants={fadeUp2}>
                             Our homes are not just designed for living — they’re built to outperform. Backed by top-tier
                             real estate data, TRE offers long-term appreciation, passive income, and security of value.
-                        </p>
-                    </div>
+                        </motion.p>
+                    </motion.div>
                 </div>
-            </div>
+            </motion.div>
 
             <div className="bg-[#ffffff]">
-                <div className="sm:py-20 py-10 3xl:max-w-[1512px]  sh:mx-9 mx-4 3xl:mx-auto">
+                <motion.div
+                    variants={sectionVariants}
+                    initial="hidden"
+                    whileInView="visible"
+                    viewport={{ once: true, amount: 0.2 }}
+                    className="sm:py-20 py-10 3xl:max-w-[1512px] sh:mx-9 mx-4 3xl:mx-auto"
+                >
                     <div className="max-w-[630px] text-center mx-auto">
-                        <h1 className="sm:text-[40px] text-[30px] font-playfair font-medium text-[#1F262B] mb-4 text-center">Latest in Smart Luxury Living</h1>
-                        <p>Discover industry insights, architecture inspiration, and smart living breakthroughs — curated for future-focused homeowners and investors.</p>
+                        <motion.h1
+                            variants={fadeUp}
+                            className="sm:text-[40px] text-[30px] font-playfair font-medium text-[#1F262B] mb-4 text-center">Latest in Smart Luxury Living</motion.h1>
+                        <motion.p variants={fadeUp}>Discover industry insights, architecture inspiration, and smart living breakthroughs — curated for future-focused homeowners and investors.</motion.p>
                     </div>
 
                     <div className="grid mc:grid-cols-2 grid-cols-1 gap-x-4">
@@ -184,25 +312,33 @@ const Home = () => {
                         ))}
                     </div>
 
-                    <Link to={'/projects'} onClick={() => window.scrollTo(0, 0)} className="bg-[#1F262B] sm:w-[240px] text-white py-4 px-6 sm:text-xl text-[17px] rounded-full mt-10 hover:bg-black/95 flex items-center justify-center mx-auto">
+                    <Link to={'/projects'} onClick={() => window.scrollTo(0, 0)} className="bg-[#1F262B] sm:w-[240px] w-fit text-white py-4 px-6 sm:text-xl text-[17px] rounded-full mt-10 hover:bg-black/95 flex items-center justify-center mx-auto">
                         Discover More
                     </Link>
-                </div>
+                </motion.div>
             </div>
 
             <div className="bg-[#eeeeee]">
-                <div className="sm:py-20 py-10 3xl:max-w-[1512px]  sh:mx-9 mx-4 3xl:mx-auto">
+                <motion.div
+                    variants={sectionVariants}
+                    initial="hidden"
+                    whileInView="visible"
+                    viewport={{ once: true, amount: 0.2 }}
+                    className="sm:py-20 py-10 3xl:max-w-[1512px] sh:mx-9 mx-4 3xl:mx-auto"
+                >
                     <div className="max-w-[860px] text-center mx-auto mb-16">
-                        <h1 className="sm:text-[40px] text-[30px] font-playfair font-medium text-[#1F262B] mb-4 text-center">Start the Conversation That Builds Your Legacy</h1>
-                        <p>Our homes are not just designed for living — they’re built to outperform. Backed by top-tier real estate data, TRE offers long-term appreciation, passive income, and security of value.</p>
+                        <motion.h1
+                            variants={fadeUp}
+                            className="sm:text-[40px] text-[30px] font-playfair font-medium text-[#1F262B] mb-4 text-center">Start the Conversation That Builds Your Legacy</motion.h1>
+                        <motion.p variants={fadeUp}>Our homes are not just designed for living — they’re built to outperform. Backed by top-tier real estate data, TRE offers long-term appreciation, passive income, and security of value.</motion.p>
                     </div>
 
                     <ContactLayout />
-                </div>
+                </motion.div>
             </div>
 
             <Footer />
-        </div>
+        </div >
     )
 }
 

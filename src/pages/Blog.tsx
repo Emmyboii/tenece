@@ -5,6 +5,26 @@ import LOT from "../components/LOT"
 import OurStoryGrid from "../components/OurStoryGrid"
 import { RiArrowLeftDoubleLine, RiArrowRightDoubleLine, RiFileSearchLine } from "react-icons/ri"
 import { Link } from "react-router-dom"
+import { motion, type Variants } from "framer-motion";
+
+const fadeUp: Variants = {
+    hidden: { opacity: 0, y: 30 },
+    visible: (i = 1) => ({
+        opacity: 1,
+        y: 0,
+        transition: { delay: i * 0.1, duration: 0.7, ease: "easeOut" },
+    }),
+};
+
+const containerStagger: Variants = {
+    hidden: {},
+    visible: {
+        transition: {
+            staggerChildren: 0.15,
+            delayChildren: 0.1,
+        },
+    },
+};
 
 const Blog = () => {
 
@@ -83,30 +103,64 @@ const Blog = () => {
 
             <div className="bg-[#eeeeee] text-[#1F262B]">
                 {!hasArticles ? (
-                    <div className="sm:py-20 py-10 flex justify-center">
+                    <motion.div
+                        className="sm:py-20 py-10 flex justify-center"
+                        initial={{ opacity: 0, scale: 0.9 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        transition={{ duration: 0.7, ease: "easeOut" }}
+                    >
                         <div className="bg-white rounded-xl shadow-sm p-12 max-w-lg text-center">
-                            <div className="flex justify-center mb-6">
+                            <motion.div
+                                className="flex justify-center mb-6"
+                                initial={{ opacity: 0, y: -20 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                transition={{ delay: 0.2, duration: 0.6, ease: "easeOut" }}
+                            >
                                 <div className="w-16 h-16 flex items-center justify-center rounded-full bg-[#1F262B]/10">
                                     <RiFileSearchLine className="text-3xl text-[#1F262B]" />
                                 </div>
-                            </div>
+                            </motion.div>
 
-                            <h2 className="text-2xl font-semibold text-[#1F262B]">
+                            <motion.h2
+                                className="text-2xl font-semibold text-[#1F262B]"
+                                initial={{ opacity: 0, y: 10 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                transition={{ delay: 0.3, duration: 0.6, ease: "easeOut" }}
+                            >
                                 No articles yet
-                            </h2>
+                            </motion.h2>
 
-                            <p className="text-gray-600 mt-3">
+                            <motion.p
+                                className="text-gray-600 mt-3"
+                                initial={{ opacity: 0, y: 10 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                transition={{ delay: 0.4, duration: 0.6, ease: "easeOut" }}
+                            >
                                 We’re currently curating insightful stories on architecture,
                                 smart living, and luxury investments. Check back soon.
-                            </p>
+                            </motion.p>
                         </div>
-                    </div>
+                    </motion.div>
                 ) : (
                     <>
-                        <div className="sm:py-20 py-10 3xl:max-w-[1512px] sh:mx-9 mx-4 3xl:mx-auto">
-                            <p className="text-[40px] font-medium">Latest Article</p>
+                        <motion.div
+                            initial="hidden"
+                            whileInView="visible"
+                            viewport={{ once: true, amount: 0.3 }}
+                            variants={fadeUp}
+                            className="sm:py-20 py-10 3xl:max-w-[1512px] sh:mx-9 mx-4 3xl:mx-auto"
+                        >
+                            <motion.p
+                                className="text-[40px] font-medium mb-4"
+                                initial={{ opacity: 0, y: 20 }}
+                                whileInView={{ opacity: 1, y: 0 }}
+                                viewport={{ once: true }}
+                                transition={{ duration: 0.6, ease: "easeOut" }}
+                            >
+                                Latest Article
+                            </motion.p>
 
-                            <Link onClick={() => window.scrollTo(0, 0)} to={`/blog/${latestPost.slug}`} >
+                            <Link onClick={() => window.scrollTo(0, 0)} to={`/blog/${latestPost.slug}`}>
                                 <OurStoryGrid
                                     image={latestPost.image}
                                     title={latestPost.title}
@@ -114,25 +168,45 @@ const Blog = () => {
                                 />
                             </Link>
 
-
-                            <div ref={blogRef} className="mt-16">
-                                <p className="mk:text-[40px] text-[29px] font-medium">Featured Article Spotlight</p>
-
+                            <motion.div
+                                ref={blogRef}
+                                className="mt-16"
+                                initial="hidden"
+                                whileInView="visible"
+                                viewport={{ once: true, amount: 0.3 }}
+                                variants={containerStagger}
+                            >
+                                <motion.p
+                                    className="mk:text-[40px] text-[29px] font-medium mb-6"
+                                    initial={{ opacity: 0, y: 20 }}
+                                    whileInView={{ opacity: 1, y: 0 }}
+                                    viewport={{ once: true }}
+                                    transition={{ delay: 0.15, duration: 0.6, ease: "easeOut" }}
+                                >
+                                    Featured Article Spotlight
+                                </motion.p>
 
                                 <div className="grid xl:grid-cols-4 md:grid-cols-3 sd:grid-cols-2 md:gap-[41px] gap-4 mt-8">
                                     {currentItems.map((post, index) => (
-                                        <Link onClick={() => window.scrollTo(0, 0)} to={`/blog/${post.slug}`} key={index} className="border-b sd:border-0 border-black pb-10">
-                                            <LOT
-                                                imageUrl={post.imageUrl}
-                                                subText={post.subText}
-                                                subTextFont="norms"
-                                            />
-                                        </Link>
+                                        <motion.div key={index} custom={index} variants={fadeUp}>
+                                            <Link onClick={() => window.scrollTo(0, 0)} to={`/blog/${post.slug}`} className="border-b sd:border-0 border-black pb-10">
+                                                <LOT
+                                                    imageUrl={post.imageUrl}
+                                                    subText={post.subText}
+                                                    subTextFont="norms"
+                                                />
+                                            </Link>
+                                        </motion.div>
                                     ))}
                                 </div>
 
                                 {/* Pagination */}
-                                <div className="flex justify-center items-center gap-3 mt-16">
+                                <motion.div
+                                    className="flex justify-center items-center gap-3 mt-16"
+                                    initial={{ opacity: 0, y: 20 }}
+                                    animate={{ opacity: 1, y: 0 }}
+                                    transition={{ delay: 0.5, duration: 0.7 }}
+                                >
                                     {/* Prev */}
                                     <button
                                         disabled={currentPage === 1}
@@ -166,11 +240,11 @@ const Blog = () => {
                                         Next
                                         <RiArrowRightDoubleLine className="size-5" />
                                     </button>
-                                </div>
+                                </motion.div>
 
-                            </div>
+                            </motion.div>
 
-                        </div>
+                        </motion.div>
                     </>
                 )}
             </div>
