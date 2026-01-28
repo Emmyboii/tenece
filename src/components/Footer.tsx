@@ -65,7 +65,7 @@ const Footer = () => {
                     </motion.h1>
                     <motion.a href="/" className="mh:text-xl font-normal" variants={itemVariants}>Home</motion.a>
                     <motion.a href="/about" className="mh:text-xl font-normal" variants={itemVariants}>About Us</motion.a>
-                    <motion.a href="/gallery" className="mh:text-xl font-normal" variants={itemVariants}>Gallery</motion.a>
+                    <motion.a href="/blog" className="mh:text-xl font-normal" variants={itemVariants}>Blog</motion.a>
                     <motion.a href="/contact" className="mh:text-xl font-normal" variants={itemVariants}>Contact Us</motion.a>
                 </motion.div>
 

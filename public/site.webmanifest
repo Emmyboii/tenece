@@ -1,0 +1,21 @@
+{
+  "name": "Tenece Real Estate",
+  "short_name": "Tenece",
+  "description": "Find your dream home or commercial property with ease. Explore listings, get expert guidance, and make informed property decisions.",
+  "icons": [
+    {
+      "src": "/BrowserLogo.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/BrowserLogo.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ],
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#ffffff"
+}
