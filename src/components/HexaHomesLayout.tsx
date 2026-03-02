@@ -7,7 +7,7 @@ const HexaHomesLayout = () => {
         <div>
             <ProjectLayout
                 text="HexaHomes"
-                subText="Crafted for High Performers. Built for Legacy."
+                subText="HexaHomes isn’t a mass-produced home. We craft lasting assets — with limited availability — for individuals who understand the value of timing, location, and legacy."
                 cta="Explore Hexa Homes"
                 ctaLink='/projects/hexahomes'
                 smallImg={hexahomes1}

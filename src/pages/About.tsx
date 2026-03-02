@@ -13,6 +13,7 @@ import OurTeamImg from "../components/OurTeamImg";
 import Footer from "../components/Footer";
 import OurStoryGrid from "../components/OurStoryGrid";
 import { motion, type Variants } from "framer-motion";
+import ProcessSection from "../components/ProcessSection";
 
 const container = {
     hidden: {},
@@ -112,9 +113,9 @@ const About = () => {
                 <OurStoryGrid
                     image={story}
                     title="Our Story"
-                    text="At Tenece Real Estate, we merge luxury with intelligent design to shape forward-thinking living spaces in choice locations. Each home reflects our commitment to seamless technology, timeless aesthetics, and elevated living.
-                            Rooted in global inspiration and African excellence, we create more than residences—we craft environments that anticipate your needs and reflect your lifestyle.
-                            Tenece is where innovation meets elegance, offering a smarter, more refined way to live in Nigeria’s most vibrant city."
+                    text="At Tenece Real Estate, we merge luxury with intelligent design to shape forward-thinking living spaces in Abuja and Lagos. Each home reflects our commitment to seamless technology, timeless aesthetics, and elevated living.
+                        Rooted in global inspiration and African excellence, we create more than residences—we craft environments that anticipate your needs and reflect your lifestyle.
+                        From premium neighborhoods in Lagos to high-value districts in Abuja, Tenece is where innovation meets elegance, offering a smarter, more refined way to live in Nigeria’s most dynamic cities."
                 />
             </motion.div>
 
@@ -143,6 +144,8 @@ const About = () => {
                     </motion.div>
                 </motion.div>
             </div>
+
+            <ProcessSection />
 
             <motion.div
                 className="bg-[#EEEEEE]"

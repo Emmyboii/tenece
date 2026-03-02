@@ -1,11 +1,19 @@
 import { useState } from "react";
 import Logo from "../assets/Logo.svg";
 import Logo2 from "../assets/Logo2.svg";
-import { motion, type Variants } from "framer-motion";
+import Logo3 from "../assets/Logo3.png";
+import { motion, type Variants, AnimatePresence } from "framer-motion";
 
 const navOpt = [
     { name: "HOME", link: "/" },
-    { name: "PROJECTS", link: "/projects" },
+    {
+        name: "PROJECTS",
+        link: "/projects",
+        dropdown: [
+            { name: "Mirasol", link: "/projects/mirasol" },
+            { name: "Hexa Homes", link: "/projects/hexahomes" },
+        ],
+    },
     { name: "ABOUT US", link: "/about" },
     { name: "BLOG", link: "/blog" },
     { name: "CONTACT US", link: "/contact" },
@@ -37,6 +45,8 @@ const itemVariants: Variants = {
 
 const Header = () => {
     const [open, setOpen] = useState(false);
+    const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
+    const [mobileDropdown, setMobileDropdown] = useState<string | null>(null);
 
     const location = window.location.pathname;
     const contactURL =
@@ -56,7 +66,7 @@ const Header = () => {
             <div className="flex items-center justify-between sm:py-10 py-4 sm:pb-6 mx-9 3xl:max-w-[1512px]  3xl:mx-auto">
                 {/* LOGO */}
                 <motion.a variants={itemVariants} href="/">
-                    <img src={contactURL ? Logo2 : Logo} alt="Logo" />
+                    <img src={contactURL ? Logo2 : projectURL ? Logo3 : Logo} alt="Logo" />
                 </motion.a>
 
                 {/* DESKTOP NAV */}
@@ -65,19 +75,55 @@ const Header = () => {
                     className="hidden lg:flex gap-12"
                 >
                     {navOpt.map((item) => (
-                        <motion.a
-                            variants={itemVariants}
+                        <motion.div
                             key={item.name}
-                            href={item.link}
-                            onClick={() => window.scrollTo(0, 0)}
-                            className={`relative ${contactURL ? "text-black" : "text-white"}
-                                after:absolute after:left-0 after:-bottom-1 after:h-[2px]
-                                after:w-0 after:bg-current after:transition-all after:duration-300
-                                hover:after:w-full`
-                            }
+                            variants={itemVariants}
+                            className="relative"
+                            onMouseEnter={() => item.dropdown && setActiveDropdown(item.name)}
+                            onMouseLeave={() => setActiveDropdown(null)}
                         >
-                            {item.name}
-                        </motion.a>
+                            {/* Main Link */}
+                            <a
+                                href={item.link}
+                                onClick={() => window.scrollTo(0, 0)}
+                                className={`relative ${contactURL ? "text-black" : "text-white"}
+                                    after:absolute after:left-0 after:-bottom-1 after:h-[2px]
+                                    after:w-0 after:bg-current after:transition-all after:duration-300
+                                    hover:after:w-full`}
+                            >
+                                {item.name}
+                            </a>
+
+                            {/* Dropdown */}
+                            <AnimatePresence>
+                                {item.dropdown && activeDropdown === item.name && (
+                                    <motion.div
+                                        initial={{ opacity: 0, y: 15 }}
+                                        animate={{ opacity: 1, y: 0 }}
+                                        exit={{ opacity: 0, y: 15 }}
+                                        transition={{ duration: 0.25 }}
+                                        className="absolute left-0 top-0.5 mt-6
+                                            w-56 rounded-2xl shadow-2xl
+                                            bg-white border border-gray-200 z-50"
+                                    >
+                                        <div className="flex flex-col py-4">
+                                            {item.dropdown.map((sub) => (
+                                                <a
+                                                    key={sub.name}
+                                                    href={sub.link}
+                                                    onClick={() => window.scrollTo(0, 0)}
+                                                    className="px-6 py-3 text-sm text-gray-800
+                                               hover:bg-black hover:text-white
+                                               transition-all duration-300"
+                                                >
+                                                    {sub.name}
+                                                </a>
+                                            ))}
+                                        </div>
+                                    </motion.div>
+                                )}
+                            </AnimatePresence>
+                        </motion.div>
                     ))}
                 </motion.nav>
 
@@ -114,25 +160,64 @@ const Header = () => {
                 >
                     <div className="flex flex-col items-center gap-8 py-10">
                         {navOpt.map((item, index) => (
-                            <motion.a
-                                variants={itemVariants}
-                                initial="hidden"
-                                animate="visible"
-                                transition={{ delay: index * 0.08 }}
-                                key={item.name}
-                                href={item.link}
-                                onClick={() => {
-                                    window.scrollTo(0, 0)
-                                    setOpen(false)
-                                }}
-                                className={`relative text-lg ${contactURL ? "text-black" : "text-white"}
-                                        after:absolute after:left-0 after:-bottom-1 after:h-[2px]
-                                        after:w-0 after:bg-current after:transition-all after:duration-300
-                                        hover:after:w-full`
-                                }
-                            >
-                                {item.name}
-                            </motion.a>
+                            <div key={item.name} className="flex flex-col items-center">
+                                {item.dropdown ? (
+                                    <>
+                                        <button
+                                            onClick={() =>
+                                                setMobileDropdown(
+                                                    mobileDropdown === item.name ? null : item.name
+                                                )
+                                            }
+                                            className={`text-lg ${contactURL ? "text-black" : "text-white"}`}
+                                        >
+                                            {item.name}
+                                        </button>
+
+                                        <AnimatePresence>
+                                            {mobileDropdown === item.name && (
+                                                <motion.div
+                                                    initial={{ opacity: 0, height: 0 }}
+                                                    animate={{ opacity: 1, height: "auto" }}
+                                                    exit={{ opacity: 0, height: 0 }}
+                                                    transition={{ duration: 0.3 }}
+                                                    className="overflow-hidden flex flex-col items-center mt-3 gap-4"
+                                                >
+                                                    {item.dropdown.map((sub) => (
+                                                        <a
+                                                            key={sub.name}
+                                                            href={sub.link}
+                                                            onClick={() => {
+                                                                window.scrollTo(0, 0);
+                                                                setOpen(false);
+                                                                setMobileDropdown(null);
+                                                            }}
+                                                            className={`text-base ${contactURL ? "text-black" : "text-white"}`}
+                                                        >
+                                                            {sub.name}
+                                                        </a>
+                                                    ))}
+                                                </motion.div>
+                                            )}
+                                        </AnimatePresence>
+                                    </>
+                                ) : (
+                                    <motion.a
+                                        variants={itemVariants}
+                                        initial="hidden"
+                                        animate="visible"
+                                        transition={{ delay: index * 0.08 }}
+                                        href={item.link}
+                                        onClick={() => {
+                                            window.scrollTo(0, 0);
+                                            setOpen(false);
+                                        }}
+                                        className={`relative text-lg ${contactURL ? "text-black" : "text-white"}`}
+                                    >
+                                        {item.name}
+                                    </motion.a>
+                                )}
+                            </div>
                         ))}
 
                         <a

@@ -1,13 +1,13 @@
 import ProjectLayout from './ProjectLayout'
 import mirasol1 from "../assets/mirasol1.png";
-import mirasol2 from "../assets/mirasol2.png";
+import mirasol2 from "../assets/new3.png";
 
 const MirasolLayout = () => {
     return (
         <div>
             <ProjectLayout
                 text="The Mirasol"
-                subText="Crafted for High Performers. Built for Legacy."
+                subText="The Mirasol is crafted for those who demand more than just a place to live. Designed with precision, sophistication, and vision"
                 cta="Explore The Mirasol"
                 ctaLink='/projects/mirasol'
                 smallImg={mirasol1}

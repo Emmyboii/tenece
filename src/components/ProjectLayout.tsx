@@ -72,11 +72,11 @@ const ProjectLayout = ({ text, subText, cta, ctaLink, smallImg, largeImg, revers
                 </motion.div>
 
                 <motion.div variants={scaleIn}>
-                    <img src={smallImg} className="w-scree" alt={text} />
+                    <img src={smallImg} className="w-ful h-500px]" alt={text} />
                 </motion.div>
             </motion.div>
             <motion.div variants={fadeIn} className="mt-8">
-                <img src={largeImg} alt={text} className="w-full" />
+                <img src={largeImg} alt={text} className="w-full h-[700px] object-cover" />
             </motion.div>
         </div>
     )

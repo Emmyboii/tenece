@@ -179,7 +179,16 @@ const HexaHomesPages = () => {
         heroText="HexaHomes"
         heroText2="Where innovation meets Elegance"
         subText="A deluxe home with upscale infrastructure in an exclusive location."
-        cta="Schedule Private Tour"
+        // cta="Schedule Private Tour"
+        cta={
+          <a
+            href="https://calendly.com/your-calendly-username"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Schedule Private Tour
+          </a>
+        }
       />
 
       <motion.div

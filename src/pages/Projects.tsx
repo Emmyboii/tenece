@@ -5,6 +5,7 @@ import HexaHomesLayout from '../components/HexaHomesLayout'
 import MirasolLayout from '../components/MirasolLayout'
 import { motion, type Variants } from "framer-motion";
 import projectHero from "../assets/projectHero.png";
+import TestimonialsSection from '../components/TestimonialsSection'
 
 const sectionVariants: Variants = {
     hidden: { opacity: 0 },
@@ -45,6 +46,8 @@ const Projects = () => {
             <div className="sm:py-20 py-10 3xl:max-w-[1512px]  sh:mx-9 mx-4 3xl:mx-auto">
                 <HexaHomesLayout />
             </div>
+
+            <TestimonialsSection />
 
             <div className="bg-[#eeeeee]">
                 <motion.div

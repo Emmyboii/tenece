@@ -1,8 +1,8 @@
 import Hero from "../components/Hero"
-import Future from "../assets/Future.png";
+import Future from "../assets/new10.png";
 import HomeHero from "../assets/HomeHero.png";
 import Legacy1 from "../assets/Legacy1.png";
-import Legacy2 from "../assets/Legacy2.png";
+import Legacy2 from "../assets/new6.jpg";
 import Legacy3 from "../assets/Legacy3.png";
 import Legacy4 from "../assets/Legacy4.png";
 import capa1 from "../assets/capa1.svg";
@@ -31,6 +31,7 @@ import val from "../assets/val.svg";
 import latest1 from "../assets/latest1.svg";
 import latest2 from "../assets/latest2.svg";
 import latest3 from "../assets/latest3.png";
+import TestimonialsSection from "../components/TestimonialsSection";
 
 
 const sectionVariants: Variants = {
@@ -114,16 +115,26 @@ const Home = () => {
     ];
 
     const LatestSmartData = [
-        { image: latest1, text: "Smart Homes, Smarter Living: How Technology is Redefining Luxury in Lagos" },
-        { image: latest2, text: "Smart Homes, Smarter Living: How Technology is Redefining Luxury in Lagos" },
-        { image: latest3, text: "Smart Homes, Smarter Living: How Technology is Redefining Luxury in Lagos" },
+        {
+            image: latest1,
+            text: "Smart Homes in Lagos: How Innovation is Elevating Luxury Living Across Africa’s Metropolis"
+        },
+        {
+            image: latest2,
+            text: "Hexa Homes & The Mirasol: Blending Architecture, Technology, and Timeless Elegance"
+        },
+        {
+            image: latest3,
+            text: "Sustainable Luxury: How Tenece Real Estate Redefines Smart, Energy-Efficient Residences"
+        },
     ];
 
     return (
         <div className="overflow-x-hidden">
             <Hero
                 heroImage={HomeHero}
-                heroText="Shaping Africa’s Most Exclusive Luxury Residences"
+                heroText="Shaping Luxury Living in Abuja and Lagos"
+                // heroText="Shaping Africa’s Most Exclusive Luxury Residences"
                 subText="From client-led residences to iconic addresses like HexaHomes and The Mirasol, Tenece crafts real estate legacies powered by innovation, precision, and prestige"
             />
 
@@ -328,6 +339,8 @@ const Home = () => {
                     </Link>
                 </motion.div>
             </div>
+
+            <TestimonialsSection />
 
             <div className="bg-[#eeeeee]">
                 <motion.div

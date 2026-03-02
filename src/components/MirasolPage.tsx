@@ -1,6 +1,6 @@
 import BelowHeroHomeAndMirasol from "./BelowHeroHomeAndMirasol"
 import Hero from "./Hero"
-import Future from "../assets/Future.png";
+import Future from "../assets/new10.png";
 import OurTeamImg from "./OurTeamImg";
 import Footer from "./Footer";
 import { motion, type Variants } from "framer-motion";
@@ -9,13 +9,13 @@ import mira2 from "../assets/mira2.png";
 import mira3 from "../assets/mira3.png";
 import mira4 from "../assets/mira4.png";
 import mira5 from "../assets/mira5.svg";
-import mira6 from "../assets/mira6.svg";
+import mira6 from "../assets/new14.png";
 import mira7 from "../assets/mira7.svg";
 import mira8 from "../assets/mira8.svg";
 import mira9 from "../assets/mira9.svg";
 import mira10 from "../assets/mira10.svg";
 import mirasolMap from "../assets/mirasolMap.png";
-import mirasolHero from "../assets/mirasolHero.png";
+import mirasolHero from "../assets/new9.png";
 
 const MirasolPage = () => {
 
@@ -70,7 +70,14 @@ const MirasolPage = () => {
                 heroImage={mirasolHero}
                 heroText="The Mirasol"
                 subText="Power. Privacy. Prestige — designed by the developers behind Lagos’ most iconic smart residences"
-                cta="Download Brochure"
+                cta={
+                    <a
+                        href="/Mirasol.pdf"
+                        download="Mirasol_Brochure.pdf"
+                    >
+                        Download Brochure
+                    </a>
+                }
             />
 
             <div className="bg-[#C0C0C0]">
@@ -147,7 +154,7 @@ const MirasolPage = () => {
 
                     <div className="flex items-center gap-4">
                         <img src={mira5} alt="" className="w-[990px h-[600px lg:block hidden" />
-                        <img src={mira6} alt="" className="w-[990px h-[600px" />
+                        <img src={mira6} alt="" className="w-1/" />
                         <img src={mira7} alt="" className="w-[990px h-[600px lg:block hidden" />
                     </div>
 
