@@ -220,7 +220,7 @@ const ContactLayout = () => {
                     {errors.email && <p className="error">{errors.email}</p>}
                 </div>
 
-                {!ignoreFields && (
+                {/* {!ignoreFields && ( */}
                     <>
 
                         {/* Phone Number with Flag */}
@@ -309,7 +309,7 @@ const ContactLayout = () => {
                             {errors.projectType && <p className="error">{errors.projectType}</p>}
                         </div>
                     </>
-                )}
+                {/* )} */}
 
                 {/* Message */}
                 <div>

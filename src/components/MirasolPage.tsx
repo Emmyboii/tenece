@@ -74,6 +74,7 @@ const MirasolPage = () => {
                     <a
                         href="/Mirasol.pdf"
                         download="Mirasol_Brochure.pdf"
+                        className="bg-white block sm:w-[224px] w-[260px] text-black sm:p-4 p-3 sm:text-lg text-[16px] rounded-full text-center hover:bg-white/95"
                     >
                         Download Brochure
                     </a>

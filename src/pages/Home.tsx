@@ -15,11 +15,9 @@ import LOT from "../components/LOT";
 import MirasolLayout from "../components/MirasolLayout";
 import HexaHomesLayout from "../components/HexaHomesLayout";
 import HIS from "../components/HIS";
-import LatestSmart from "../components/LatestSmart";
 import ContactLayout from "../components/ContactLayout";
 import Footer from "../components/Footer";
 import BelowHeroHomeAndMirasol from "../components/BelowHeroHomeAndMirasol";
-import { Link } from "react-router-dom";
 import { motion, type Variants } from "framer-motion";
 import cac from "../assets/cac.svg";
 import gca from "../assets/gca.svg";
@@ -28,10 +26,8 @@ import ta from "../assets/ta.svg";
 import eec from "../assets/eec.svg";
 import sgm from "../assets/sgm.svg";
 import val from "../assets/val.svg";
-import latest1 from "../assets/latest1.svg";
-import latest2 from "../assets/latest2.svg";
-import latest3 from "../assets/latest3.png";
 import TestimonialsSection from "../components/TestimonialsSection";
+import LatestBlogSection from "../components/Latestblogsection ";
 
 
 const sectionVariants: Variants = {
@@ -112,21 +108,6 @@ const Home = () => {
         { icon: eec, title: "Energy-Efficient Comfort Zones", description: "Personalized temperature and lighting settings that save energy and enhance comfort." },
         { icon: sgm, title: "Smart Glass + Motion Sensors", description: "Glass that tints for privacy, paired with motion-activated lighting and systems." },
         { icon: val, title: "Voice Activated Living", description: "Control your environment hands-free with integrated voice assistants." },
-    ];
-
-    const LatestSmartData = [
-        {
-            image: latest1,
-            text: "Smart Homes in Lagos: How Innovation is Elevating Luxury Living Across Africa’s Metropolis"
-        },
-        {
-            image: latest2,
-            text: "Hexa Homes & The Mirasol: Blending Architecture, Technology, and Timeless Elegance"
-        },
-        {
-            image: latest3,
-            text: "Sustainable Luxury: How Tenece Real Estate Redefines Smart, Energy-Efficient Residences"
-        },
     ];
 
     return (
@@ -308,37 +289,7 @@ const Home = () => {
                 </div>
             </motion.div>
 
-            <div className="bg-[#ffffff]">
-                <motion.div
-                    variants={sectionVariants}
-                    initial="hidden"
-                    whileInView="visible"
-                    viewport={{ once: true, amount: 0.15 }}
-                    className="sm:py-20 py-10 3xl:max-w-[1512px] sh:mx-9 mx-4 3xl:mx-auto"
-                >
-                    <div className="max-w-[630px] text-center mx-auto">
-                        <motion.h1
-                            variants={fadeUp}
-                            className="sm:text-[40px] text-[30px] font-playfair font-medium text-[#1F262B] mb-4 text-center">Latest in Smart Luxury Living</motion.h1>
-                        <motion.p variants={fadeUp} className="sm:text-base text-sm">Discover industry insights, architecture inspiration, and smart living breakthroughs — curated for future-focused homeowners and investors.</motion.p>
-                    </div>
-
-                    <div className="grid mc:grid-cols-2 grid-cols-1 gap-x-4">
-                        {LatestSmartData.map((item, index) => (
-                            <LatestSmart
-                                key={index}
-                                image={item.image}
-                                text={item.text}
-                                index={index}
-                            />
-                        ))}
-                    </div>
-
-                    <Link to={'/projects'} onClick={() => window.scrollTo(0, 0)} className="bg-[#1F262B] sm:w-[240px] w-fit text-white py-4 px-6 sm:text-xl text-[17px] rounded-full mt-10 hover:bg-black/95 flex items-center justify-center mx-auto">
-                        Discover More
-                    </Link>
-                </motion.div>
-            </div>
+            <LatestBlogSection />
 
             <TestimonialsSection />
 

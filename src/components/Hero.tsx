@@ -68,7 +68,7 @@ const Hero = ({ heroImage, heroText, heroText2, subText, cta }: HeroProps) => {
                     className={`3xl:max-w-[1512px] sh:mx-9 mx-4 3xl:mx-auto ${(location.includes('/mirasol') || location.includes('/hexahomes'))
                         ? 'mt-[255px] mb-[230px] mf:space-y-5 space-y-3'
                         : 'mt-[320px] space-y-8'
-                        }`}
+                        }`} 
                 >
                     <motion.h1 variants={itemVariants} className={`mf:text-[76px] md:text-[60px] text-[40px] font-semibold font-playfair text-white max-w-[1000px] ${(location.includes('/mirasol') || location.includes('/hexahomes')) && "text-center mx-auto"}`}>{heroText}</motion.h1>
                     <motion.h1 variants={itemVariants} className={`mf:text-[32px] md:text-[20px] text-base font-medium text-white max-w-[1000px] ${(location.includes('/mirasol') || location.includes('/hexahomes')) && "text-center mx-auto"}`}>{heroText2}</motion.h1>
@@ -81,7 +81,8 @@ const Hero = ({ heroImage, heroText, heroText2, subText, cta }: HeroProps) => {
                             whileHover={{ scale: 1.05 }}
                             whileTap={{ scale: 0.95 }}
                             onClick={handleScrollToStory}
-                            type="submit" className={`bg-white sm:w-[224px] w-[180px] text-black sm:p-4 p-2 sm:text-lg text-[16px] rounded-full mt-4 hover:bg-white/95 ${(location.includes('/mirasol') || location.includes('/hexahomes')) && "flex justify-center mx-auto w-[260px] p-3"}`}>
+                            className={`mt-4 ${(location.includes('/mirasol') || location.includes('/hexahomes')) && "flex justify-center mx-auto"}`}
+                        >
                             {cta}
                         </motion.button>
                     ) : location === '/' ? (

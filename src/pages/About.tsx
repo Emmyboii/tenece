@@ -85,7 +85,10 @@ const About = () => {
                 heroImage={AboutHero}
                 heroText="Redefining Luxury. Elevating Smart Living."
                 subText="From visionary designs to intelligent homes, we build more than properties. We create timeless experiences in the heart of Lagos."
-                cta="Explore our story"
+                // cta="Explore our story"
+                cta={
+                    <p className="bg-white block sm:w-[224px] w-[180px] text-black sm:p-4 p-2 sm:text-lg text-[16px] rounded-full text-center hover:bg-white/95">Expore our story</p>
+                }
             />
 
             <motion.div

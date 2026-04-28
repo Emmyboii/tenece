@@ -182,9 +182,11 @@ const HexaHomesPages = () => {
         // cta="Schedule Private Tour"
         cta={
           <a
-            href="https://calendly.com/your-calendly-username"
-            target="_blank"
-            rel="noopener noreferrer"
+            // href="https://calendly.com/your-calendly-username"
+            href="/contact"
+            // target="_blank"
+            // rel="noopener noreferrer"
+            className="bg-white block sm:w-[224px] w-[180px] text-black sm:p-4 p-3 sm:text-lg text-[16px] rounded-full text-center hover:bg-white/95"
           >
             Schedule Private Tour
           </a>
@@ -318,7 +320,12 @@ const HexaHomesPages = () => {
               type="submit"
               className="bg-white w-[244px] py-3 text-black p-2.5 sm:text-xl text-[17px] rounded-full mt-12 mx-auto flex justify-center hover:bg-white/95"
             >
-              Download Brochure
+              <a
+                href="/Mirasol.pdf"
+                download="Mirasol_Brochure.pdf"
+              >
+                Download Brochure
+              </a>
             </motion.button>
           </motion.div>
         </div>
