@@ -1,11 +1,10 @@
 import Hero from "../components/Hero"
 import story from "../assets/aboutStory.png";
 import AboutHero from "../assets/aboutHero.png";
-import team1 from "../assets/team1.png";
-import team2 from "../assets/team2.svg";
-import team3 from "../assets/team3.svg";
-import team4 from "../assets/team4.svg";
-import team5 from "../assets/team5.svg";
+import team1 from "../assets/about1.webp";
+import team2 from "../assets/about2.webp";
+import team3 from "../assets/about3.png";
+import team4 from "../assets/about4.png";
 import mission from "../assets/aboutMisson.png";
 import vision from "../assets/aboutVision.png";
 import LOT from "../components/LOT";
@@ -197,7 +196,7 @@ const About = () => {
                             </motion.div>
 
                             <motion.div variants={teamCard}>
-                                <OurTeamImg image={team2} name="KINGSLEY EZE" position="CEO Tenece Group" />
+                                <OurTeamImg image={team2} name="LINA EZE" position="Managing Director, Tenece Holdings Ltd" />
                             </motion.div>
                         </motion.div>
                     </motion.div>
@@ -206,15 +205,14 @@ const About = () => {
                         className="flex flex-col gap-5 mt-5 sh:grid sh:grid-cols-2 sh:justify-end mc:flex mc:flex-row mc:mt-16"
                         variants={container}
                     >
-                        {[
-                            team3,
-                            team4,
-                            team5,
-                        ].map((img, i) => (
-                            <motion.div key={i} variants={teamCard}>
-                                <OurTeamImg image={img} name="KINGSLEY EZE" position="CEO Tenece Group" />
-                            </motion.div>
-                        ))}
+
+                        <motion.div variants={teamCard}>
+                            <OurTeamImg image={team3} name="ONINYE OJUKWU" position="Group Counsel and Company Secretary" />
+                        </motion.div>
+
+                        <motion.div variants={teamCard}>
+                            <OurTeamImg image={team4} name="STANLEY" position="Head, Admin" />
+                        </motion.div>
                     </motion.div>
 
                 </div>

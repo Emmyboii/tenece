@@ -4,6 +4,15 @@ import Logo2 from "../assets/Logo2.svg";
 import Logo3 from "../assets/Logo3.png";
 import { motion, type Variants, AnimatePresence } from "framer-motion";
 
+declare global {
+    interface Window {
+        Calendly?: {
+            initPopupWidget: (options: { url: string }) => void;
+            initBadgeWidget?: (options: unknown) => void;
+        };
+    }
+}
+
 const navOpt = [
     { name: "HOME", link: "/" },
     {
@@ -53,6 +62,17 @@ const Header = () => {
         location === "/contact" || location.startsWith("/blog/");
 
     const projectURL = location === '/projects'
+
+    const openCalendly = () => {
+        if (window.Calendly) {
+            window.Calendly.initPopupWidget({
+                url: "https://calendly.com/tenecerealestate/30min",
+            });
+        } else {
+            console.warn("Calendly not loaded yet");
+            window.open("https://calendly.com/tenecerealestate/30min", "_blank");
+        }
+    };
 
     return (
         <motion.header
@@ -128,15 +148,18 @@ const Header = () => {
                 </motion.nav>
 
                 {/* DESKTOP CTA */}
-                <motion.a
+                <motion.p
                     variants={itemVariants}
-                    href="/contact"
-                    onClick={() => window.scrollTo(0, 0)}
-                    className={`hidden lg:block px-5 py-4 rounded-full ${contactURL ? "bg-black text-white" : "bg-white text-black"
+                    // href="/contact"
+                    onClick={() => {
+                        window.scrollTo(0, 0)
+                        openCalendly()
+                    }}
+                    className={`hidden lg:block px-5 py-4 rounded-full cursor-pointer ${contactURL ? "bg-black text-white" : "bg-white text-black"
                         }`}
                 >
                     BOOK A VISIT
-                </motion.a>
+                </motion.p>
 
 
                 {/* HAMBURGER */}
@@ -221,12 +244,12 @@ const Header = () => {
                         ))}
 
                         <a
-                            href="/contact"
-                            onClick={() => setOpen(false)}
-                            className={`px-6 py-4 rounded-full ${contactURL
-                                ? "bg-black text-white"
-                                : "bg-white text-black"
-                                }`}
+                            onClick={() => {
+                                setOpen(false);
+                                openCalendly();
+                            }}
+                            className={`px-6 py-4 rounded-full ${contactURL ? "bg-black text-white" : "bg-white text-black"
+                                } cursor-pointer`}
                         >
                             BOOK A VISIT
                         </a>

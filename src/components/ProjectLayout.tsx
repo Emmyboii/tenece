@@ -50,7 +50,7 @@ const ProjectLayout = ({ text, subText, cta, ctaLink, smallImg, largeImg, revers
                 className={"flex lg:flex-row flex-col gap-4 justify-between lg:items-start items-center" + (reverse ? " flex-row-reverse" : "")}
             >
                 <motion.div variants={fadeSlide(reverse)} className="lg:text-start text-center mb-2 lg:mb-0 lg:w-[1000px]">
-                    <h2 className="mk:text-[64px] sm:text-[45px] text-[32px] font-playfair font-medium text-[#1F262B]">
+                    <h2 className="mk:text-[64px] sm:text-[45px] sd:text-[32px] text-2xl font-playfair font-medium text-[#1F262B]">
                         {text}
                     </h2>
                     <p className="sm:text-base text-sm font-medium text-[#1F262B] mt-4">
@@ -65,7 +65,7 @@ const ProjectLayout = ({ text, subText, cta, ctaLink, smallImg, largeImg, revers
                         }}
                         type="submit"
                         variants={fadeIn}
-                        className="bg-black sm:text-base text-sm text-white py-4 px-5 rounded-full mt-4 hover:bg-black/95"
+                        className="bg-black sm:text-base text-sm text-white sm:py-4 py-3 sm:px-5 px-4 rounded-full mt-4 hover:bg-black/95"
                     >
                         {cta || "EXPLORE OUR PROJECTS"}
                     </motion.button>
@@ -76,7 +76,7 @@ const ProjectLayout = ({ text, subText, cta, ctaLink, smallImg, largeImg, revers
                 </motion.div>
             </motion.div>
             <motion.div variants={fadeIn} className="mt-8">
-                <img src={largeImg} alt={text} className="w-full h-[700px] object-cover" />
+                <img src={largeImg} alt={text} className="w-full sm:h-[700px] h-[400px] object-cover" />
             </motion.div>
         </div>
     )

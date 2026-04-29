@@ -7,8 +7,21 @@ import Contact from "./pages/Contact"
 import Blog from "./pages/Blog"
 import BlogDetails from "./pages/BlogDetails"
 import ProjectTypes from "./pages/ProjectTypes"
+import { useEffect } from "react"
 
 function App() {
+
+  useEffect(() => {
+    const script = document.createElement("script");
+    script.src = "https://assets.calendly.com/assets/external/widget.js";
+    script.async = true;
+
+    script.onload = () => {
+      console.log("Calendly loaded ✅");
+    };
+
+    document.body.appendChild(script);
+  }, []);
 
   return (
     <div className="font-sanss">

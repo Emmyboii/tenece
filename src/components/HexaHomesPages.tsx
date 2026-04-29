@@ -43,6 +43,15 @@ import hexaMap from "../assets/hexaMap.svg";
 import hexa12 from "../assets/hexa12.svg";
 import hexaHero from "../assets/hexaHero.png";
 
+declare global {
+  interface Window {
+    Calendly?: {
+      initPopupWidget: (options: { url: string }) => void;
+      initBadgeWidget?: (options: unknown) => void;
+    };
+  }
+}
+
 // Fade in + slide up animation for items
 const fadeInUp: Variants = {
   hidden: { opacity: 0, y: 40 },
@@ -172,6 +181,17 @@ const HexaHomesPages = () => {
     { imageUrl: hexa12, subText: "Gates", reverse: true },
   ];
 
+  const openCalendly = () => {
+    if (window.Calendly) {
+      window.Calendly.initPopupWidget({
+        url: "https://calendly.com/tenecerealestate/30min",
+      });
+    } else {
+      console.warn("Calendly not loaded yet");
+      window.open("https://calendly.com/tenecerealestate/30min", "_blank");
+    }
+  };
+
   return (
     <div className="overflow-x-hidden">
       <Hero
@@ -179,14 +199,10 @@ const HexaHomesPages = () => {
         heroText="HexaHomes"
         heroText2="Where innovation meets Elegance"
         subText="A deluxe home with upscale infrastructure in an exclusive location."
-        // cta="Schedule Private Tour"
         cta={
           <a
-            // href="https://calendly.com/your-calendly-username"
-            href="/contact"
-            // target="_blank"
-            // rel="noopener noreferrer"
-            className="bg-white block sm:w-[224px] w-[180px] text-black sm:p-4 p-3 sm:text-lg text-[16px] rounded-full text-center hover:bg-white/95"
+            onClick={openCalendly}
+            className="bg-white block sm:w-[224px] w-[200px] text-black sm:p-4 p-3 sm:text-lg text-[16px] rounded-full text-center hover:bg-white/95"
           >
             Schedule Private Tour
           </a>
@@ -321,8 +337,8 @@ const HexaHomesPages = () => {
               className="bg-white w-[244px] py-3 text-black p-2.5 sm:text-xl text-[17px] rounded-full mt-12 mx-auto flex justify-center hover:bg-white/95"
             >
               <a
-                href="/Mirasol.pdf"
-                download="Mirasol_Brochure.pdf"
+                href="/Hexahomes.pdf"
+                download="Hexahomes_Brochure.pdf"
               >
                 Download Brochure
               </a>

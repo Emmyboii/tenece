@@ -45,7 +45,7 @@ const LOT = ({ imageUrl, text, subText, reverse, center, textFont, subTextFont, 
           variants={imageVariants}
           src={imageUrl}
           alt="LOT"
-          className={`w-[600px] sh:h-auto h-[330px] object-center rounded-md
+          className={`w-[600px] object-cover sh:h-auto h-[330px] object-center rounded-md
             ${subTextFont === 'norms' && 'w-[400px] h-[400px]'}
             ${(subTextFont === 'norm' || subTextFont === 'norms') && 'w-auto h-[450px]'}
             ${subTextFont === '' && 'sh:h-auto h-[300px]'}`
