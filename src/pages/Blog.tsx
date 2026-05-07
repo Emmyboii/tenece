@@ -70,7 +70,8 @@ const Blog = () => {
     const [error, setError] = useState<string | null>(null);
     const [currentPage, setCurrentPage] = useState(1);
 
-    // ── Fetch on mount ──
+    const [totalPages, setTotalPages] = useState(1);
+
     useEffect(() => {
         let cancelled = false;
 
@@ -78,11 +79,24 @@ const Blog = () => {
             try {
                 setLoading(true);
                 setError(null);
-                const json = await fetchBlogPosts();
-                if (!cancelled) setPosts(normalizePosts(json.data));
 
-            } catch {
-                if (!cancelled) setError("Failed to load articles. Please try again later.");
+                const json = await fetchBlogPosts(currentPage, ITEMS_PER_PAGE);
+
+                if (!cancelled) {
+                    setPosts(normalizePosts(json.data));
+                    setTotalPages(json.meta.pagination.pageCount);
+                }
+
+            } catch (err) {
+                console.error("BLOG ERROR:", err);
+
+                if (!cancelled) {
+                    setError(
+                        err instanceof Error
+                            ? err.message
+                            : "Failed to load articles. Please try again later."
+                    );
+                }
             } finally {
                 if (!cancelled) setLoading(false);
             }
@@ -90,7 +104,7 @@ const Blog = () => {
 
         load();
         return () => { cancelled = true; };
-    }, []);
+    }, [currentPage]); // 👈 IMPORTANT
 
     // ── Scroll to grid on page change ──
     useEffect(() => {
@@ -101,12 +115,8 @@ const Blog = () => {
 
     // ── Derived data ──
     const hasArticles = posts.length > 0;
-    const latestPost = posts[0];
-    const otherPosts = posts.slice(1);
-
-    const totalPages = Math.ceil(otherPosts.length / ITEMS_PER_PAGE);
-    const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
-    const currentItems = otherPosts.slice(startIndex, startIndex + ITEMS_PER_PAGE);
+    const latestPost = currentPage === 1 ? posts[0] : null;
+    const currentItems = currentPage === 1 ? posts.slice(1) : posts;
 
     const getVisiblePages = () => {
         let start = Math.max(1, currentPage - 1);
@@ -232,92 +242,97 @@ const Blog = () => {
                             Latest Article
                         </motion.p>
 
-                        <Link onClick={() => window.scrollTo(0, 0)} to={`/blog/${latestPost.slug}`}>
-                            <OurStoryGrid
-                                image={latestPost.imageUrl}
-                                title={latestPost.title}
-                                text={latestPost.date}
-                            />
-                        </Link>
+                        {latestPost && (
+                            <Link onClick={() => window.scrollTo(0, 0)} to={`/blog/${latestPost.slug}`}>
+                                <OurStoryGrid
+                                    image={latestPost.imageUrl}
+                                    title={latestPost.title}
+                                    text={latestPost.date}
+                                    variant="blog"
+                                />
+                            </Link>
+                        )}
 
-                        <motion.div
-                            ref={blogRef}
-                            className="mt-16"
-                            initial="hidden"
-                            whileInView="visible"
-                            viewport={{ once: true, amount: 0.05 }}
-                            variants={containerStagger}
-                        >
-                            <motion.p
-                                className="mk:text-[40px] sm:text-start text-center text-[29px] font-medium mb-6"
-                                initial={{ opacity: 0, y: 20 }}
-                                whileInView={{ opacity: 1, y: 0 }}
-                                viewport={{ once: true }}
-                                transition={{ delay: 0.15, duration: 0.6, ease: "easeOut" }}
+                        {posts.length > 1 && (
+                            <motion.div
+                                ref={blogRef}
+                                className="mt-16"
+                                initial="hidden"
+                                whileInView="visible"
+                                viewport={{ once: true, amount: 0.05 }}
+                                variants={containerStagger}
                             >
-                                Featured Article Spotlight
-                            </motion.p>
-
-                            <div className="grid xl:grid-cols-4 md:grid-cols-3 sd:grid-cols-2 md:gap-[41px] gap-4 mt-8">
-                                {currentItems.map((post, index) => (
-                                    <motion.div key={post.id} custom={index} variants={fadeUp}>
-                                        <Link
-                                            onClick={() => window.scrollTo(0, 0)}
-                                            to={`/blog/${post.slug}`}
-                                            className="border-b sd:border-0 border-black pb-10"
-                                        >
-                                            <LOT
-                                                imageUrl={post.imageUrl}
-                                                subText={post.title}
-                                                subTextFont="norms"
-                                            />
-                                        </Link>
-                                    </motion.div>
-                                ))}
-                            </div>
-
-                            {/* Pagination — only shown when there are multiple pages */}
-                            {totalPages > 1 && (
-                                <motion.div
-                                    className="flex justify-center items-center gap-3 mt-16"
+                                <motion.p
+                                    className="mk:text-[40px] sm:text-start text-center text-[29px] font-medium mb-6"
                                     initial={{ opacity: 0, y: 20 }}
-                                    animate={{ opacity: 1, y: 0 }}
-                                    transition={{ delay: 0.5, duration: 0.7 }}
+                                    whileInView={{ opacity: 1, y: 0 }}
+                                    viewport={{ once: true }}
+                                    transition={{ delay: 0.15, duration: 0.6, ease: "easeOut" }}
                                 >
-                                    <button
-                                        disabled={currentPage === 1}
-                                        onClick={() => setCurrentPage((p) => Math.max(p - 1, 1))}
-                                        className="px-4 py-3 flex items-center gap-2.5 disabled:bg-[#969A9EFE] disabled:cursor-not-allowed text-white rounded bg-[#1F262B]"
-                                    >
-                                        <RiArrowLeftDoubleLine className="size-5" />
-                                        Previous
-                                    </button>
+                                    Featured Article Spotlight
+                                </motion.p>
 
-                                    {visiblePages.map((page) => (
-                                        <button
-                                            key={page}
-                                            onClick={() => setCurrentPage(page)}
-                                            className={`py-3 w-[50px] px-4 flex items-center font-semibold justify-center
-                        ${page === currentPage
-                                                    ? "bg-[#FFFFFF] text-[#3B3B3B] rounded"
-                                                    : "bg-[#E4E4ED] text-[#7A7575]"
-                                                }`}
-                                        >
-                                            {page}
-                                        </button>
+                                <div className="grid xl:grid-cols-4 md:grid-cols-3 sd:grid-cols-2 md:gap-[41px] gap-4 mt-8">
+                                    {currentItems.map((post, index) => (
+                                        <motion.div key={post.id} custom={index} variants={fadeUp}>
+                                            <Link
+                                                onClick={() => window.scrollTo(0, 0)}
+                                                to={`/blog/${post.slug}`}
+                                                className="border-b sd:border-0 border-black pb-10"
+                                            >
+                                                <LOT
+                                                    imageUrl={post.imageUrl}
+                                                    subText={post.title}
+                                                    subTextFont="norms"
+                                                />
+                                            </Link>
+                                        </motion.div>
                                     ))}
+                                </div>
 
-                                    <button
-                                        disabled={currentPage === totalPages}
-                                        onClick={() => setCurrentPage((p) => Math.min(p + 1, totalPages))}
-                                        className="px-4 py-3 flex items-center gap-2.5 disabled:bg-[#969A9EFE] disabled:cursor-not-allowed text-white rounded bg-[#1F262B]"
+                                {/* Pagination — only shown when there are multiple pages */}
+                                {totalPages > 1 && (
+                                    <motion.div
+                                        className="flex justify-center items-center gap-3 mt-16"
+                                        initial={{ opacity: 0, y: 20 }}
+                                        animate={{ opacity: 1, y: 0 }}
+                                        transition={{ delay: 0.5, duration: 0.7 }}
                                     >
-                                        Next
-                                        <RiArrowRightDoubleLine className="size-5" />
-                                    </button>
-                                </motion.div>
-                            )}
-                        </motion.div>
+                                        <button
+                                            disabled={currentPage === 1}
+                                            onClick={() => setCurrentPage((p) => Math.max(p - 1, 1))}
+                                            className="px-4 py-3 flex items-center gap-2.5 disabled:bg-[#969A9EFE] disabled:cursor-not-allowed text-white rounded bg-[#1F262B]"
+                                        >
+                                            <RiArrowLeftDoubleLine className="size-5" />
+                                            Previous
+                                        </button>
+
+                                        {visiblePages.map((page) => (
+                                            <button
+                                                key={page}
+                                                onClick={() => setCurrentPage(page)}
+                                                className={`py-3 w-[50px] px-4 flex items-center font-semibold justify-center
+                                                ${page === currentPage
+                                                        ? "bg-[#FFFFFF] text-[#3B3B3B] rounded"
+                                                        : "bg-[#E4E4ED] text-[#7A7575]"
+                                                    }`}
+                                            >
+                                                {page}
+                                            </button>
+                                        ))}
+
+                                        <button
+                                            disabled={currentPage === totalPages}
+                                            onClick={() => setCurrentPage((p) => Math.min(p + 1, totalPages))}
+                                            className="px-4 py-3 flex items-center gap-2.5 disabled:bg-[#969A9EFE] disabled:cursor-not-allowed text-white rounded bg-[#1F262B]"
+                                        >
+                                            Next
+                                            <RiArrowRightDoubleLine className="size-5" />
+                                        </button>
+                                    </motion.div>
+                                )}
+                            </motion.div>
+                        )}
                     </motion.div>
                 )}
             </div>

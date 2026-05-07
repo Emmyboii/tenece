@@ -5,6 +5,7 @@ import Header from "../components/Header";
 import { Link, useParams } from "react-router-dom";
 import LOT from "../components/LOT";
 import { RiFileSearchLine } from "react-icons/ri";
+import DOMPurify from "dompurify";
 
 // ─── Strapi Types ────────────────────────────────────────────────────────────
 
@@ -12,26 +13,124 @@ interface StrapiImageFormat {
   url: string;
 }
 
-interface StrapiImage {
-  data: {
-    attributes: {
-      url: string;
-      formats?: {
-        large?: StrapiImageFormat;
-        medium?: StrapiImageFormat;
-      };
-    };
-  } | null;
+export interface StrapiImage {
+  url: string;
+  formats?: {
+    large?: StrapiImageFormat;
+    medium?: StrapiImageFormat;
+    small?: StrapiImageFormat;
+  };
 }
 
-type ContentBlockType = "heading" | "paragraph" | "list";
+// ─── Strapi Rich Text Block Types ────────────────────────────────────────────
 
-interface ContentBlock {
-  type: ContentBlockType;
-  text?: string;
-  items?: string[];
-  ordered?: boolean;
+interface StrapiTextNode {
+  type: "text";
+  text: string;
+  bold?: boolean;
+  italic?: boolean;
+  underline?: boolean;
+  strikethrough?: boolean;
+  code?: boolean;
 }
+
+interface StrapiLinkNode {
+  type: "link";
+  url: string;
+  children: StrapiTextNode[];
+}
+
+type StrapiInlineNode = StrapiTextNode | StrapiLinkNode;
+
+interface StrapiListItemNode {
+  type: "list-item";
+  children: StrapiInlineNode[];
+}
+
+interface StrapiBlock {
+  type: "paragraph" | "heading" | "list" | "list-item" | "quote" | "code";
+  level?: number;             // for headings: 1–6
+  format?: "ordered" | "unordered"; // for lists
+  children: Array<StrapiInlineNode | StrapiListItemNode | StrapiBlock>;
+}
+
+// ─── Rich Text → HTML Converter ──────────────────────────────────────────────
+
+function renderInlineNode(node: StrapiInlineNode): string {
+  if (node.type === "link") {
+    const inner = node.children.map(renderInlineNode).join("");
+    return `<a href="${node.url}" target="_blank" rel="noopener noreferrer">${inner}</a>`;
+  }
+
+  // text node
+  let text = node.text
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;");
+
+  if (node.bold) text = `<strong>${text}</strong>`;
+  if (node.italic) text = `<em>${text}</em>`;
+  if (node.underline) text = `<u>${text}</u>`;
+  if (node.strikethrough) text = `<s>${text}</s>`;
+  if (node.code) text = `<code>${text}</code>`;
+
+  return text;
+}
+
+function renderListItem(node: StrapiListItemNode): string {
+  const inner = node.children.map((c) => renderInlineNode(c as StrapiInlineNode)).join("");
+  return `<li>${inner}</li>`;
+}
+
+function strapiBlocksToHtml(blocks: StrapiBlock[]): string {
+  return blocks
+    .map((block) => {
+      switch (block.type) {
+        case "paragraph": {
+          const inner = (block.children as StrapiInlineNode[])
+            .map(renderInlineNode)
+            .join("");
+          return `<p>${inner}</p>`;
+        }
+
+        case "heading": {
+          const level = block.level ?? 2;
+          const inner = (block.children as StrapiInlineNode[])
+            .map(renderInlineNode)
+            .join("");
+          return `<h${level}>${inner}</h${level}>`;
+        }
+
+        case "list": {
+          const tag = block.format === "ordered" ? "ol" : "ul";
+          const items = (block.children as StrapiListItemNode[])
+            .map(renderListItem)
+            .join("");
+          return `<${tag}>${items}</${tag}>`;
+        }
+
+        case "quote": {
+          const inner = (block.children as StrapiInlineNode[])
+            .map(renderInlineNode)
+            .join("");
+          return `<blockquote>${inner}</blockquote>`;
+        }
+
+        case "code": {
+          const inner = (block.children as StrapiInlineNode[])
+            .map(renderInlineNode)
+            .join("");
+          return `<pre><code>${inner}</code></pre>`;
+        }
+
+        default:
+          return "";
+      }
+    })
+    .join("\n");
+}
+
+// ─── Other Types ─────────────────────────────────────────────────────────────
 
 interface RelatedPost {
   id: number;
@@ -46,121 +145,92 @@ interface BlogPostFull {
   slug: string;
   publishedAt: string;
   coverImage: string;
-  content: ContentBlock[];
+  content: string; // rendered HTML
   relatedPosts: RelatedPost[];
 }
 
 interface StrapiDetailResponse {
   data: {
     id: number;
-    attributes: {
+    title: string;
+    slug: string;
+    publishedAt: string;
+    coverImage: StrapiImage;
+    content: StrapiBlock[] | string; // Strapi v5 = blocks array; v4 = string
+    related_posts?: Array<{
+      id: number;
       title: string;
       slug: string;
-      publishedAt: string;
       coverImage: StrapiImage;
-      content: ContentBlock[];           // rich-text stored as structured blocks
-      related_posts?: {
-        data: Array<{
-          id: number;
-          attributes: {
-            title: string;
-            slug: string;
-            coverImage: StrapiImage;
-          };
-        }>;
-      };
-    };
+    }>;
   } | null;
 }
 
 // ─── Config ──────────────────────────────────────────────────────────────────
 
-// TODO: move to .env  →  VITE_STRAPI_URL=http://localhost:1337
-// const STRAPI_BASE_URL = import.meta.env.VITE_STRAPI_URL ?? "http://localhost:1337";
+const STRAPI_BASE_URL = import.meta.env.VITE_STRAPI_URL ?? "http://localhost:1337";
 
 // ─── Helpers ─────────────────────────────────────────────────────────────────
 
-function getStrapiImageUrl(image: StrapiImage): string {
-  if (!image?.data) return "";
-  const attrs = image.data.attributes;
-  return attrs.formats?.large?.url ?? attrs.formats?.medium?.url ?? attrs.url ?? "";
+function getStrapiImageUrl(image?: StrapiImage | null): string {
+  if (!image) return "";
+
+  const url =
+    image.formats?.large?.url ??
+    image.formats?.medium?.url ??
+    image.formats?.small?.url ??
+    image.url;
+
+  if (!url) return "";
+  if (url.startsWith("http")) return url;
+
+  return `${STRAPI_BASE_URL}${url}`;
 }
 
 function normalizeDetail(raw: StrapiDetailResponse["data"]): BlogPostFull | null {
   if (!raw) return null;
-  const a = raw.attributes;
+
+  // Convert content: if it's an array of blocks, render to HTML; if already a string, use as-is
+  const contentHtml = Array.isArray(raw.content)
+    ? strapiBlocksToHtml(raw.content as StrapiBlock[])
+    : (raw.content ?? "");
+
   return {
     id: raw.id,
-    title: a.title,
-    slug: a.slug,
-    publishedAt: a.publishedAt,
-    coverImage: getStrapiImageUrl(a.coverImage),
-    content: a.content ?? [],
+    title: raw.title,
+    slug: raw.slug,
+    publishedAt: new Date(raw.publishedAt).toLocaleDateString("en-GB", {
+      day: "2-digit",
+      month: "short",
+      year: "numeric",
+    }),
+    coverImage: getStrapiImageUrl(raw.coverImage),
+    content: contentHtml,
     relatedPosts:
-      a.related_posts?.data.map((r) => ({
+      raw.related_posts?.map((r) => ({
         id: r.id,
-        title: r.attributes.title,
-        slug: r.attributes.slug,
-        imageUrl: getStrapiImageUrl(r.attributes.coverImage),
+        title: r.title,
+        slug: r.slug,
+        imageUrl: getStrapiImageUrl(r.coverImage),
       })) ?? [],
   };
 }
 
-// ─── Simulated fetch (replace with real call once Strapi is live) ─────────────
+// ─── Fetch ───────────────────────────────────────────────────────────────────
 
 async function fetchBlogPost(slug: string): Promise<StrapiDetailResponse> {
-  void slug; // used by the real Strapi call below — remove this line when you uncomment it
-  /**
-   * REAL Strapi call (uncomment when your Strapi instance is running):
-   *
-   * const res = await fetch(
-   *   `http://localhost:1337/api/blog-posts?filters[slug][$eq]=${slug}&populate[coverImage]=true&populate[related_posts][populate]=coverImage`
-   * );
-   * if (!res.ok) throw new Error(`Strapi error: ${res.status}`);
-   * const json = await res.json();
-   * // Strapi returns an array for filter queries; grab first match
-   * return { data: json.data?.[0] ?? null };
-   */
+  const res = await fetch(
+    `${STRAPI_BASE_URL}/api/blog-posts?filters[slug][$eq]=${encodeURIComponent(slug)}&populate[coverImage]=true&populate[related_posts][populate]=coverImage`
+  );
 
-  // ── Simulated endpoint (returns null → triggers "not found" UI) ──
-  await new Promise((r) => setTimeout(r, 800));
-  return { data: null };
+  if (!res.ok) throw new Error("Failed to fetch");
+
+  const json = await res.json();
+
+  return {
+    data: json.data?.[0] ?? null,
+  };
 }
-
-// ─── Dummy data (kept for reference / local dev) ─────────────────────────────
-
-/*
-import blogImg  from "../assets/blogImg.svg";
-import blogImg2 from "../assets/blogImg2.svg";
-import blogImg3 from "../assets/blogImg3.png";
-import blogImg4 from "../assets/blogImg4.png";
-import blogImg5 from "../assets/blogImg5.svg";
-
-// Previously imported from ../components/dummyBlogData:
-const DUMMY_POST: BlogPostFull = {
-  id: 1,
-  title: "Luxury Real Estate vs. Traditional Investments: Where Should You Put Your Money?",
-  slug: "luxury-real-estate-vs-traditional-investments",
-  publishedAt: "2025-01-25T00:00:00.000Z",
-  coverImage: blogImg,
-  content: [
-    { type: "paragraph", text: "When it comes to building long-term wealth…" },
-    { type: "heading",   text: "Why Luxury Real Estate?" },
-    { type: "paragraph", text: "Unlike stocks or bonds, real estate is a tangible asset…" },
-    {
-      type: "list",
-      ordered: false,
-      items: ["Consistent appreciation", "Rental yield potential", "Hedge against inflation"],
-    },
-  ],
-  relatedPosts: [
-    { id: 2, title: "Design Without Compromise…", slug: "design-without-compromise",   imageUrl: blogImg2 },
-    { id: 3, title: "Design Without Compromise…", slug: "design-without-compromise-2", imageUrl: blogImg3 },
-    { id: 4, title: "Design Without Compromise…", slug: "design-without-compromise-3", imageUrl: blogImg4 },
-    { id: 5, title: "Design Without Compromise…", slug: "design-without-compromise-4", imageUrl: blogImg5 },
-  ],
-};
-*/
 
 // ─── Animation variants ───────────────────────────────────────────────────────
 
@@ -184,7 +254,10 @@ const BlogDetails = () => {
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    if (!slug) return;
+    if (!slug) {
+      setLoading(false);
+      return;
+    }
 
     let cancelled = false;
 
@@ -202,7 +275,9 @@ const BlogDetails = () => {
     };
 
     load();
-    return () => { cancelled = true; };
+    return () => {
+      cancelled = true;
+    };
   }, [slug]);
 
   // ── Loading state ──
@@ -237,7 +312,10 @@ const BlogDetails = () => {
             <div className="bg-white rounded-xl shadow-sm p-12 max-w-lg text-center">
               <p className="text-2xl font-semibold text-[#1F262B]">Something went wrong</p>
               <p className="text-gray-600 mt-3">{error}</p>
-              <Link to="/blog" className="inline-block mt-6 px-6 py-3 rounded bg-[#1F262B] text-white font-medium hover:opacity-90 transition">
+              <Link
+                to="/blog"
+                className="inline-block mt-6 px-6 py-3 rounded bg-[#1F262B] text-white font-medium hover:opacity-90 transition"
+              >
                 Back to Blog
               </Link>
             </div>
@@ -248,7 +326,7 @@ const BlogDetails = () => {
     );
   }
 
-  // ── Not found state (post is null after successful fetch) ──
+  // ── Not found state ──
   if (!post) {
     return (
       <motion.div
@@ -341,65 +419,34 @@ const BlogDetails = () => {
             />
           )}
 
-          {/* Content Blocks */}
+          {/* Rich Text Content */}
           <motion.div
-            className="space-y-6 sm:text-lg leading-relaxed mt-10"
+            className="prose prose-lg max-w-[1292px] mx-auto space-y-6 sm:text-lg leading-relaxed mt-10"
             variants={containerStagger}
           >
-            {post.content.map((block, index) => {
-              switch (block.type) {
-                case "heading":
-                  return (
-                    <motion.h2
-                      key={index}
-                      className="sm:text-2xl text-xl font-semibold mt-10"
-                      variants={fadeUp}
-                      transition={{ duration: 0.6, delay: index * 0.1 }}
-                    >
-                      {block.text}
-                    </motion.h2>
-                  );
-                case "paragraph":
-                  return (
-                    <motion.p
-                      key={index}
-                      className="sm:text-lg leading-relaxed text-gray-700"
-                      variants={fadeUp}
-                      transition={{ duration: 0.6, delay: index * 0.1 }}
-                    >
-                      {block.text}
-                    </motion.p>
-                  );
-                case "list":
-                  return block.ordered ? (
-                    <motion.ol
-                      key={index}
-                      className="list-decimal pl-6 space-y-2 sm:text-lg text-gray-700"
-                      variants={fadeUp}
-                      transition={{ duration: 0.6, delay: index * 0.1 }}
-                    >
-                      {block.items?.map((item, i) => <li key={i}>{item}</li>)}
-                    </motion.ol>
-                  ) : (
-                    <motion.ul
-                      key={index}
-                      className="list-disc pl-6 space-y-2 sm:text-lg text-gray-700"
-                      variants={fadeUp}
-                      transition={{ duration: 0.6, delay: index * 0.1 }}
-                    >
-                      {block.items?.map((item, i) => <li key={i}>{item}</li>)}
-                    </motion.ul>
-                  );
-                default:
-                  return null;
-              }
-            })}
+            <div
+              dangerouslySetInnerHTML={{
+                __html: DOMPurify.sanitize(post.content, {
+                  USE_PROFILES: { html: true },
+                  ALLOWED_TAGS: [
+                    "p", "h1", "h2", "h3", "h4", "h5", "h6",
+                    "ul", "ol", "li",
+                    "strong", "em", "u", "s", "code", "pre",
+                    "a", "blockquote",
+                  ],
+                  ALLOWED_ATTR: ["href", "target", "rel"],
+                }),
+              }}
+            />
           </motion.div>
 
           {/* Related / More Articles */}
           {post.relatedPosts.length > 0 && (
             <motion.div className="mt-16" variants={fadeUp}>
-              <motion.p className="sm:text-[40px] text-2xl font-medium mb-6" variants={fadeUp}>
+              <motion.p
+                className="sm:text-[40px] text-2xl font-medium mb-6"
+                variants={fadeUp}
+              >
                 More Articles
               </motion.p>
 
@@ -408,9 +455,20 @@ const BlogDetails = () => {
                 variants={containerStagger}
               >
                 {post.relatedPosts.map((related, index) => (
-                  <motion.div key={related.id} variants={fadeUp} transition={{ duration: 0.6, delay: index * 0.1 }}>
-                    <Link to={`/blog/${related.slug}`} onClick={() => window.scrollTo(0, 0)}>
-                      <LOT imageUrl={related.imageUrl} subText={related.title} subTextFont="norms" />
+                  <motion.div
+                    key={related.id}
+                    variants={fadeUp}
+                    transition={{ duration: 0.6, delay: index * 0.1 }}
+                  >
+                    <Link
+                      to={`/blog/${related.slug}`}
+                      onClick={() => window.scrollTo(0, 0)}
+                    >
+                      <LOT
+                        imageUrl={related.imageUrl}
+                        subText={related.title}
+                        subTextFont="norms"
+                      />
                     </Link>
                   </motion.div>
                 ))}

@@ -5,6 +5,7 @@ interface OurStoryGridProps {
     image?: string;
     title?: string;
     text?: string;
+    variant?: "default" | "blog";
 }
 
 const imageVariant: Variants = {
@@ -25,9 +26,8 @@ const textVariant: Variants = {
     },
 };
 
-const OurStoryGrid = ({ image, title, text }: OurStoryGridProps) => {
+const OurStoryGrid = ({ image, title, text, variant }: OurStoryGridProps) => {
 
-    const location = window.location.pathname
 
     return (
         <motion.div
@@ -41,29 +41,31 @@ const OurStoryGrid = ({ image, title, text }: OurStoryGridProps) => {
                 src={image}
                 alt=""
                 variants={imageVariant}
-                className={`${location === "/blog" && "3xl:w-[548px]"
-                    } rx:w-[548px] w-full rounded-[4px]`}
+                className={`
+                    w-full rounded-[4px]
+                    ${variant === "blog" ? "max-w-[900px] md:h-[700px] object-cover" : "rx:w-[548px] h-auto"}
+                `}
             />
 
             {/* Text */}
             <motion.div
                 variants={textVariant}
-                className={`sm:space-y-7 space-y-4 rx:max-w-[678px] ${location === "/blog" && "3xl:max-w-[527px]"
+                className={`sm:space-y-7 space-y-4 rx:max-w-[678px] ${variant === "blog" && "3xl:max-w-[527px]"
                     }`}
             >
                 <p
-                    className={`${location === "/blog"
-                            ? "mk:text-[40px] text-[24px] font-medium"
-                            : "font-playfair mk:text-[64px] sm:text-[45px] text-[32px] font-semibold"
+                    className={`${variant === "blog"
+                        ? "mk:text-[40px] text-[24px] font-medium"
+                        : "font-playfair mk:text-[64px] sm:text-[45px] text-[32px] font-semibold"
                         }`}
                 >
                     {title}
                 </p>
 
                 <p
-                    className={`${location === "/blog"
-                            ? "text-xl font-medium"
-                            : "mh:text-2xl font-normal leading-relaxed"
+                    className={`${variant === "blog"
+                        ? "text-xl font-medium"
+                        : "mh:text-2xl font-normal leading-relaxed"
                         }`}
                 >
                     {text}

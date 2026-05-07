@@ -15,29 +15,29 @@ export interface StrapiImageFormat {
 }
 
 export interface StrapiImage {
-  data: {
-    attributes: {
-      url: string;
-      formats?: {
-        large?: StrapiImageFormat;
-        medium?: StrapiImageFormat;
-        small?: StrapiImageFormat;
-      };
-    };
-  } | null;
+  url: string;
+  formats?: {
+    large?: StrapiImageFormat;
+    medium?: StrapiImageFormat;
+    small?: StrapiImageFormat;
+  };
 }
 
 export interface BlogPostAttributes {
-    title: string;
-    slug: string;
-    publishedAt: string;
-    coverImage: StrapiImage;
-    excerpt?: string;
+  title: string;
+  slug: string;
+  publishedAt: string;
+  coverImage: StrapiImage;
+  excerpt?: string;
 }
 
 export interface StrapiPost {
-    id: number;
-    attributes: BlogPostAttributes;
+  id: number;
+  title: string;
+  slug: string;
+  publishedAt: string;
+  coverImage: StrapiImage;
+  excerpt?: string;
 }
 
 export interface StrapiBlogResponse {
@@ -60,65 +60,80 @@ export interface BlogPost {
   slug: string;
   date: string;
   imageUrl: string;
-//   excerpt?: string;
+  //   excerpt?: string;
 }
 
 // ─── Helpers ─────────────────────────────────────────────────────────────────
 
-export function getStrapiImageUrl(image: StrapiImage): string {
-  if (!image?.data) return "";
-  const attrs = image.data.attributes;
-  return (
-    attrs.formats?.large?.url ??
-    attrs.formats?.medium?.url ??
-    attrs.formats?.small?.url ??
-    attrs.url ??
-    ""
-  );
+function getStrapiImageUrl(image?: StrapiImage | null): string {
+  if (!image) return "";
+
+  const url =
+    image.formats?.large?.url ??
+    image.formats?.medium?.url ??
+    image.formats?.small?.url ??
+    image.url;
+
+  if (!url) return "";
+
+  if (url.startsWith("http")) return url;
+
+  return `${import.meta.env.VITE_STRAPI_URL}${url}`;
 }
 
 export function normalizePosts(raw: StrapiPost[]): BlogPost[] {
   return raw.map((item) => ({
     id: item.id,
-    title: item.attributes.title,
-    slug: item.attributes.slug,
-    // excerpt: item.attributes.excerpt,
-    date: new Date(item.attributes.publishedAt).toLocaleDateString("en-GB", {
+    title: item.title,
+    slug: item.slug,
+    date: new Date(item.publishedAt).toLocaleDateString("en-GB", {
       day: "2-digit",
       month: "short",
       year: "numeric",
     }),
-    imageUrl: getStrapiImageUrl(item.attributes.coverImage),
+    imageUrl: getStrapiImageUrl(item.coverImage),
   }));
 }
 
 // ─── Fetch: all posts (paginated) ────────────────────────────────────────────
 
+const STRAPI_BASE_URL = import.meta.env.VITE_STRAPI_URL ?? "http://localhost:1337";
+
 export async function fetchBlogPosts(
   page = 1,
   pageSize = 12
 ): Promise<StrapiBlogResponse> {
-  /**
-   * REAL Strapi call — uncomment when your instance is running:
-   *
-   * const res = await fetch(
-   *   `http://localhost:1337/api/blog-posts?populate=coverImage&sort=publishedAt:desc&pagination[page]=${page}&pagination[pageSize]=${pageSize}`
-   * );
-   * if (!res.ok) throw new Error(`Strapi error: ${res.status}`);
-   * return res.json() as Promise<StrapiBlogResponse>;
-   */
+  const res = await fetch(
+    `${STRAPI_BASE_URL}/api/blog-posts?populate=coverImage&sort=publishedAt:desc&pagination[page]=${page}&pagination[pageSize]=${pageSize}`
+  );
 
-  // ── Simulated endpoint — returns empty while Strapi is not yet live ──
-  await new Promise((r) => setTimeout(r, 800));
-  return {
-    data: [],
-    meta: { pagination: { page, pageSize, pageCount: 0, total: 0 } },
-  };
+  if (!res.ok) {
+    throw new Error(`Strapi error: ${res.status}`);
+  }
+
+  return res.json();
 }
-
 // ─── Fetch: latest N posts (for homepage preview) ────────────────────────────
 
 export async function fetchLatestBlogPosts(limit = 3): Promise<BlogPost[]> {
   const res = await fetchBlogPosts(1, limit);
   return normalizePosts(res.data);
+}
+
+export async function subscribeToNewsletter(email: string) {
+  const res = await fetch(`${STRAPI_BASE_URL}/api/newsletters`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      data: { email },
+    }),
+  });
+
+  if (!res.ok) {
+    throw new Error("Failed to subscribe");
+  }
+
+  return res.json();
 }

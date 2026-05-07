@@ -20,5 +20,5 @@ export interface BlogPost {
     coverImage: string;
     date: string;
     author: string;
-    content: BlogBlock[];
+    content: string;
 }

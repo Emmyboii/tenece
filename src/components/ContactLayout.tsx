@@ -40,22 +40,27 @@ const ContactLayout = () => {
     const ignoreFields = location === '/contact'
     const hexa = location.includes('/hexahomes')
 
+    const nigeria =
+        CountryCode.find(
+            (c) => c.iso?.trim().toUpperCase() === "NG"
+        ) || CountryCode[0];
+
     const [form, setForm] = useState<FormState>({
         name: "",
         email: "",
         phone: "",
-        phone_country_code: "",
+        phone_country_code: nigeria.code,
         projectType: "",
         message: "",
     });
     const [isOpen, setIsOpen] = useState(false);
-    const [selectedCode, setSelectedCode] = useState<Country | undefined>(
-        CountryCode.find(c => c.iso === "ng")
-    );
+    const [loading, setLoading] = useState(false);
+    const [selectedCode, setSelectedCode] = useState<Country | undefined>(nigeria);
     const [searchTerm, setSearchTerm] = useState("");
     const [filteredCountries, setFilteredCountries] = useState(CountryCode); const [errors, setErrors] = useState<Record<string, string>>({});
     const dropdownRef = useRef<HTMLDivElement>(null);
     const [highlightedIndex, setHighlightedIndex] = useState(0);
+    const [success, setSuccess] = useState(false);
 
     // Auto-detect country by browser locale
     useEffect(() => {
@@ -71,14 +76,16 @@ const ContactLayout = () => {
     }, []);
 
     // Debounced search
-    const handleSearch = debounce((term: string) => {
-        const filtered = CountryCode.filter(c =>
-            c.name.toLowerCase().includes(term.toLowerCase()) ||
-            c.code.includes(term)
-        );
-        setFilteredCountries(filtered);
-        setHighlightedIndex(0);
-    }, 200);
+    const handleSearch = useRef(
+        debounce((term: string) => {
+            const filtered = CountryCode.filter(c =>
+                c.name.toLowerCase().includes(term.toLowerCase()) ||
+                c.code.includes(term)
+            );
+            setFilteredCountries(filtered);
+            setHighlightedIndex(0);
+        }, 200)
+    ).current;
 
     const onSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setSearchTerm(e.target.value);
@@ -133,7 +140,7 @@ const ContactLayout = () => {
 
     const isPhoneValid = (): boolean => {
         const len = form.phone.length;
-        return len >= 6 && len <= 12;
+        return len >= 7 && len <= 15;
     };
 
 
@@ -151,12 +158,55 @@ const ContactLayout = () => {
         return Object.keys(newErrors).length === 0;
     };
 
-    const handleSubmit = (e: React.FormEvent) => {
+    const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         if (!validate()) return;
 
-        console.log("Form submitted:", form);
+        try {
+            setLoading(true);
+
+            const res = await fetch(`${import.meta.env.VITE_STRAPI_URL}/api/contacts`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    data: form,
+                }),
+            });
+
+            if (!res.ok) throw new Error("Failed to submit");
+
+            setSuccess(true);
+
+            // clear errors
+            setErrors({});
+
+            // reset form
+            setForm({
+                name: "",
+                email: "",
+                phone: "",
+                phone_country_code: "",
+                projectType: "",
+                message: "",
+            });
+
+            setSelectedCode(nigeria);
+        } catch (err) {
+            console.error(err);
+            alert("Something went wrong. Try again.");
+        } finally {
+            setLoading(false);
+        }
     };
+
+    useEffect(() => {
+        if (success) {
+            const timer = setTimeout(() => setSuccess(false), 3000);
+            return () => clearTimeout(timer);
+        }
+    }, [success]);
 
     return (
         <motion.div
@@ -188,6 +238,41 @@ const ContactLayout = () => {
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.8, ease: "easeOut" }}
             >
+                {success && (
+                    <motion.div
+                        initial={{ opacity: 0, y: -10, scale: 0.95 }}
+                        animate={{ opacity: 1, y: 0, scale: 1 }}
+                        exit={{ opacity: 0 }}
+                        transition={{ duration: 0.4 }}
+                        className="bg-green-50 border border-green-200 text-green-700 rounded-2xl px-5 py-4 flex items-center gap-3 shadow-sm"
+                    >
+                        <div className="w-10 h-10 rounded-full bg-green-100 flex items-center justify-center">
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                className="w-5 h-5"
+                                fill="none"
+                                viewBox="0 0 24 24"
+                                stroke="currentColor"
+                                strokeWidth={2.5}
+                            >
+                                <path
+                                    strokeLinecap="round"
+                                    strokeLinejoin="round"
+                                    d="M5 13l4 4L19 7"
+                                />
+                            </svg>
+                        </div>
+
+                        <div>
+                            <p className="font-semibold text-base">
+                                Message Sent Successfully
+                            </p>
+                            <p className="text-sm text-green-600">
+                                We’ll get back to you shortly.
+                            </p>
+                        </div>
+                    </motion.div>
+                )}
                 {hexa && (
                     <motion.p
                         className="text-center text-2xl font-manrope font-medium text-[#000000] mt-[-10px]"
@@ -203,6 +288,7 @@ const ContactLayout = () => {
                         type="text"
                         placeholder="John Doe"
                         className="input"
+                        value={form.name}
                         onChange={(e) => setForm({ ...form, name: e.target.value })}
                     />
                     {errors.name && <p className="error">{errors.name}</p>}
@@ -215,100 +301,103 @@ const ContactLayout = () => {
                         type="email"
                         placeholder="johndoe@gmail.com"
                         className="input"
+                        value={form.email}
                         onChange={(e) => setForm({ ...form, email: e.target.value })}
                     />
                     {errors.email && <p className="error">{errors.email}</p>}
                 </div>
 
                 {/* {!ignoreFields && ( */}
-                    <>
+                <>
 
-                        {/* Phone Number with Flag */}
-                        <div className="relative">
-                            <label className="font-normal">Phone Number</label>
-                            <div className="flex w-full gap-2">
-                                {/* Country code */}
-                                <div
-                                    className="flex items-center gap-2 sm:h-[64px] h-[55px] rounded-xl px-3 cursor-pointer bg-gray-100"
-                                    onClick={() => setIsOpen(!isOpen)}
-                                    onKeyDown={handleKeyDown}
-                                    tabIndex={0}
-                                    ref={dropdownRef}
-                                >
-                                    <ReactCountryFlag
-                                        countryCode={(selectedCode?.iso || "US").toUpperCase()}
-                                        svg
-                                        style={{ width: "15px", height: "15px", borderRadius: "100%" }}
-                                    />
-                                    <span>{selectedCode?.code}</span>
-                                    {isOpen ? <IoIosArrowUp /> : <IoIosArrowDown />}
-                                </div>
+                    {/* Phone Number with Flag */}
+                    <div className="relative">
+                        <label className="font-normal">Phone Number</label>
+                        <div className="flex w-full gap-2">
+                            {/* Country code */}
+                            <div
+                                className="flex items-center gap-2 sm:h-[64px] h-[55px] rounded-xl px-3 cursor-pointer bg-gray-100"
+                                onClick={() => setIsOpen(!isOpen)}
+                                onKeyDown={handleKeyDown}
+                                tabIndex={0}
 
-                                {/* Phone input */}
+                                ref={dropdownRef}
+                            >
+                                <ReactCountryFlag
+                                    countryCode={selectedCode?.iso?.toUpperCase() || "NG"}
+                                    svg
+                                    style={{ width: "15px", height: "15px", borderRadius: "100%" }}
+                                />
+                                <span>{selectedCode?.code}</span>
+                                {isOpen ? <IoIosArrowUp /> : <IoIosArrowDown />}
+                            </div>
+
+                            {/* Phone input */}
+                            <input
+                                type="text"
+                                placeholder="Enter phone number"
+                                value={form.phone}
+                                onChange={handlePhoneChange}
+                                className="flex-1 sm:h-[64px] h-[55px] bg-gray-100 rounded-xl rounded-r-md p-2 px-4 outline-none"
+                                maxLength={15}
+                                inputMode="numeric"
+                            />
+                        </div>
+
+                        {errors.phone && <p className="error">{errors.phone}</p>}
+                        {!isPhoneValid() && form.phone && <p className="error">Invalid phone length for selected country</p>}
+
+                        {/* Dropdown */}
+                        {isOpen && (
+                            <div ref={dropdownRef} className="absolute z-10 mt-1 w-full bg-white border rounded shadow-md max-h-60 overflow-y-auto">
                                 <input
                                     type="text"
-                                    placeholder="Enter phone number"
-                                    value={form.phone}
-                                    onChange={handlePhoneChange}
-                                    className="flex-1 sm:h-[64px] h-[55px] bg-gray-100 rounded-xl rounded-r-md p-2 outline-none"
-                                    maxLength={15}
-                                    inputMode="numeric"
+                                    value={searchTerm}
+                                    onChange={onSearchChange}
+                                    placeholder="Search country..."
+                                    className="w-full px-3 py-2 border-b outline-none"
                                 />
+                                {filteredCountries.map((country, index) => (
+                                    <div
+                                        key={country.code + index}
+                                        className={`flex items-center gap-2 px-3 py-2 cursor-pointer hover:bg-gray-100 ${highlightedIndex === index ? "bg-gray-200" : ""
+                                            }`}
+                                        onClick={() => selectCountry(country)}
+                                    >
+                                        <ReactCountryFlag countryCode={country.iso.toUpperCase()} svg style={{ width: "24px", height: "18px" }} />
+                                        <span>{country.name} ({country.code})</span>
+                                    </div>
+                                ))}
                             </div>
+                        )}
+                    </div>
 
-                            {errors.phone && <p className="error">{errors.phone}</p>}
-                            {!isPhoneValid() && form.phone && <p className="error">Invalid phone length for selected country</p>}
+                    {/* Project Type */}
+                    <div className="z-0">
+                        <label className="font-normal">Project Type</label>
 
-                            {/* Dropdown */}
-                            {isOpen && (
-                                <div ref={dropdownRef} className="absolute z-10 mt-1 w-full bg-white border rounded shadow-md max-h-60 overflow-y-auto">
-                                    <input
-                                        type="text"
-                                        value={searchTerm}
-                                        onChange={onSearchChange}
-                                        placeholder="Search country..."
-                                        className="w-full px-3 py-2 border-b outline-none"
-                                    />
-                                    {filteredCountries.map((country, index) => (
-                                        <div
-                                            key={country.code + index}
-                                            className={`flex items-center gap-2 px-3 py-2 cursor-pointer hover:bg-gray-100 ${highlightedIndex === index ? "bg-gray-200" : ""
-                                                }`}
-                                            onClick={() => selectCountry(country)}
-                                        >
-                                            <ReactCountryFlag countryCode={country.iso.toUpperCase()} svg style={{ width: "24px", height: "18px" }} />
-                                            <span>{country.name} ({country.code})</span>
-                                        </div>
-                                    ))}
-                                </div>
-                            )}
+                        <div className="relative">
+                            <select
+                                className="input appearance-none pr-10"
+                                title="projectType"
+                                value={form.projectType}
+                                onChange={(e) => setForm({ ...form, projectType: e.target.value })}
+                            >
+                                <option value=""></option>
+                                <option value="residential">Residential</option>
+                                <option value="commercial">Commercial</option>
+                                <option value="interior">Interior Design</option>
+                            </select>
+
+                            {/* Custom arrow */}
+                            <span className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/3 text-gray-500">
+                                ▼
+                            </span>
                         </div>
 
-                        {/* Project Type */}
-                        <div className="z-0">
-                            <label className="font-normal">Project Type</label>
-
-                            <div className="relative">
-                                <select
-                                    className="input appearance-none pr-10"
-                                    title="projectType"
-                                    onChange={(e) => setForm({ ...form, projectType: e.target.value })}
-                                >
-                                    <option value=""></option>
-                                    <option value="residential">Residential</option>
-                                    <option value="commercial">Commercial</option>
-                                    <option value="interior">Interior Design</option>
-                                </select>
-
-                                {/* Custom arrow */}
-                                <span className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/3 text-gray-500">
-                                    ▼
-                                </span>
-                            </div>
-
-                            {errors.projectType && <p className="error">{errors.projectType}</p>}
-                        </div>
-                    </>
+                        {errors.projectType && <p className="error">{errors.projectType}</p>}
+                    </div>
+                </>
                 {/* )} */}
 
                 {/* Message */}
@@ -316,7 +405,8 @@ const ContactLayout = () => {
                     <label className="font-normal">Message</label>
                     <textarea
                         title="message"
-                        className="h-[154px] w-full bg-gray-100 rounded-xl mt-3 px-4 outline-none text-base resize-none"
+                        value={form.message}
+                        className="h-[154px] w-full bg-gray-100 rounded-xl mt-3 p-4 outline-none text-base resize-none"
                         onChange={(e) => setForm({ ...form, message: e.target.value })}
                     />
                     {errors.message && <p className="error">{errors.message}</p>}
@@ -325,9 +415,21 @@ const ContactLayout = () => {
                 {/* Button */}
                 <button
                     type="submit"
-                    className="w-full bg-[#1F262B] text-white sm:py-4 py-3 rounded-full text-lg hover:bg-black transition"
+                    disabled={loading}
+                    className={`w-full sm:py-4 py-3 rounded-full text-lg transition flex items-center justify-center gap-3
+                        ${loading
+                            ? "bg-gray-500 cursor-not-allowed"
+                            : "bg-[#1F262B] hover:bg-black text-white"
+                        }`}
                 >
-                    {ignoreFields ? 'Submit' : ' Request Consultation'}
+                    {loading ? (
+                        <>
+                            <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin" />
+                            Sending...
+                        </>
+                    ) : (
+                        ignoreFields ? "Submit" : "Request Consultation"
+                    )}
                 </button>
             </motion.form>
         </motion.div>

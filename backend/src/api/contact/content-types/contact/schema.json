@@ -1,0 +1,40 @@
+{
+  "kind": "collectionType",
+  "collectionName": "contacts",
+  "info": {
+    "singularName": "contact",
+    "pluralName": "contacts",
+    "displayName": "contact-form"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "email": {
+      "type": "email",
+      "required": true
+    },
+    "phone": {
+      "type": "string"
+    },
+    "phone_country_code": {
+      "type": "string"
+    },
+    "projectType": {
+      "type": "enumeration",
+      "enum": [
+        "residential",
+        "commercial",
+        "interior"
+      ]
+    },
+    "message": {
+      "type": "text"
+    }
+  }
+}

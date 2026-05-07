@@ -1,45 +1,80 @@
 import { FaFacebookSquare, FaInstagram, FaLinkedin, FaRegCopyright } from "react-icons/fa";
 import { FaSquareXTwitter } from "react-icons/fa6";
 import { motion, type Variants } from "framer-motion";
+import { useEffect, useState } from "react";
+import { subscribeToNewsletter } from "../lib/blogApi";
+
+const containerVariants: Variants = {
+    hidden: {},
+    visible: {
+        transition: {
+            staggerChildren: 0.15,
+        },
+    },
+};
+
+const sectionVariants: Variants = {
+    hidden: { opacity: 0, y: 50 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: [0.42, 0, 0.58, 1] } },
+};
+
+const iconVariants: Variants = {
+    hidden: { opacity: 0, scale: 0 },
+    visible: { opacity: 1, scale: 1, transition: { duration: 0.5, ease: "easeOut" } },
+    hover: { scale: 1.2 },
+};
+
+const columnVariants: Variants = {
+    hidden: {},
+    visible: {
+        transition: {
+            staggerChildren: 0.15, // animate children one after another
+        },
+    },
+};
+
+const itemVariants: Variants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: {
+        opacity: 1,
+        y: 0,
+        transition: { duration: 0.6, ease: [0.42, 0, 0.58, 1] }
+    },
+};
 
 const Footer = () => {
-    const containerVariants: Variants = {
-        hidden: {},
-        visible: {
-            transition: {
-                staggerChildren: 0.15,
-            },
-        },
+
+    const [email, setEmail] = useState("");
+    const [loading, setLoading] = useState(false);
+    const [success, setSuccess] = useState(false);
+    const [error, setError] = useState("");
+
+    const handleSubscribe = async () => {
+        try {
+            setLoading(true);
+            setError("");
+            setSuccess(false);
+
+            await subscribeToNewsletter(email);
+
+            setSuccess(true);
+            setEmail("");
+        } catch {
+            setError("Subscription failed. Try again.");
+        } finally {
+            setLoading(false);
+        }
     };
 
-    const sectionVariants: Variants = {
-        hidden: { opacity: 0, y: 50 },
-        visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: [0.42, 0, 0.58, 1] } },
-    };
-
-    const iconVariants: Variants = {
-        hidden: { opacity: 0, scale: 0 },
-        visible: { opacity: 1, scale: 1, transition: { duration: 0.5, ease: "easeOut" } },
-        hover: { scale: 1.2 },
-    };
-
-    const columnVariants: Variants = {
-        hidden: {},
-        visible: {
-            transition: {
-                staggerChildren: 0.15, // animate children one after another
-            },
-        },
-    };
-
-    const itemVariants: Variants = {
-        hidden: { opacity: 0, y: 20 },
-        visible: {
-            opacity: 1,
-            y: 0,
-            transition: { duration: 0.6, ease: [0.42, 0, 0.58, 1] }
-        },
-    };
+    useEffect(() => {
+        if (success || error) {
+            const timer = setTimeout(() => {
+                setSuccess(false);
+                setError("");
+            }, 3000);
+            return () => clearTimeout(timer);
+        }
+    }, [success, error]);
 
     return (
         <motion.div
@@ -135,6 +170,15 @@ const Footer = () => {
                     whileInView="visible"
                     viewport={{ once: true, amount: 0.15 }}
                 >
+
+                    {success && (
+                        <p className="text-green-400 mt-3">Subscribed successfully!</p>
+                    )}
+
+                    {error && (
+                        <p className="text-red-400 mt-3">{error}</p>
+                    )}
+
                     <motion.h1 variants={itemVariants} className="mh:text-2xl text-xl font-medium">SUBSCRIBE</motion.h1>
                     <motion.p variants={itemVariants} className="mh:text-xl font-normal md:text-start text-center">
                         Join our newsletter to stay up to date on exclusive living
@@ -142,20 +186,21 @@ const Footer = () => {
 
                     <motion.input
                         type="text"
-                        className="bg-white w-full rounded-xl py-5 px-4 mh:mt-4"
+                        className="bg-white text-black w-full rounded-xl py-5 px-4 mh:mt-4"
                         title="newsletter"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
                         placeholder="Enter your Email Address"
                         variants={sectionVariants}
                     />
 
                     <motion.button
-                        type="submit"
+                        type="button"
+                        onClick={handleSubscribe}
+                        disabled={loading}
                         className="bg-white text-black px-5 py-4 rounded-full hover:bg-white/95 border border-white lg:w-[176px] w-[135px] mh:mt-6"
-                        variants={sectionVariants}
-                        whileHover={{ scale: 1.05 }}
-                        transition={{ duration: 0.3 }}
                     >
-                        Subscribe
+                        {loading ? "Subscribing..." : "Subscribe"}
                     </motion.button>
                 </motion.div>
             </motion.div>
