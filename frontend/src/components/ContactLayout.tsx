@@ -57,23 +57,31 @@ const ContactLayout = () => {
     const [loading, setLoading] = useState(false);
     const [selectedCode, setSelectedCode] = useState<Country | undefined>(nigeria);
     const [searchTerm, setSearchTerm] = useState("");
-    const [filteredCountries, setFilteredCountries] = useState(CountryCode); const [errors, setErrors] = useState<Record<string, string>>({});
+    const [filteredCountries, setFilteredCountries] = useState(CountryCode);
+    const [errors, setErrors] = useState<Record<string, string>>({});
     const dropdownRef = useRef<HTMLDivElement>(null);
     const [highlightedIndex, setHighlightedIndex] = useState(0);
     const [success, setSuccess] = useState(false);
+    const successRef = useRef<HTMLDivElement>(null); // ← ref for success banner
 
     // Auto-detect country by browser locale
     useEffect(() => {
         const browserLocale = navigator.language.split("-")[1]?.toLowerCase();
         const detected = CountryCode.find(c => c.iso === browserLocale);
         if (detected) {
-            // Wrap in microtask to avoid "cascading renders"
             setTimeout(() => {
                 setSelectedCode(detected);
                 setForm(prev => ({ ...prev, phone_country_code: detected.code }));
             }, 0);
         }
     }, []);
+
+    // Scroll to success banner whenever it becomes visible
+    useEffect(() => {
+        if (success && successRef.current) {
+            successRef.current.scrollIntoView({ behavior: "smooth", block: "center" });
+        }
+    }, [success]);
 
     // Debounced search
     const handleSearch = useRef(
@@ -132,7 +140,6 @@ const ContactLayout = () => {
         setForm(prev => ({ ...prev, phone_country_code: country.code }));
     };
 
-    // Restrict phone input to numbers only
     const handlePhoneChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const val = e.target.value.replace(/\D/g, "");
         setForm(prev => ({ ...prev, phone: val }));
@@ -142,7 +149,6 @@ const ContactLayout = () => {
         const len = form.phone.length;
         return len >= 7 && len <= 15;
     };
-
 
     const validate = () => {
         const newErrors: Record<string, string> = {};
@@ -178,11 +184,7 @@ const ContactLayout = () => {
             if (!res.ok) throw new Error("Failed to submit");
 
             setSuccess(true);
-
-            // clear errors
             setErrors({});
-
-            // reset form
             setForm({
                 name: "",
                 email: "",
@@ -191,7 +193,6 @@ const ContactLayout = () => {
                 projectType: "",
                 message: "",
             });
-
             setSelectedCode(nigeria);
         } catch (err) {
             console.error(err);
@@ -240,6 +241,7 @@ const ContactLayout = () => {
             >
                 {success && (
                     <motion.div
+                        ref={successRef} // ← attached here
                         initial={{ opacity: 0, y: -10, scale: 0.95 }}
                         animate={{ opacity: 1, y: 0, scale: 1 }}
                         exit={{ opacity: 0 }}
@@ -268,7 +270,7 @@ const ContactLayout = () => {
                                 Message Sent Successfully
                             </p>
                             <p className="text-sm text-green-600">
-                                We’ll get back to you shortly.
+                                We'll get back to you shortly.
                             </p>
                         </div>
                     </motion.div>
@@ -307,20 +309,17 @@ const ContactLayout = () => {
                     {errors.email && <p className="error">{errors.email}</p>}
                 </div>
 
-                {/* {!ignoreFields && ( */}
                 <>
-
                     {/* Phone Number with Flag */}
                     <div className="relative">
                         <label className="font-normal">Phone Number</label>
                         <div className="flex w-full gap-2">
                             {/* Country code */}
                             <div
-                                className="flex items-center gap-2 sm:h-[64px] h-[55px] rounded-xl px-3 cursor-pointer bg-gray-100"
+                                className="flex sk:flex-row flex-col justify-center items-center gap-2 sm:h-[64px] h-[55px] rounded-xl sm:px-3 px-1.5 cursor-pointer bg-gray-100"
                                 onClick={() => setIsOpen(!isOpen)}
                                 onKeyDown={handleKeyDown}
                                 tabIndex={0}
-
                                 ref={dropdownRef}
                             >
                                 <ReactCountryFlag
@@ -328,8 +327,8 @@ const ContactLayout = () => {
                                     svg
                                     style={{ width: "15px", height: "15px", borderRadius: "100%" }}
                                 />
-                                <span>{selectedCode?.code}</span>
-                                {isOpen ? <IoIosArrowUp /> : <IoIosArrowDown />}
+                                <span className="sm:text-base text-xs">{selectedCode?.code}</span>
+                                {isOpen ? <IoIosArrowUp className="sk:block hidden" /> : <IoIosArrowDown className="sk:block hidden" />}
                             </div>
 
                             {/* Phone input */}
@@ -360,8 +359,7 @@ const ContactLayout = () => {
                                 {filteredCountries.map((country, index) => (
                                     <div
                                         key={country.code + index}
-                                        className={`flex items-center gap-2 px-3 py-2 cursor-pointer hover:bg-gray-100 ${highlightedIndex === index ? "bg-gray-200" : ""
-                                            }`}
+                                        className={`flex items-center sm:text-base text-xs gap-2 px-3 py-2 cursor-pointer hover:bg-gray-100 ${highlightedIndex === index ? "bg-gray-200" : ""}`}
                                         onClick={() => selectCountry(country)}
                                     >
                                         <ReactCountryFlag countryCode={country.iso.toUpperCase()} svg style={{ width: "24px", height: "18px" }} />
@@ -389,7 +387,6 @@ const ContactLayout = () => {
                                 <option value="interior">Interior Design</option>
                             </select>
 
-                            {/* Custom arrow */}
                             <span className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/3 text-gray-500">
                                 ▼
                             </span>
@@ -398,7 +395,6 @@ const ContactLayout = () => {
                         {errors.projectType && <p className="error">{errors.projectType}</p>}
                     </div>
                 </>
-                {/* )} */}
 
                 {/* Message */}
                 <div>
