@@ -49,8 +49,8 @@ interface StrapiListItemNode {
 
 interface StrapiBlock {
   type: "paragraph" | "heading" | "list" | "list-item" | "quote" | "code";
-  level?: number;             // for headings: 1–6
-  format?: "ordered" | "unordered"; // for lists
+  level?: number;
+  format?: "ordered" | "unordered";
   children: Array<StrapiInlineNode | StrapiListItemNode | StrapiBlock>;
 }
 
@@ -62,7 +62,6 @@ function renderInlineNode(node: StrapiInlineNode): string {
     return `<a href="${node.url}" target="_blank" rel="noopener noreferrer">${inner}</a>`;
   }
 
-  // text node
   let text = node.text
     .replace(/&/g, "&amp;")
     .replace(/</g, "&lt;")
@@ -87,42 +86,27 @@ function strapiBlocksToHtml(blocks: StrapiBlock[]): string {
     .map((block) => {
       switch (block.type) {
         case "paragraph": {
-          const inner = (block.children as StrapiInlineNode[])
-            .map(renderInlineNode)
-            .join("");
+          const inner = (block.children as StrapiInlineNode[]).map(renderInlineNode).join("");
           return `<p>${inner}</p>`;
         }
-
         case "heading": {
           const level = block.level ?? 2;
-          const inner = (block.children as StrapiInlineNode[])
-            .map(renderInlineNode)
-            .join("");
+          const inner = (block.children as StrapiInlineNode[]).map(renderInlineNode).join("");
           return `<h${level}>${inner}</h${level}>`;
         }
-
         case "list": {
           const tag = block.format === "ordered" ? "ol" : "ul";
-          const items = (block.children as StrapiListItemNode[])
-            .map(renderListItem)
-            .join("");
+          const items = (block.children as StrapiListItemNode[]).map(renderListItem).join("");
           return `<${tag}>${items}</${tag}>`;
         }
-
         case "quote": {
-          const inner = (block.children as StrapiInlineNode[])
-            .map(renderInlineNode)
-            .join("");
+          const inner = (block.children as StrapiInlineNode[]).map(renderInlineNode).join("");
           return `<blockquote>${inner}</blockquote>`;
         }
-
         case "code": {
-          const inner = (block.children as StrapiInlineNode[])
-            .map(renderInlineNode)
-            .join("");
+          const inner = (block.children as StrapiInlineNode[]).map(renderInlineNode).join("");
           return `<pre><code>${inner}</code></pre>`;
         }
-
         default:
           return "";
       }
@@ -132,7 +116,7 @@ function strapiBlocksToHtml(blocks: StrapiBlock[]): string {
 
 // ─── Other Types ─────────────────────────────────────────────────────────────
 
-interface RelatedPost {
+interface MoreArticle {
   id: number;
   title: string;
   slug: string;
@@ -145,8 +129,7 @@ interface BlogPostFull {
   slug: string;
   publishedAt: string;
   coverImage: string;
-  content: string; // rendered HTML
-  relatedPosts: RelatedPost[];
+  content: string;
 }
 
 interface StrapiDetailResponse {
@@ -156,14 +139,15 @@ interface StrapiDetailResponse {
     slug: string;
     publishedAt: string;
     coverImage: StrapiImage;
-    content: StrapiBlock[] | string; // Strapi v5 = blocks array; v4 = string
-    related_posts?: Array<{
-      id: number;
-      title: string;
-      slug: string;
-      coverImage: StrapiImage;
-    }>;
+    content: StrapiBlock[] | string;
   } | null;
+}
+
+interface StrapiListItem {
+  id: number;
+  title: string;
+  slug: string;
+  coverImage: StrapiImage;
 }
 
 // ─── Config ──────────────────────────────────────────────────────────────────
@@ -174,27 +158,21 @@ const STRAPI_BASE_URL = import.meta.env.VITE_STRAPI_URL ?? "http://localhost:133
 
 function getStrapiImageUrl(image?: StrapiImage | null): string {
   if (!image) return "";
-
   const url =
     image.formats?.large?.url ??
     image.formats?.medium?.url ??
     image.formats?.small?.url ??
     image.url;
-
   if (!url) return "";
   if (url.startsWith("http")) return url;
-
   return `${STRAPI_BASE_URL}${url}`;
 }
 
 function normalizeDetail(raw: StrapiDetailResponse["data"]): BlogPostFull | null {
   if (!raw) return null;
-
-  // Convert content: if it's an array of blocks, render to HTML; if already a string, use as-is
   const contentHtml = Array.isArray(raw.content)
     ? strapiBlocksToHtml(raw.content as StrapiBlock[])
     : (raw.content ?? "");
-
   return {
     id: raw.id,
     title: raw.title,
@@ -206,13 +184,6 @@ function normalizeDetail(raw: StrapiDetailResponse["data"]): BlogPostFull | null
     }),
     coverImage: getStrapiImageUrl(raw.coverImage),
     content: contentHtml,
-    relatedPosts:
-      raw.related_posts?.map((r) => ({
-        id: r.id,
-        title: r.title,
-        slug: r.slug,
-        imageUrl: getStrapiImageUrl(r.coverImage),
-      })) ?? [],
   };
 }
 
@@ -220,16 +191,25 @@ function normalizeDetail(raw: StrapiDetailResponse["data"]): BlogPostFull | null
 
 async function fetchBlogPost(slug: string): Promise<StrapiDetailResponse> {
   const res = await fetch(
-    `${STRAPI_BASE_URL}/api/blog-posts?filters[slug][$eq]=${encodeURIComponent(slug)}&populate[coverImage]=true&populate[related_posts][populate]=coverImage`
+    `${STRAPI_BASE_URL}/api/blog-posts?filters[slug][$eq]=${encodeURIComponent(slug)}&populate[coverImage]=true`
   );
-
   if (!res.ok) throw new Error("Failed to fetch");
-
   const json = await res.json();
+  return { data: json.data?.[0] ?? null };
+}
 
-  return {
-    data: json.data?.[0] ?? null,
-  };
+async function fetchMoreArticles(currentId: number): Promise<MoreArticle[]> {
+  const res = await fetch(
+    `${STRAPI_BASE_URL}/api/blog-posts?filters[id][$ne]=${currentId}&populate[coverImage]=true&pagination[pageSize]=4&sort=publishedAt:desc`
+  );
+  if (!res.ok) return [];
+  const json = await res.json();
+  return (json.data ?? []).map((item: StrapiListItem) => ({
+    id: item.id,
+    title: item.title,
+    slug: item.slug,
+    imageUrl: getStrapiImageUrl(item.coverImage),
+  }));
 }
 
 // ─── Animation variants ───────────────────────────────────────────────────────
@@ -250,6 +230,7 @@ const BlogDetails = () => {
   const { slug } = useParams<{ slug: string }>();
 
   const [post, setPost] = useState<BlogPostFull | null>(null);
+  const [moreArticles, setMoreArticles] = useState<MoreArticle[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
@@ -266,7 +247,15 @@ const BlogDetails = () => {
         setLoading(true);
         setError(null);
         const json = await fetchBlogPost(slug);
-        if (!cancelled) setPost(normalizeDetail(json.data));
+        const normalized = normalizeDetail(json.data);
+
+        if (!cancelled) {
+          setPost(normalized);
+          if (normalized) {
+            const more = await fetchMoreArticles(normalized.id);
+            if (!cancelled) setMoreArticles(more);
+          }
+        }
       } catch {
         if (!cancelled) setError("Failed to load the article. Please try again later.");
       } finally {
@@ -275,9 +264,7 @@ const BlogDetails = () => {
     };
 
     load();
-    return () => {
-      cancelled = true;
-    };
+    return () => { cancelled = true; };
   }, [slug]);
 
   // ── Loading state ──
@@ -440,8 +427,8 @@ const BlogDetails = () => {
             />
           </motion.div>
 
-          {/* Related / More Articles */}
-          {post.relatedPosts.length > 0 && (
+          {/* More Articles */}
+          {moreArticles.length > 0 && (
             <motion.div className="mt-16" variants={fadeUp}>
               <motion.p
                 className="sm:text-[40px] text-2xl font-medium mb-6"
@@ -454,19 +441,19 @@ const BlogDetails = () => {
                 className="grid xl:grid-cols-4 md:grid-cols-3 sd:grid-cols-2 md:gap-[41px] gap-4 mt-8"
                 variants={containerStagger}
               >
-                {post.relatedPosts.map((related, index) => (
+                {moreArticles.map((article, index) => (
                   <motion.div
-                    key={related.id}
+                    key={article.id}
                     variants={fadeUp}
                     transition={{ duration: 0.6, delay: index * 0.1 }}
                   >
                     <Link
-                      to={`/blog/${related.slug}`}
+                      to={`/blog/${article.slug}`}
                       onClick={() => window.scrollTo(0, 0)}
                     >
                       <LOT
-                        imageUrl={related.imageUrl}
-                        subText={related.title}
+                        imageUrl={article.imageUrl}
+                        subText={article.title}
                         subTextFont="norms"
                       />
                     </Link>

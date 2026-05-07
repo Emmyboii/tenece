@@ -29,18 +29,6 @@
         "images"
       ]
     },
-    "related_posts": {
-      "type": "relation",
-      "relation": "manyToMany",
-      "target": "api::blog-post.blog-post",
-      "inversedBy": "blog_posts"
-    },
-    "blog_posts": {
-      "type": "relation",
-      "relation": "manyToMany",
-      "target": "api::blog-post.blog-post",
-      "mappedBy": "related_posts"
-    },
     "content": {
       "type": "blocks",
       "required": true

@@ -488,10 +488,6 @@ export interface ApiBlogPostBlogPost extends Struct.CollectionTypeSchema {
     draftAndPublish: true;
   };
   attributes: {
-    blog_posts: Schema.Attribute.Relation<
-      'manyToMany',
-      'api::blog-post.blog-post'
-    >;
     content: Schema.Attribute.Blocks & Schema.Attribute.Required;
     coverImage: Schema.Attribute.Media<'files' | 'images'> &
       Schema.Attribute.Required;
@@ -505,10 +501,6 @@ export interface ApiBlogPostBlogPost extends Struct.CollectionTypeSchema {
     > &
       Schema.Attribute.Private;
     publishedAt: Schema.Attribute.DateTime;
-    related_posts: Schema.Attribute.Relation<
-      'manyToMany',
-      'api::blog-post.blog-post'
-    >;
     slug: Schema.Attribute.UID<'title'> & Schema.Attribute.Required;
     title: Schema.Attribute.String & Schema.Attribute.Required;
     updatedAt: Schema.Attribute.DateTime;
