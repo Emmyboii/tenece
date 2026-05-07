@@ -1,6 +1,6 @@
 import ProjectLayout from './ProjectLayout'
 import mirasol1 from "../assets/mirasol1.png";
-import mirasol2 from "../assets/new3.png";
+import mirasol2 from "../assets/new3.jpg";
 
 const MirasolLayout = () => {
     return (

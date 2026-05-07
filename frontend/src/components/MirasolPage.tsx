@@ -1,6 +1,6 @@
 import BelowHeroHomeAndMirasol from "./BelowHeroHomeAndMirasol"
 import Hero from "./Hero"
-import Future from "../assets/new10.png";
+import Future from "../assets/new10.jpg";
 import OurTeamImg from "./OurTeamImg";
 import Footer from "./Footer";
 import { motion, type Variants } from "framer-motion";
@@ -8,14 +8,14 @@ import mira1 from "../assets/mira1.png";
 import mira2 from "../assets/mira2.png";
 import mira3 from "../assets/mira3.png";
 import mira4 from "../assets/mira4.png";
-import mira5 from "../assets/mira5.svg";
+import mira5 from "../assets/mira5.jpg";
 import mira6 from "../assets/new14.png";
-import mira7 from "../assets/mira7.svg";
-import mira8 from "../assets/mira8.svg";
-import mira9 from "../assets/mira9.svg";
-import mira10 from "../assets/mira10.svg";
+import mira7 from "../assets/mira7.jpg";
+import mira8 from "../assets/mira8.jpg";
+import mira9 from "../assets/mira9.jpg";
+import mira10 from "../assets/mira10.jpg";
 import mirasolMap from "../assets/mirasolMap.png";
-import mirasolHero from "../assets/new9.png";
+import mirasolHero from "../assets/new9.jpg";
 
 const MirasolPage = () => {
 
