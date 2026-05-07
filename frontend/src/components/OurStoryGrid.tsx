@@ -43,7 +43,7 @@ const OurStoryGrid = ({ image, title, text, variant }: OurStoryGridProps) => {
                 variants={imageVariant}
                 className={`
                     w-full rounded-[4px]
-                    ${variant === "blog" ? "max-w-[900px] md:h-[700px] object-cover" : "rx:w-[548px] h-auto"}
+                    ${variant === "blog" ? "max-w-[900px] md:h-[550px] object-cover" : "rx:w-[548px] h-auto"}
                 `}
             />
 
