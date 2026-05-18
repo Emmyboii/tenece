@@ -86,7 +86,7 @@ const MirasolPage = () => {
                     text="An Address of Authority."
                     text2="A Home of Legacy."
                     image={Future}
-                    subText="The Mirasol is not just a residence — it’s a symbol. A statement for those who have arrived. With only a select number of units, Mirasol offers more than ownership — it offers the right to say you live above Lagos."
+                    subText="The Mirasol is not just a residence — it’s a symbol. With only a select number of units, Mirasol offers more than ownership — it offers the right to say you live above Lagos."
                     textColor="black"
                 />
             </div>
