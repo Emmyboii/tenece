@@ -100,7 +100,7 @@ const MirasolPage = () => {
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.8 }}
                 >
-                    Crafted for the Privileged Few
+                    Not For Everyone, Intentionally
                 </motion.h1>
 
                 {/* Grid */}
